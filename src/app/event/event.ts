@@ -1,0 +1,23 @@
+import { Artist } from './../artist/artist';
+
+export class Event {
+    id: number;
+    name: string;
+    image: object;
+    description: string;
+    ticketLink: string;
+    entryAge: string;
+    venueName: string;
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: string;
+    startDateTime: Date;
+    endDateTime: Date;
+    officialEvent: boolean;
+    slug: string;
+    artists: Artist[];
+    createdAt: Date;
+    updatedAt: Date;
+}

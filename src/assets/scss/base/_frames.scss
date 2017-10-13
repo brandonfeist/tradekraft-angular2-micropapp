@@ -1,0 +1,76 @@
+.frame-title {
+    float: left;
+    margin: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    width: 100%;
+
+    @include media($mobile) {
+        .col-8,
+        .col-4 {
+            @include span-columns(6 of 12);
+        }
+    }
+
+    h1 {
+        font-size: 15px;
+    }
+
+    .btn.red {
+        margin-right: 12px;
+        margin-top: 8px;
+
+        @include media($mobile) {
+            margin-left: 0;
+            margin-right: 0;
+            width: 100%;
+        }
+    }
+}
+
+.frame-sub-title {
+    float: left;
+    margin: 0;
+    text-transform: initial;
+    width: 100%;
+
+    h1 {
+        font-size: 12px;
+    }
+}
+
+.frame {
+    float: left;
+    margin: 10px 0;
+    width: 100%;
+
+    @include media($mobile) {
+        margin: 0;
+    }
+}
+
+.frame-talent-releases {
+    @include span-columns(4);
+}
+
+.frame-player {
+    @include span-columns(8);
+
+    .player-inline {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+}
+
+.frame-items {
+    float: left;
+    width: 100%;
+}
+
+.frame-talentpool {
+    margin-bottom: 30px;
+}
+
+.nomargin {
+    margin: 0;
+}

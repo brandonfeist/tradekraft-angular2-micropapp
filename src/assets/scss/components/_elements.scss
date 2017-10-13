@@ -1,0 +1,204 @@
+.count,
+.contest-label {
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 200px;
+    z-index: 50;
+
+    &.active {
+        .count-ribbon,
+        .contest-ribbon {
+            background: $white;
+            color: $black;
+        }
+    }
+}
+
+.count-ribbon,
+.contest-ribbon {
+    background: $black;
+    color: $red;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 15px;
+    position: absolute;
+    right: -70px;
+    text-align: center;
+    text-transform: uppercase;
+    top: 35px;
+    transform: rotate(45deg);
+    width: 250px;
+}
+
+.contest-ribbon {
+    background: $red;
+    color: $white;
+    padding: 10px;
+    top: 20px;
+
+    &:hover {
+        background: $white;
+    }
+}
+
+.small {
+    .count-ribbon {
+        font-size: 13px;
+        font-weight: 700;
+        padding: 12px;
+        right: -80px;
+        text-transform: uppercase;
+        top: 25px;
+    }
+}
+
+*:focus {
+    outline: none;
+}
+
+.jscroll-loading {
+    float: left;
+    width: 100%;
+}
+
+.jscroll-inner {
+    display: inline-block;
+    overflow-x: visible;
+    position: relative;
+    width: 100%;
+}
+
+.loading {
+    min-height: 100px;
+    position: relative;
+    width: 100%;
+
+    img {
+        animation: rotating 2s linear infinite;
+        bottom: 0;
+        box-shadow: none;
+        display: block;
+        height: 50%;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+    }
+}
+
+.form-error,
+.form-group {
+    color: $red;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+
+    ul {
+        list-style: none;
+    }
+}
+
+.crop-holder {
+    .crop-image {
+        max-height: 350px;
+        max-width: 100%;
+    }
+
+    .btn {
+        float: right;
+        margin-left: 10px;
+    }
+}
+
+.trophie-overview {
+    h2 {
+        float: left;
+    }
+
+    h5 {
+        float: right;
+    }
+}
+
+.trophie-timeline {
+    background: $white;
+    border-radius: 10px;
+    float: left;
+    height: 10px;
+    margin-top: 5px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    span {
+        background: $black;
+        float: left;
+        height: 10px;
+    }
+}
+
+.notify-block {
+    img {
+        width: 250px;
+    }
+}
+
+.pace {
+    display: block;
+    pointer-events: none;
+    user-select: none;
+
+    .pace-progress {
+        background: $red;
+        height: 2px;
+        position: fixed;
+        right: 100%;
+        transition: opacity 300ms ease-in-out;
+        width: 100%;
+        z-index: 2000;
+    }
+}
+
+.pace-done .pace-progress {
+    opacity: 0;
+}
+
+input.copy-text {
+    width: 80%;
+    font-size: 1em;
+}
+
+.stats-container {
+    display: inline-block;
+    margin-bottom: 20px;
+    width: 100%;
+
+    .stats-block {
+        @include span-columns(3 of 12);
+        @include omega(4n);
+
+        font-style: italic;
+        margin-bottom: 20px;
+
+        @include media($mobile) {
+            @include span-columns(6 of 12);
+            @include omega();
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        p {
+            line-height: 16px;
+            margin: 0;
+        }
+    }
+}

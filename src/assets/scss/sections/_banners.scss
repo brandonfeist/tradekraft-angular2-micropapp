@@ -1,0 +1,115 @@
+.banner {
+    margin-bottom: 40px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    @include media($mobile) {
+        &.video {
+            display: none;
+        }
+    }
+
+    a {
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+    }
+
+    .icon {
+        background: $white;
+        position: absolute;
+    }
+
+    &.black {
+        background: $black;
+    }
+
+    .wrapper,
+    .frame {
+        height: 100%;
+    }
+
+    .video-container {
+        height: calc(100% - 40px);
+    }
+
+    &::before {
+        background: linear-gradient(to bottom, $white-transparent 0%, $off-white 95%);
+        bottom: 0;
+        content: '';
+        display: block;
+        height: 300px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+    }
+
+    &.background {
+        height: calc(100vh - 50px);
+        position: absolute;
+        top: 0;
+        z-index: -1;
+    }
+
+    &.large {
+        height: 540px;
+        margin-top: 0;
+
+        @include media($mobile) {
+            height: 425px;
+        }
+    
+    }
+
+    &.mid {
+        height: 350px;
+        margin-top: 0;
+
+        @include media($mobile) {
+            height: 200px;
+        }
+    
+    }
+
+    &.small {
+        height: 300px;
+        margin-top: 0;
+
+        @include media($mobile) {
+            height: 100px;
+        }
+    
+    }
+
+    video,
+    img:not(.top-image) {
+        display: block;
+        min-height: 100%;
+        object-fit: cover;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -2;
+    }
+
+    img:not(.top-image) {
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .container {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    .media {
+        border: 2px solid $black;
+        left: 10px;
+        position: absolute;
+        top: 10px;
+    }
+}

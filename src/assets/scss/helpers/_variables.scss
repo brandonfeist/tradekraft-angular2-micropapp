@@ -1,0 +1,39 @@
+$font: nimbus-sans, Helvetica, sans-serif;
+
+$white: #fff;
+$off-white: #f4f4f4;
+$white-transparent: rgba(255, 255, 255, 0);
+$light-white-transparent: rgba(255, 255, 255, 0.15);
+$off-white-transparent: rgba(247, 247, 247, 0.8);
+
+$dark-blue: #272c2e;
+
+$light-grey: #ececec;
+$light-mid-grey: #d8d8d8;
+$mid-grey: #aeaeae;
+$mid-dark-grey: #95989a;
+$header-grey: #505050;
+$dark-grey: #1c1f21;
+
+$black: #000;
+$black-transparent: rgba(0, 0, 0, 0);
+$shadow-black: rgba(0, 0, 0, 0.15);
+$shadow-black-mid: rgba(0, 0, 0, 0.3);
+$shadow-black-dark: rgba(0, 0, 0, 0.6);
+
+$red: #ef241c;
+
+$fb-blue: #2f4b93;
+$tw-blue: #1da1f2;
+$sc-orange: #f50;
+$google-red: #dc4a3d;
+$whatsapp-green: #25d366;
+$reddit-orange: #ff4500;
+$instagram-blue: #517fa4;
+
+$sf-green: #1ed760;
+$bp-green: #a5df00;
+
+$mobile: new-breakpoint(max-width 1040px 4);
+$tablet: new-breakpoint(min-width 550px max-width 1040px);
+$desktop: new-breakpoint(min-width 1040px 4);

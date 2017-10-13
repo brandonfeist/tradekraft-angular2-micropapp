@@ -1,0 +1,70 @@
+body {
+    background: $off-white;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+main {
+    background: $off-white;
+    display: inline-block;
+    height: 100%;
+    min-height: calc(100vh - 50px);
+    width: 100%;
+}
+
+img {
+    display: block;
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 1400px;
+    padding: 0 65px;
+    position: relative;
+    width: 100%;
+
+    @include media($mobile) {
+        padding: 0 10px;
+    }
+}
+
+.hide {
+    // scss-lint:disable ImportantRule
+    display: none !important;
+}
+
+.show {
+    display: block;
+}
+
+hr {
+    background: $mid-grey;
+    border: 0;
+    border-radius: 8px;
+    height: 8px;
+    margin: 15px auto;
+    opacity: 0.5;
+    width: 50px;
+}
+
+.center {
+    text-align: center;
+
+    img {
+        margin: 20px auto;
+    }
+}
+
+.pager {
+    float: left;
+    position: relative;
+    width: 100%;
+}
+
+.row {
+    clear: both;
+    float: left;
+    width: 100%;
+}

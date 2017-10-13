@@ -1,0 +1,30 @@
+<div class="frame frame-events">
+    <div class="wrapper">
+        <div class="frame-title">
+            <div class="col-8">
+                <h1>Events</h1>
+            </div>
+            <div class="col-4">
+                <a class="btn action-third right" routerLink="/events">More Events</a>
+            </div>
+        </div>
+        <div class="frame-items">
+            <a class="item react mix" *ngFor="let event of events">
+                <div class="image-container">
+                    <div class="count active">
+                        <div class="count-ribbon">{{ getDaysRemaining(event) }}</div>
+                    </div>
+                    <div class="date">
+                        <h1>MMM DD, YYYY</h1>
+                    </div>
+                    <img src="img source" alt="event title">
+                </div>
+                <div class="text-container">
+                    <h2>{{ event.name }}</h2>
+                    <h4>{{ getEventLocationShortFormat(event) }}</h4>
+                    <span class="btn default">View More</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

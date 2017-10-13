@@ -1,0 +1,215 @@
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-6,
+.col-8,
+.col-9,
+.col-12 {
+    height: inherit;
+    position: relative;
+}
+
+.col-12 {
+    @include span-columns(12);
+    @include omega();
+
+    @include media($mobile) {
+        @include span-columns(12 of 12);
+    }
+}
+
+.col-10 {
+    @include span-columns(10);
+
+    @include media($mobile) {
+        @include span-columns(12 of 12);
+    }
+}
+
+.col-9 {
+    @include span-columns(9);
+
+    @include media($mobile) {
+        @include span-columns(12 of 12);
+    }
+
+    .wrapper {
+        padding: 0;
+    }
+}
+
+.col-8 {
+    @include span-columns(8);
+
+    @include media($mobile) {
+        @include span-columns(12 of 12);
+    }
+}
+
+.col-7 {
+    @include span-columns(7);
+
+    @include media($mobile) {
+        @include span-columns(12 of 12);
+    }
+}
+
+.col-6 {
+    @include span-columns(6);
+
+    @include media($mobile) {
+        @include span-columns(12 of 12);
+    }
+}
+
+.col-4 {
+    @include span-columns(4);
+
+    @include media($mobile) {
+        @include span-columns(12 of 12);
+    }
+}
+
+.col-3 {
+    @include span-columns(3);
+
+    @include media($mobile) {
+        @include span-columns(12 of 12);
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .item.small {
+        @include span-columns(12);
+        @include omega(1n);
+    }
+}
+
+.col-2 {
+    @include span-columns(2);
+
+    @include media($mobile) {
+        @include span-columns(6 of 12);
+    }
+}
+
+.col-1 {
+    @include span-columns(1);
+
+    @include media($mobile) {
+        @include span-columns(6 of 12);
+    }
+}
+
+.col-container {
+    background: $white;
+    box-shadow: 0 1px 2px $shadow-black;
+    float: left;
+    padding: 15px;
+    width: 100%;
+
+    @include media($mobile) {
+        .col-4,
+        .col-8 {
+            width: 100%;
+        }
+    }
+
+    .btn.down {
+        margin-top: 30px;
+    }
+
+    .btn.default {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 220px;
+    }
+}
+
+.trophie {
+    clear: both;
+    height: 50px;
+    margin: 20px 0;
+    min-width: 200px;
+    width: 100%;
+
+    .badge {
+        float: left;
+        height: 100%;
+        width: 85px;
+
+        img {
+            border-radius: 100%;
+            box-shadow: 0 2px 4px $shadow-black-mid;
+            display: block;
+            height: 100%;
+            margin: 0 auto;
+        }
+    }
+
+    .info {
+        float: left;
+        height: 100%;
+        margin-top: 10px;
+        width: calc(100% - 210px);
+
+        h4,
+        p {
+            clear: both;
+            float: left;
+            font-size: 14px;
+            margin: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        p {
+            font-size: 12px;
+            font-style: italic;
+            margin-top: -2px;
+        }
+
+        h4 {
+            text-transform: uppercase;
+        }
+    }
+
+    .achieved {
+        float: left;
+        height: 100%;
+        width: 125px;
+    }
+}
+
+.col.submit-add-playlist,
+.col.input-new-playlist {
+    cursor: pointer;
+    position: relative;
+
+    p {
+        color: $dark-grey;
+        margin: 0;
+        padding: 13px 60px 13px 30px;
+        text-align: left;
+    }
+
+    .icon {
+        opacity: 0.7;
+        position: absolute;
+        right: 19px;
+        top: 8px;
+    }
+
+    .form-control {
+        margin: 6px 0;
+    }
+}
+
+.grid-sizer {
+    width: 33%;
+}
