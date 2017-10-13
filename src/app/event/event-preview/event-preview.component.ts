@@ -1,7 +1,9 @@
-import { Event } from './../event';
-import { EventService } from './../event.service';
 import { Component, OnInit }      from '@angular/core';
 import { URLSearchParams } from '@angular/http';
+import * as moment from 'moment-timezone';
+
+import { Event } from './../event';
+import { EventService } from './../event.service';
 
 @Component({
     selector: 'event-preview',
@@ -19,6 +21,12 @@ import { URLSearchParams } from '@angular/http';
       err => {
         console.log("error", err);
       });
+    }
+
+    formatEventStartDateTime(event: Event) {
+      let formatedStartDateTime = moment(event.startDateTime);
+
+      return formatedStartDateTime.format("MMM DD YYYY");
     }
 
     getDaysRemaining(event: Event) {
