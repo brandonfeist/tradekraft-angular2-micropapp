@@ -1,9 +1,8 @@
 import { Component, OnInit }      from '@angular/core';
 
 @Component({
-    selector: 'app-event',
-    templateUrl: './event.component.html',
-    styleUrls: [ './event.component.css' ]
+    selector: 'events',
+    templateUrl: './event.component.html'
   })
   export class EventComponent implements OnInit {
     ngOnInit() { }

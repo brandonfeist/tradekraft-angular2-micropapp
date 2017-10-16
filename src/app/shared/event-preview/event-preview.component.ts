@@ -2,8 +2,8 @@ import { Component, OnInit }      from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import * as moment from 'moment-timezone';
 
-import { Event } from './../event';
-import { EventService } from './../event.service';
+import { Event } from './../../event/event';
+import { EventService } from './../../services/event.service';
 
 @Component({
     selector: 'event-preview',
@@ -11,12 +11,15 @@ import { EventService } from './../event.service';
   })
   export class EventPreviewComponent implements OnInit {
     events: Event[] = [];
+    defaultImage = "assets/images/preload-image.jpg";
+    errorImage = "assets/images/error-image.jpg";
 
     constructor(private eventService: EventService) { }
 
     ngOnInit() { 
       this.eventService.getEvents(new URLSearchParams("pageSize=4")).subscribe(data => {
         this.events = data.content;
+        console.log(this.events);
       },
       err => {
         console.log("error", err);

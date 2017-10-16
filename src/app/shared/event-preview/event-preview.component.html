@@ -17,7 +17,7 @@
                     <div class="date">
                         <h1>{{ formatEventStartDateTime(event) }}</h1>
                     </div>
-                    <img src="{{ event.image.original }}" alt="event title">
+                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.image.original" alt="event title">
                 </div>
                 <div class="text-container">
                     <h2>{{ event.name }}</h2>

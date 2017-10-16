@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { HomeModule }    from './home/home.module';
 import { NavbarComponent } from './navbar/navbar.component';
 
+import { EventService } from './services/event.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     SlimLoadingBarModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ EventService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

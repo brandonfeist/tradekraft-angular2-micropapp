@@ -1,18 +1,21 @@
 import { NgModule }     from '@angular/core';
 import { CommonModule }       from '@angular/common';
+import {RouterModule} from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
-import { EventComponent }     from './event.component';
-import { EventRoutingModule } from './event-routing.module';
+import { EventPreviewComponent } from './event-preview/event-preview.component';
 
 @NgModule({
     imports:  [ 
       CommonModule,
-      EventRoutingModule,
+      RouterModule,
       LazyLoadImageModule
     ],
+    exports: [
+        EventPreviewComponent
+    ],
     declarations: [ 
-      EventComponent
+      EventPreviewComponent
     ]
   })
-  export class EventModule { }
+  export class SharedModule { }
