@@ -1,0 +1,189 @@
+%container-white {
+    background: $white;
+    box-shadow: 0 1px 2px $shadow-black;
+    display: block;
+    padding: 15px;
+}
+
+.container-white {
+    @extend %container-white;
+}
+
+.tk-container,
+.sub-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.sub-container {
+    margin: 5px 0;
+
+    h5:last-child {
+        float: right;
+    }
+}
+
+.tk-container {
+    margin-bottom: 20px;
+}
+
+.html-container {
+    margin: 30px auto;
+    width: 100%;
+
+    @include media($mobile) {
+        width: 100%;
+    }
+
+    p {
+        color: $dark-grey;
+        font-size: 15px;
+        line-height: 28px;
+    }
+
+    img {
+        margin: 20px auto;
+        max-width: 100%;
+    }
+
+    &.playlists {
+        .portal {
+            border: 1px;
+            border-color: #000;
+            border-style: solid;
+            margin: 5px auto;
+            max-width: 125px;
+        }
+    }
+}
+
+.activecampaign {
+    background: $white;
+    box-shadow: 0 2px 4px $shadow-black;
+    color: $black;
+    margin: 0;
+    padding: 40px 60px;
+    text-align: center;
+
+    h1 {
+        font-size: 24px;
+        margin: 0;
+    }
+
+    p {
+        color: $mid-grey;
+        font-size: 14px;
+        margin: 5px 0 20px;
+    }
+
+    .red {
+        margin: 5px 0 0;
+    }
+}
+
+.reward-container,
+.buttons-container {
+    float: left;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.text-container {
+    &.center {
+        text-align: center;
+    }
+
+    h5 {
+        color: inherit;
+        width: 100%;
+    }
+}
+
+.upload-container {
+    .btn {
+        display: inline-block;
+        float: none;
+    }
+}
+
+.profile-container {
+    padding: 50px;
+    position: relative;
+    width: 100%;
+
+    .btn-connect {
+        clear: both;
+        display: inline-block;
+        float: none;
+        margin: 5px;
+        position: relative;
+        width: 300px;
+    }
+}
+
+.presave-content {
+    margin-top: 5vh;
+
+    .container-white {
+        display: inline-block;
+        margin-top: 50px;
+        padding: 30px;
+    }
+
+    form {
+        float: left;
+        position: relative;
+        width: 100%;
+    }
+
+    .required {
+        float: left;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 38px;
+        font-style: normal;
+        margin: 0;
+
+        @include media($mobile) {
+            font-size: 28px;
+        }
+    }
+
+    h2 {
+        font-size: 24px;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 21px;
+        margin: 0;
+
+        @include media($mobile) {
+            font-size: 16px;
+        }
+    }
+
+    h5 {
+        font-size: 13px;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    select {
+        border: 1px solid $black;
+    }
+
+    p {
+        float: left;
+        margin: 0;
+        width: 100%;
+    }
+
+    .btn {
+        float: none;
+        margin: 0;
+    }
+}

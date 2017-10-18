@@ -74,6 +74,72 @@
         }
     }
 
+    &.artist-mix {
+        // scss-lint:disable NestingDepth
+        img {
+            filter: grayscale(0%);
+            min-height: 100%;
+            transform: scale(1);
+            transition: transform 200ms ease-in-out, filter 200ms ease-in-out, opacity 1s;
+        }
+
+        &:hover img {
+            filter: grayscale(70%);
+            transform: scale(1.1);
+            transition: transform 200ms ease-in-out, filter 200ms ease-in-out, opacity 1s;
+        }
+
+        .btn.default {
+            bottom: 35px;
+            left: 0;
+            margin: 0 auto;
+            position: absolute;
+            right: 0;
+            width: 175px;
+        }
+
+        .text-container {
+            background: $white;
+            color: $black;
+            padding: 5px 0px;
+            text-align: center;
+            transition: background-color 200ms ease-in-out;
+
+            h2,
+            h4,
+            p {
+                color: $black;
+                font-size: 14px;
+                margin: 14px;
+            }
+        }
+
+        // &:hover .text-container {
+        //     background-color: rgb(241, 241, 241);
+        //     transition: background-color 200ms ease-in-out;
+        // }
+
+        .date {
+            bottom: 0;
+            color: $white;
+            padding: 20px 40px;
+            position: absolute;
+            z-index: 9;
+
+            h1 {
+                font-size: 24px;
+                font-weight: 600;
+                margin: 0;
+            }
+
+            h2 {
+                font-size: 16px;
+                font-weight: 500;
+                margin: 0;
+            }
+        }
+    }
+
     &.mix {
         // scss-lint:disable NestingDepth
         img {
@@ -479,6 +545,19 @@
         }
     }
 
+
+    &.artist {
+        box-shadow: 0 1px 2px $shadow-black;
+
+        @include span-columns(3);
+        @include omega(4n);
+
+        @include media($mobile) {
+            @include span-columns(6 of 12);
+            @include omega(2n);
+        }
+    }
+
     &.react {
         box-shadow: 0 1px 2px $shadow-black;
 
@@ -532,9 +611,18 @@
 
     &.black,
     .frame-blog &:first-child,
+    &.artist-mix .image-container,
     &.mix .image-container {
         &::after {
             background: linear-gradient(to bottom, $black-transparent 0%, $black 100%);
+
+            @include image-container-default;
+        }
+    }
+
+    &.artist-mix .image-container {
+        &::after {
+            background: linear-gradient(to bottom, $black-transparent 0%, $black 200%);
 
             @include image-container-default;
         }

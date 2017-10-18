@@ -7,14 +7,18 @@
 @import './assets/scss/helpers/_variables.scss';
 
 @import './assets/scss/base/_base.scss';
+@import './assets/scss/base/_containers.scss';
 @import './assets/scss/base/_frames.scss';
 @import './assets/scss/base/_typography.scss';
 
 @import './assets/scss/components/_buttons.scss';
 @import './assets/scss/components/_columns.scss';
 @import './assets/scss/components/_elements.scss';
+@import './assets/scss/components/_instagram.scss';
 @import './assets/scss/components/_items.scss';
 @import './assets/scss/components/_lazy-load-images.scss';
 
+@import './assets/scss/pages/_index.scss';
 
 @import './assets/scss/sections/_banners.scss';
+@import './assets/scss/sections/_slidemenu.scss';

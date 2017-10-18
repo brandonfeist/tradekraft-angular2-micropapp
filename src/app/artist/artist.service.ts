@@ -6,13 +6,13 @@ import 'rxjs/add/operator/map';
 export class ArtistService {
     constructor(private http: Http) {}
 
-    getEvents(params?: URLSearchParams) {
+    getArtists(params?: URLSearchParams) {
         return this.http.get('http://localhost:8087/v1/artists',
         { search: params })
         .map((res:Response) => res.json());
     }
 
-    getEvent(slug: string) {
+    getArtist(slug: string) {
         return this.http.get('http://localhost:8087/v1/artists/' + slug,)
         .map((res:Response) => res.json());
     }

@@ -27,7 +27,9 @@ import { EventService } from './services/event.service';
     SlimLoadingBarModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [ EventService ],
+  providers: [ 
+    EventService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

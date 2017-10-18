@@ -1,1 +1,36 @@
-<p>Artists!</p>
+<main id="panel" class="index-page slideout-panel slideout-panel-left">
+    <div class="frame">
+        <div class="wrapper">
+            <div class="tk-container">
+                <div class="tk-container">
+                    <div class="col-8">
+                        <h1>Artists</h1>
+                    </div>
+                </div>
+            </div>
+            <form [formGroup]="artistSearchForm" (ngSubmit)="onSubmit()" novalidate>
+                <div class="tk-container">
+                    <div class="container-white search-holder col-8">
+                        <input type="search" placeholder="Search for artist..." formControlName="search">
+                        <input type="submit" value="">
+                    </div>
+                    <div class="container-white filter-holder col-4">
+                        <select class="search_form_genre" formControlName="year">
+                            <option *ngFor="let year of years" [value]="year.value">{{ year.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <div class="frame-items">
+                <a class="item artist artist-mix" *ngFor="let artist of artists" routerLink="/artists/{{ artist.slug }}">
+                    <div class="image-container">
+                        <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.image.medium" title="artist.name" alt="artist.name">
+                    </div>
+                    <div class="text-container">
+                        <h2>{{ artist.name }}</h2>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>

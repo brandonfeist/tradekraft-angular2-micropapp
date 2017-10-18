@@ -19,7 +19,6 @@ import { EventService } from './../../services/event.service';
     ngOnInit() { 
       this.eventService.getEvents(new URLSearchParams("pageSize=4")).subscribe(data => {
         this.events = data.content;
-        console.log(this.events);
       },
       err => {
         console.log("error", err);
