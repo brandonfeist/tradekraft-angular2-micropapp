@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 
 import { HomeModule }    from './home/home.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PageNotFoundModule } from './404/not-found.module';
 
 import { EventService } from './services/event.service';
 
@@ -25,7 +26,8 @@ import { EventService } from './services/event.service';
     HttpModule,
     CollapseModule,
     SlimLoadingBarModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    PageNotFoundModule
   ],
   providers: [ 
     EventService

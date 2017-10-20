@@ -4,8 +4,10 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ArtistComponent }  from './artist.component';
+import { ArtistDetailsComponent } from './artist-details/artist-details.component';
 import { ArtistService }    from './artist.service';
 import { ArtistRoutingModule }  from './artist-routing.module';
+import { ArtistDetailsResolve } from './artist-details/artist-details.resolve';
 
 @NgModule({
     imports:  [ 
@@ -15,8 +17,12 @@ import { ArtistRoutingModule }  from './artist-routing.module';
       ReactiveFormsModule
     ],
     declarations: [ 
-      ArtistComponent
+      ArtistComponent,
+      ArtistDetailsComponent
     ],
-    providers: [ ArtistService ]
+    providers: [ 
+      ArtistService, 
+      ArtistDetailsResolve
+    ]
   })
   export class ArtistModule { }

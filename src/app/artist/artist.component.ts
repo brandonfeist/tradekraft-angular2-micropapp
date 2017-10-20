@@ -19,8 +19,7 @@ export class ArtistComponent implements OnInit {
   defaultImage: string = "assets/images/preload-image.jpg";
   errorImage: string = "assets/images/error-image.jpg";
   artistSearchForm: FormGroup;
-  years = [{value: 0, name: "Year"},
-          {value: 2016, name: "2016"},
+  years = [{value: 2016, name: "2016"},
           {value: 2017, name: "2017"}];
 
   constructor(private artistService: ArtistService, private formBuilder: FormBuilder,

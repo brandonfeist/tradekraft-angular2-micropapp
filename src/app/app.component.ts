@@ -9,23 +9,23 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnDestroy {
-  private sub: any;
+  private subscription: any;
 
   constructor(private slimLoadingBarService: SlimLoadingBarService, private router: Router) {
-      this.sub = this.router.events.subscribe(event => {
-        if (event instanceof NavigationStart) {
-            this.slimLoadingBarService.start();
-        } else if ( event instanceof NavigationEnd ||
-                    event instanceof NavigationCancel ||
-                    event instanceof NavigationError) {
-            this.slimLoadingBarService.complete();
-        }
+    this.subscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+          this.slimLoadingBarService.start();
+      } else if ( event instanceof NavigationEnd ||
+                  event instanceof NavigationCancel ||
+                  event instanceof NavigationError) {
+          this.slimLoadingBarService.complete();
+      }
     }, (error: any) => {
         this.slimLoadingBarService.complete();
     });
   }
 
   ngOnDestroy(): any {
-    this.sub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

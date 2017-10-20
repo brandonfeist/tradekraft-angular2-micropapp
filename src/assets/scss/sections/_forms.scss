@@ -1,0 +1,258 @@
+select,
+input {
+    -webkit-appearance: none;
+}
+
+select {
+    appearance: none;
+    background: url('/assets/images/icons/slim_arrow_down.svg') no-repeat right;
+    background-position-x: 95%;
+    background-size: 4%;
+    border: 0;
+    border-radius: 0;
+    color: $black;
+    font-size: 14px;
+    margin: 1px 0;
+    overflow: hidden;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+// scss-lint:disable SelectorFormat
+.form,
+.fos_comment_comment_edit_form {
+    width: 100%;
+
+    &.small {
+        margin: 0 auto;
+        max-width: 350px;
+    }
+
+    p {
+        color: $mid-grey;
+        text-align: center;
+    }
+
+    select {
+        appearance: none;
+        background: url('/assets/images/icons/slim_arrow_down.svg') no-repeat right $white;
+        background-position-x: 95%;
+        background-size: 4%;
+        border: 1px solid $mid-grey;
+        border-radius: 0;
+        font-size: 14px;
+        margin: 10px 0;
+        overflow: hidden;
+        padding: 10px 20px;
+        width: 100%;
+    }
+
+    [type='text'],
+    [type='password'],
+    [type='checkbox'],
+    [type='email'],
+    textarea,
+    label {
+        border-color: 0;
+        float: left;
+    }
+
+    textarea {
+        appearance: none;
+        border: 1px solid $mid-grey;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 10px 0;
+        min-height: 85px;
+        padding: 20px;
+        width: 100%;
+    }
+
+    [type='text'],
+    [type='password'],
+    [type='email'],
+    [type='url'] {
+        appearance: none;
+        border: 1px solid $mid-grey;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 10px 0;
+        padding: 10px 20px;
+        width: 100%;
+    }
+
+    span {
+        cursor: pointer;
+        float: right;
+        font-size: 12px;
+
+        &:hover {
+            color: $red;
+        }
+    }
+
+    label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 10px;
+        text-align: left;
+        width: 100%;
+    }
+}
+
+.user-pages {
+    padding: 30px;
+    text-align: center;
+
+    hr {
+        height: 2px;
+        width: 25%;
+    }
+
+    label {
+        border-right: 1px solid $black;
+        color: $black;
+        cursor: pointer;
+        line-height: 30px;
+        margin: 5px 0;
+        padding: 0 20px;
+
+        &:hover {
+            color: $red;
+        }
+
+        &:last-of-type {
+            border-right: 0;
+        }
+
+        &.active a {
+            color: $red;
+        }
+    }
+}
+
+// scss-lint:disable UnnecessaryParentReference
+[type='radio'],
+[type='checkbox'] {
+    display: none;
+
+    & + label {
+        cursor: pointer;
+        user-select: none;
+
+        &::before {
+            background: url('/assets/images/icons/cross_black.svg') left top no-repeat;
+            content: '';
+            cursor: pointer;
+            display: inline-block;
+            height: 15px;
+            margin-right: 10px;
+            opacity: 0.3;
+            vertical-align: middle;
+            width: 15px;
+        }
+
+        &.insta::before {
+            display: none;
+        }
+    }
+
+    &:checked + label::before {
+        background: url('/assets/images/icons/check_green.svg') left top no-repeat;
+        opacity: 1;
+    }
+
+    &:checked + label img {
+        border: 5px solid $sf-green;
+    }
+}
+
+[type='file'] {
+    display: none;
+
+    & + label {
+        cursor: pointer;
+        user-select: none;
+    }
+}
+
+.radio-holder {
+    float: left;
+    position: relative;
+    text-align: center;
+    width: 100%;
+
+    label {
+        margin-bottom: 10px;
+    }
+
+    input + label {
+        display: inline-block;
+        float: none;
+        height: 20px;
+        margin-bottom: 5px;
+        margin-left: 20px;
+        margin-right: auto;
+        position: relative;
+        width: auto;
+    }
+}
+
+%container-white-input-form {
+    margin: 40px auto;
+    max-width: 500px;
+    padding: 40px;
+    width: 100%;
+}
+
+.presave-content {
+    .container-white.input-form {
+        @extend %container-white-input-form;
+
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+.container-white.input-form {
+    margin: 20px auto;
+    max-width: 500px;
+    padding: 40px;
+    width: 100%;
+
+    form {
+        display: table;
+    }
+}
+
+.input-form,
+.modal {
+    .register-form label {
+        margin: 10px 0 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    [type='submit'] {
+        width: 100%;
+    }
+}
+
+.form-group {
+    display: block;
+    float: left;
+}
+
+.fos_comment_submit {
+    input,
+    button {
+        cursor: pointer;
+    }
+}
+
+.col-container {
+    select {
+        border: 1px solid;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+}
