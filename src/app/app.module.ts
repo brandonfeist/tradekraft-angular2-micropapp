@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PageNotFoundModule } from './404/not-found.module';
 
 import { EventService } from './services/event.service';
+import { SpotifyService } from './services/spotify.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { EventService } from './services/event.service';
     PageNotFoundModule
   ],
   providers: [ 
-    EventService
+    EventService,
+    SpotifyService
   ],
   bootstrap: [AppComponent]
 })

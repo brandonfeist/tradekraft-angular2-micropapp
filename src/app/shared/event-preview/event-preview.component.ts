@@ -38,7 +38,7 @@ import { EventService } from './../../services/event.service';
       currentDate.setSeconds(59);
       currentDate.setMilliseconds(999);
 
-      let eventStartDate = new Date(this.events[0].startDateTime);
+      let eventStartDate = new Date(event.startDateTime);
       eventStartDate.setHours(23);
       eventStartDate.setMinutes(59);
       eventStartDate.setSeconds(59);

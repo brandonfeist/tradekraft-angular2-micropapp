@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
@@ -14,7 +15,8 @@ import { ArtistDetailsResolve } from './artist-details/artist-details.resolve';
       CommonModule,
       ArtistRoutingModule,
       LazyLoadImageModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      SharedModule
     ],
     declarations: [ 
       ArtistComponent,

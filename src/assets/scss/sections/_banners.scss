@@ -34,6 +34,18 @@
         height: calc(100% - 40px);
     }
 
+    &.small::before {
+        background: linear-gradient(to bottom, $white-transparent 0%, $off-white 70%);
+        bottom: 0;
+        content: '';
+        display: block;
+        height: 300px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+    }
+
     &::before {
         background: linear-gradient(to bottom, $white-transparent 0%, $off-white 95%);
         bottom: 0;
@@ -60,7 +72,6 @@
         @include media($mobile) {
             height: 425px;
         }
-    
     }
 
     &.mid {
@@ -70,7 +81,6 @@
         @include media($mobile) {
             height: 200px;
         }
-    
     }
 
     &.small {
@@ -80,7 +90,6 @@
         @include media($mobile) {
             height: 100px;
         }
-    
     }
 
     video,
@@ -112,4 +121,104 @@
         position: absolute;
         top: 10px;
     }
+}
+
+.banner-empty {
+    background: $black;
+    height: 100%;
+    width: 100%;
+}
+
+.release-header,
+.artist-header,
+.user-header,
+.main-header {
+    margin-top: -150px;
+
+    @include media($mobile) {
+        margin-top: -80px;
+    }
+
+    .col-9 {
+        margin-right: 0;
+    }
+
+    img {
+        box-shadow: 0 4px 12px $shadow-black-dark;
+        width: 100%;
+    }
+
+    h4,
+    h5 {
+        float: left;
+        font-size: 14px;
+        margin-bottom: 5px;
+        margin-right: 10px;
+        margin-top: 5px;
+    }
+
+    h4 {
+        font-weight: 700;
+
+        &.padded {
+            padding: 15px 0;
+        }
+    }
+
+    .col-3 h5 {
+        width: auto;
+    }
+
+    .image-container,
+    .text-container {
+        float: left;
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
+.release-header,
+.artist-header {
+    @include media($mobile) {
+        .image-container {
+            float: none;
+            margin: 0 auto;
+            width: 50%;
+        }
+    }
+}
+
+.banner,
+.title-container {
+    h1 {
+        color: $black;
+        font-size: 34px;
+        font-style: italic;
+        font-weight: 800;
+        margin: 0;
+        text-transform: uppercase;
+
+        @include media($mobile) {
+            font-size: 23px;
+            margin-top: 20px;
+        }
+    }
+
+    h2 {
+        color: $black;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 800;
+        text-transform: uppercase;
+
+        @include media($mobile) {
+            font-size: 18px;
+        }
+    }
+}
+
+.top-image {
+    margin: 20px auto;
+    max-height: calc(30vh - 40px);
+    max-width: 400px;
 }

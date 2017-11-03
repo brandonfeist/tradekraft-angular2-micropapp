@@ -4,6 +4,7 @@ import {RouterModule} from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 import { EventPreviewComponent } from './event-preview/event-preview.component';
+import { ReadMoreComponent } from './read-more/read-more.component';
 
 @NgModule({
     imports:  [ 
@@ -12,10 +13,12 @@ import { EventPreviewComponent } from './event-preview/event-preview.component';
       LazyLoadImageModule
     ],
     exports: [
-        EventPreviewComponent
+        EventPreviewComponent,
+        ReadMoreComponent
     ],
     declarations: [ 
-      EventPreviewComponent
+      EventPreviewComponent,
+      ReadMoreComponent
     ]
   })
   export class SharedModule { }

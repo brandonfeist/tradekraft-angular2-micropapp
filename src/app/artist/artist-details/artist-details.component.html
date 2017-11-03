@@ -1,3 +1,103 @@
 <div class="frame banner small">
-    <img class="image lazy-load" [lazyLoad]="artist.image.medium" alt="artist.name">
+    <img class="image lazy-load" [errorImage]="errorImage" [lazyLoad]="artist.image.original">
+</div>
+<div class="frame">
+    <div class="wrapper">
+        <div class="artist-header">
+            <div class="col-6">
+                <div class="image-container">
+                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.image.medium" title="artist.name" alt="artist.name">
+                </div>
+                <div class="tk-container">
+                    <div class="event-holder">
+                        <div class="text-container">
+                            <h2>Events</h2>
+                        </div>
+                        <div class="frame-items">
+                            <a class="item artist-event mix" *ngFor="let event of artist.events" routerLink="/events/{{ event.slug }}">
+                                <div class="image-container">
+                                    <div class="count active">
+                                        <div class="count-ribbon">{{ getDaysRemaining(event) }}</div>
+                                    </div>
+                                    <div class="date">
+                                        <h1>{{ formatEventStartDateTime(event) }}</h1>
+                                    </div>
+                                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.image.original" alt="event title">
+                                </div>
+                                <div class="text-container">
+                                    <h2>{{ event.name }}</h2>
+                                    <h4>{{ getEventLocationShortFormat(event) }}</h4>
+                                    <span class="btn default">View More</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="title-container">
+                    <h1>{{ artist.name }}</h1>
+                </div>
+                <div class="social-media push-right">
+                    <a *ngIf="artist.facebook" href="{{ artist.facebook }}" target="_blank">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a *ngIf="artist.instagram" href="{{ artist.instagram }}" target="_blank">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                    <a *ngIf="artist.twitter" href="{{ artist.twitter }}" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a *ngIf="artist.soundcloud" href="{{ artist.soundcloud }}" target="_blank">
+                        <i class="fa fa-soundcloud"></i>
+                    </a>
+                    <button class="spotify-bt" *ngIf="artist.spotify" (click)="followSpotify(artist.spotify)" title="Follow {{ artist.name }} on Spotify">
+                        <i class="fa fa-spotify spotify-logo-bt"></i>
+                        <!-- possibly check if user is authenticated and already follows, then have it say following -->
+                        <span class="spotify-bt-text">Follow</span>
+                    </button>
+                </div>
+                <!-- <div class="text-container artist-description" [innerHTML]="artist.description"></div> -->
+                <read-more class="text-container artist-description" [text]="artist.description" [maxLength]="500"></read-more>
+
+                <div class="text-container divider">
+                    <h2>Releases</h2>
+                </div>
+                <div class="frame-items">
+                    <div class="item artist-music" *ngFor="let release of artist.releases.artistReleases">
+                        <a routerLink="/releases/{{release.slug}}">
+                            <div class="image-container">
+                                <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.thumb" title="release.name" alt="release.name">
+                            </div>
+                        </a>
+                        <div class="text-container">
+                            <h2>
+                                <a routerLink="/release/{{release.slug}}">{{ release.name }}</a>
+                            </h2>
+                            <p>{{ formatReleaseArtists(release) }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-container divider">
+                    <h2>Appears On</h2>
+                </div>
+                <div class="frame-items">
+                    <div class="item artist-music" *ngFor="let release of artist.releases.appearsOn">
+                        <a routerLink="/releases/{{release.slug}}">
+                            <div class="image-container">
+                                <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.thumb" title="release.name" alt="release.name">
+                            </div>
+                        </a>
+                        <div class="text-container">
+                            <h2>
+                                <a routerLink="/release/{{release.slug}}">{{ release.name }}</a>
+                            </h2>
+                            <p>{{ formatReleaseArtists(release) }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

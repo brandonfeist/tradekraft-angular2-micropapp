@@ -1,0 +1,240 @@
+.artist-header {
+    display: inline-block;
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+
+    @include media($tablet) {
+        padding: 0 25vw;
+    }
+
+    .social-media {
+        margin: 20px 0;
+        line-height: 1;
+        display: block;
+        float: left;
+
+        & i {
+            font-size: 24px;
+
+            &.spotify-logo-bt {
+                float: left;
+                font-size: 18px;
+            }
+        }
+    }
+
+    .spotify-bt {
+        background: #333333;
+        border-radius: 500px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 11px;
+        border-width: 0;
+
+        &:hover {
+            @include media($desktop) {
+                background: $red;
+                transition: all 200ms ease-in-out;
+            }
+        }
+    }
+
+    .spotify-bt-text {
+        display: block;
+        text-transform: uppercase;
+        font-weight: 200;
+        letter-spacing: 1px;
+        padding: 4px 5px 0px 10px;
+        float: left;
+    }
+
+    .event-holder {
+        margin: 5px 0;
+    }
+
+    .push-right a {
+        margin-right: 1.5em;
+    }
+
+    .video-container,
+    .wrapper {
+        padding: 0;
+        width: 100%;
+    }
+
+    .title-container {
+        float: left;
+        width: 100%;
+    }
+
+    .image-container {
+        position: relative;
+    }
+
+    .artist-header-date,
+    .artist-header-label {
+        @include media($mobile) {
+            display: none;
+        }
+    }
+
+    .artist-header-artist-title {
+        display: none;
+
+        @include media($mobile) {
+            display: block;
+            float: none;
+            text-align: center;
+        }
+    }
+
+    .col-6 {
+        h1 {
+            font-size: 32px;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            width: 100%;
+        }
+
+        .tab-content {
+            padding: 20px;
+        }
+    }
+
+    .col-6 {
+        @include media($mobile) {
+            .player-inline,
+            .title-container {
+                display: none;
+            }
+        }
+
+        .player-inline.spotify {
+            display: none;
+        }
+    }
+
+    .artist-artist-content {
+        display: none;
+    }
+}
+
+.artist-holder,
+.artist-content {
+    float: left;
+    position: relative;
+    width: 100%;
+}
+
+.artist-holder {
+    margin: 5px 0;
+
+    .artist {
+        margin: 0;
+        z-index: 1;
+    }
+
+    .artist-portal {
+        .cta-label {
+            line-height: initial;
+            float: right;
+            border: 2px solid black;
+            padding: 5px 10px;
+            min-width: 100px;
+            text-align: center;
+            margin-top: -2px;
+        }
+    }
+
+    .artist-content {
+        background: $white;
+        box-shadow: 0 1px 2px $shadow-black;
+        display: none;
+        padding: 10px 30px;
+    }
+
+    .download::before {
+        transform: rotate(90deg);
+    }
+
+    &.active {
+        .download::before {
+            transform: rotate(-90deg);
+        }
+
+        .artist-content {
+            display: block;
+        }
+    }
+
+    .spotify-optimize {
+        background: #1ed760;
+        border-radius: 500px;
+        color: $white;
+    }
+
+    .icon {
+        float: left;
+        height: 35px;
+        margin-left: 5px;
+        margin-top: 8px;
+        position: absolute;
+        width: 35px;
+        z-index: 5;
+
+        &:hover::before {
+            opacity: 1;
+        }
+
+        &.spotify::before {
+            background-image: url('/images/icons/portal/icon_spotify.png');
+        }
+
+        &.spotify.spotify-optimize {
+            height: 30px;
+            margin-left: 8px;
+            margin-top: 11px;
+            width: 30px;
+        }
+
+        &.spotify.spotify-optimize::before {
+            background-image: url('/images/icons/portal/icon_spotify_white.png');
+        }
+
+        &.saavn::before {
+            background-image: url('/images/icons/portal/icon_saavn.png');
+        }
+
+        &.applemusic::before {
+            background-image: url('/images/icons/portal/icon_applemusic.png');
+        }
+
+        &.deezer::before {
+            background-image: url('/images/icons/portal/icon_deezer.png');
+        }
+
+        &.itunes::before {
+            background-image: url('/images/icons/portal/icon_itunes.png');
+        }
+
+        &.youtube::before {
+            background-image: url('/images/icons/portal/icon_youtube.png');
+        }
+
+        &.beatport::before {
+            background-image: url('/images/icons/portal/icon_beatport.png');
+        }
+
+        &.downloadicon::before {
+            background-image: url('/images/icons/download.svg');
+        }
+
+        &.other::before {
+            background-image: url('/images/icons/site_black.svg');
+        }
+    }
+}
