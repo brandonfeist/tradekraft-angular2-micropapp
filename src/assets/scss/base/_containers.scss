@@ -91,6 +91,12 @@
 }
 
 .text-container {
+    &.present {
+        h2 {
+            font-size:32px;
+        }
+    }
+
     &.center {
         text-align: center;
     }

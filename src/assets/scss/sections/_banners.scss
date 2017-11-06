@@ -35,7 +35,7 @@
     }
 
     &.small::before {
-        background: linear-gradient(to bottom, $white-transparent 0%, $off-white 70%);
+        background: linear-gradient(to bottom, $white-transparent 0%, $off-white 90%);
         bottom: 0;
         content: '';
         display: block;
@@ -133,7 +133,7 @@
 .artist-header,
 .user-header,
 .main-header {
-    margin-top: -150px;
+    margin-top: -75px;
 
     @include media($mobile) {
         margin-top: -80px;
@@ -172,8 +172,12 @@
     .image-container,
     .text-container {
         float: left;
-        margin-top: 10px;
+        margin: 10px 0;
         width: 100%;
+
+        &.no-margin {
+            margin: 0;
+        }
     }
 }
 
@@ -192,7 +196,7 @@
 .title-container {
     h1 {
         color: $black;
-        font-size: 34px;
+        font-size: 48px;
         font-style: italic;
         font-weight: 800;
         margin: 0;

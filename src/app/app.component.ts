@@ -1,14 +1,13 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
   private subscription: any;
 
   constructor(private slimLoadingBarService: SlimLoadingBarService, private router: Router) {
@@ -23,6 +22,14 @@ export class AppComponent implements OnDestroy {
     }, (error: any) => {
         this.slimLoadingBarService.complete();
     });
+  }
+
+  ngOnInit() {
+    this.router.events.subscribe((event: NavigationEnd) => {
+      if(event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+      }
+    })
   }
 
   ngOnDestroy(): any {

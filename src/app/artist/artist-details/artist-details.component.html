@@ -4,17 +4,17 @@
 <div class="frame">
     <div class="wrapper">
         <div class="artist-header">
-            <div class="col-6">
+            <div class="col-3">
                 <div class="image-container">
-                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.image.medium" title="artist.name" alt="artist.name">
+                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.image.medium" title="{{ artist.name }}" alt="{{ artist.name }}">
                 </div>
-                <div class="tk-container">
+                <!-- <div class="tk-container">
                     <div class="event-holder">
                         <div class="text-container">
                             <h2>Events</h2>
                         </div>
                         <div class="frame-items">
-                            <a class="item artist-event mix" *ngFor="let event of artist.events" routerLink="/events/{{ event.slug }}">
+                            <a class="item artist-event mix" *ngFor="let event of artist.events | slice:0:2; let i=index" routerLink="/events/{{ event.slug }}">
                                 <div class="image-container">
                                     <div class="count active">
                                         <div class="count-ribbon">{{ getDaysRemaining(event) }}</div>
@@ -32,9 +32,17 @@
                             </a>
                         </div>
                     </div>
+                </div> -->
+                <div class="sub-container">
+                    <a class="silent button" routerLink="/artists">
+                        <div class="button-wrapper">  
+                            <span>Back to artists</span>      
+                            <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-9">
                 <div class="title-container">
                     <h1>{{ artist.name }}</h1>
                 </div>
@@ -60,7 +68,7 @@
                 <!-- <div class="text-container artist-description" [innerHTML]="artist.description"></div> -->
                 <read-more class="text-container artist-description" [text]="artist.description" [maxLength]="500"></read-more>
 
-                <div class="text-container divider">
+                <div class="text-container present divider">
                     <h2>Releases</h2>
                 </div>
                 <div class="frame-items">
@@ -79,7 +87,7 @@
                     </div>
                 </div>
 
-                <div class="text-container divider">
+                <div class="text-container present divider">
                     <h2>Appears On</h2>
                 </div>
                 <div class="frame-items">

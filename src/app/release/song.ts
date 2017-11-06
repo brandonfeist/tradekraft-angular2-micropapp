@@ -3,7 +3,7 @@ import { Artist } from './../artist/artist';
 export class Song {
     id: number;
     name: string;
-    songFile: object;
+    songFile: any;
     trackNumber: number;
     duration: string;
     bpm: number;

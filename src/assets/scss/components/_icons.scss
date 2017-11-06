@@ -1,0 +1,588 @@
+.icon {
+    cursor: pointer;
+    display: block;
+    float: left;
+    position: relative;
+
+    &::before {
+        background: no-repeat center;
+        background-size: 65%;
+        content: '';
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    &.search {
+        float: right;
+        height: 20px;
+        width: 20px;
+
+        &::before {
+            background-image: url('/images/icons/search_black.svg');
+            background-size: 100%;
+            opacity: 0.3;
+        }
+
+        &.white::before {
+            background-image: url('/images/icons/search_white.svg');
+            opacity: 0.6;
+        }
+
+        &:hover::before {
+            background-image: url('/images/icons/search_red.svg');
+            opacity: 1;
+        }
+    }
+
+    &.photo {
+        background: $off-white-transparent;
+        bottom: 0;
+        height: 30px;
+        margin: 0;
+        padding: 30px 0;
+        position: absolute;
+        right: 0;
+        width: 60px;
+
+        &::before {
+            background-image: url('/images/icons/photo_black.svg');
+        }
+    }
+
+    &.unmute {
+        border: 1px solid $black;
+        border-radius: 100%;
+        height: 30px;
+        margin-left: 10px;
+        margin-top: 10px;
+        width: 30px;
+
+        &.black::before {
+            background-image: url('/images/icons/unmute_black.svg');
+            background-size: 45%;
+        }
+    }
+
+    &.mute {
+        border: 1px solid $black;
+        border-radius: 100%;
+        height: 30px;
+        margin-left: 10px;
+        margin-top: 10px;
+        width: 30px;
+
+        &.black::before {
+            background-image: url('/images/icons/mute_black.svg');
+            background-size: 45%;
+        }
+    }
+
+    // scss-lint:disable NestingDepth
+
+    &.add {
+        height: 35px;
+        width: 35px;
+        z-index: 20;
+
+        &::before {
+            background-image: url('/images/icons/plus_black.svg');
+            background-size: 35%;
+        }
+    }
+
+    &.play,
+    &.pause,
+    &.load {
+        border-radius: 100%;
+        height: 50px;
+        width: 50px;
+        z-index: 20;
+
+        &::before {
+            background-size: 35%;
+        }
+
+        &.black {
+            border: 2px solid $black;
+
+            &::before {
+                background-image: url('/images/icons/play_black.svg');
+            }
+        }
+
+        &.white {
+            border: 2px solid $white;
+
+            &::before {
+                background-image: url('/images/icons/play_white.svg');
+            }
+        }
+    }
+
+    &.score {
+        height: 17px;
+        margin: 0;
+        margin-left: 2px;
+        margin-right: 2px;
+        width: 17px;
+
+        &::before {
+            background-image: url('/images/icons/thumb_black.svg');
+            background-size: 90%;
+            opacity: 0.7;
+        }
+
+        &.down {
+            transform: rotate(180deg);
+        }
+    }
+
+    &.unlocked {
+        font-size: 12px;
+        font-weight: 100;
+        margin-top: 35px;
+        text-align: center;
+        width: 100%;
+
+        &::before {
+            background-image: url('/images/icons/black_lock.svg');
+            background-size: 90%;
+            height: 30px;
+            left: calc(50% - (25px / 2));
+            margin-top: -35px;
+            position: absolute;
+            width: 25px;
+        }
+    }
+
+    &.locked {
+        margin-top: 15px;
+        width: 100%;
+
+        &::before {
+            background-image: url('/images/icons/red_lock.svg');
+            background-size: 90%;
+            height: 30px;
+            left: calc(50% - (25px / 2));
+            position: absolute;
+            width: 25px;
+        }
+    }
+
+    .item &,
+    .release-header .image-container & {
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .item & {
+        height: 80px;
+        width: 80px;
+    }
+
+    .release-header .image-container & {
+        background: $shadow-black-mid;
+        height: 35%;
+        width: 35%;
+    }
+    // scss-lint:disable NestingDepth
+    &.pause {
+        border-radius: 100%;
+        z-index: 20;
+
+        &::before {
+            background-size: 45%;
+        }
+
+        &.black {
+            border: 2px solid $black;
+
+            &::before {
+                background-image: url('/images/icons/pause_black.svg');
+            }
+        }
+
+        &.white {
+            border: 2px solid $white;
+
+            &::before {
+                background-image: url('/images/icons/pause_white.svg');
+            }
+        }
+    }
+    // scss-lint:disable NestingDepth
+    &.load {
+        animation: rotating 2s linear infinite;
+        border-radius: 100%;
+        z-index: 20;
+
+        &::before {
+            background-size: 75%;
+        }
+
+        &.black {
+            border: 2px solid $black;
+
+            &::before {
+                background-image: url('/images/logos/logo_image_black.svg');
+            }
+        }
+
+        &.white {
+            border: 2px solid $white;
+
+            &::before {
+                background-image: url('/images/logos/logo_image_white.svg');
+            }
+        }
+    }
+
+    &.rank {
+        bottom: 0;
+        height: 30px;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 30px;
+
+        &::before {
+            background-image: url('/images/icons/play_black.svg');
+            background-size: 30%;
+            opacity: 0.5;
+        }
+
+        &.up::before {
+            opacity: 1;
+            transform: rotate(-90deg);
+        }
+
+        &.down::before {
+            opacity: 0.1;
+            transform: rotate(90deg);
+        }
+    }
+
+    &.like,
+    &.share,
+    &.delete,
+    &.edit {
+        height: 100%;
+        width: 20px;
+
+        &::before {
+            background-size: 60%;
+        }
+    }
+
+    &.delete {
+        &::before {
+            background-image: url('/images/icons/cross_black.svg');
+        }
+
+        &:hover::before {
+            background-image: url('/images/icons/cross_red.svg');
+        }
+    }
+
+    &.edit {
+        &::before {
+            background-image: url('/images/icons/edit_black.svg');
+        }
+
+        &:hover::before {
+            background-image: url('/images/icons/edit_red.svg');
+        }
+    }
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &.like {
+        &::before {
+            background-image: url('/images/icons/heart_black.svg');
+        }
+
+        &.white::before {
+            background-image: url('/images/icons/heart_white.svg');
+        }
+
+        &:hover::before {
+            background-image: url('/images/icons/heart_red.svg');
+        }
+
+        &.has-voted::before {
+            background-image: url('/images/icons/heart_red.svg');
+        }
+    }
+
+    &.share {
+        &::before {
+            background-image: url('/images/icons/share_black.svg');
+        }
+
+        &.white::before {
+            background-image: url('/images/icons/share_white.svg');
+        }
+    }
+
+    &.notification {
+        &::before {
+            background-image: url('/images/icons/bell_black.svg');
+            background-size: 90%;
+            opacity: 0.3;
+        }
+
+        &.white::before {
+            background-image: url('/images/icons/bell_white.svg');
+            opacity: 0.6;
+        }
+
+        &:hover::before {
+            background-image: url('/images/icons/bell_red.svg');
+            opacity: 1;
+        }
+    }
+
+    &.chat {
+        &::before {
+            background-image: url('/images/icons/chat_black.svg');
+            background-size: 90%;
+            opacity: 0.3;
+        }
+    }
+
+    &.next {
+        &::before {
+            background-image: url('/images/icons/skip_white.svg');
+        }
+    }
+
+    &.cross {
+        &::before {
+            background-image: url('/images/icons/cross_black.svg');
+        }
+
+        &.white::before {
+            background-image: url('/images/icons/cross_white.svg');
+        }
+    }
+
+    &.prev {
+        &::before {
+            background-image: url('/images/icons/skip_white.svg');
+            transform: rotate(180deg);
+        }
+    }
+
+    &.facebook::before {
+        background-image: url('/images/icons/fb_black.svg');
+    }
+
+    &.soundcloud::before {
+        background-image: url('/images/icons/soundcloud_black.svg');
+    }
+
+    &.twitter::before {
+        background-image: url('/images/icons/twitter_black.svg');
+    }
+
+    &.google::before {
+        background-image: url('/images/icons/google_black.svg');
+    }
+
+    &.deezer::before {
+        background-image: url('/images/icons/deezer_black.svg');
+    }
+
+    &.youtube::before {
+        background-image: url('/images/icons/youtube_black.svg');
+    }
+
+    &.spotify {
+        &:hover::before {
+            opacity: 0.5;
+        }
+
+        &::before {
+            background-image: url('/images/icons/spotify_green.svg');
+            opacity: 1;
+        }
+
+        &.black::before {
+            background-image: url('/images/icons/spotify_black.svg');
+            opacity: 1;
+        }
+    }
+
+    &.messenger {
+        &:hover::before {
+            background-image: url('/images/icons/messenger_blue.svg');
+            opacity: 0.5;
+        }
+
+        &::before {
+            background-image: url('/images/icons/messenger_blue.svg');
+            opacity: 1;
+        }
+    }
+
+    &.instagram::before {
+        background-image: url('/images/icons/instagram_black.svg');
+    }
+
+    &.site::before {
+        background-image: url('/images/icons/site_black.svg');
+    }
+}
+
+.reward {
+    display: inline-block;
+    float: none;
+    height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 30px;
+
+    &::before {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 90%;
+        content: '';
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    &.gold::before {
+        background-image: url('/images/images/reward1.png');
+    }
+
+    &.silver::before {
+        background-image: url('/images/images/reward2.png');
+    }
+
+    &.bronze::before {
+        background-image: url('/images/images/reward3.png');
+    }
+
+    &.goldbadge::before {
+        background-image: url('/images/images/contest1.png');
+    }
+
+    &.silverbadge::before {
+        background-image: url('/images/images/contest2.png');
+    }
+
+    &.bronzebadge::before {
+        background-image: url('/images/images/contest3.png');
+    }
+}
+
+.social-icon {
+    .social-icon-text {
+        display: none;
+    }
+
+    display: inline-block;
+    float: none;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 50px;
+
+    &::before {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 90%;
+        content: '';
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    &.spotify::before {
+        background-image: url('/images/icons/social/social-icon-spotify.png');
+    }
+
+    &.facebook::before {
+        background-image: url('/images/icons/social/social-icon-facebook.png');
+    }
+
+    &.soundcloud::before {
+        background-image: url('/images/icons/social/social-icon-soundcloud.png');
+    }
+
+    &.twitter::before {
+        background-image: url('/images/icons/social/social-icon-twitter.png');
+    }
+
+    &.instagram::before {
+        background-image: url('/images/icons/social/social-icon-instagram.png');
+    }
+
+    &.youtube::before {
+        background-image: url('/images/icons/social/social-icon-youtube.png');
+    }
+}
+
+.player {
+    .icon {
+        border: 0;
+        height: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top: 5px;
+        opacity: 0.6;
+        position: relative;
+        width: 30px;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &::before {
+            background-size: 40%;
+        }
+
+        &.play {
+            background: $dark-grey;
+            border: 0;
+            border-radius: 100%;
+            opacity: 1;
+        }
+    }
+}
+
+.btn-listened {
+    &.disabled {
+        background: $mid-grey;
+    }
+}
+
+.sonata-bc {
+    .icon.load,
+    .icon.pause,
+    .icon.play {
+        width: 18px;
+        height: 18px;
+    }
+}

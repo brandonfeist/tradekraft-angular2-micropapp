@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
@@ -12,6 +13,7 @@ import { ReleaseRoutingModule } from './release-routing.module';
 @NgModule({
     imports:  [ 
       CommonModule,
+      SharedModule,
       ReleaseRoutingModule,
       LazyLoadImageModule,
       ReactiveFormsModule

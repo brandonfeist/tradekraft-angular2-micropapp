@@ -397,8 +397,8 @@
     }
 
     &.artist-music {
-        @include span-columns(4);
-        @include omega(3n);
+        @include span-columns(3);
+        @include omega(4n);
 
         overflow: visible;
 
@@ -579,8 +579,8 @@
 
         &:first-child:nth-last-child(n+1),
         &:first-child:nth-last-child(n+1) ~ & {
-            @include span-columns(6);
-            @include omega(2n);
+            @include span-columns(12);
+            // @include omega(2n);
 
             @include media($mobile) {
                 @include span-columns(12 of 12);

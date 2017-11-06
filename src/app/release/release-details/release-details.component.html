@@ -1,1 +1,120 @@
-hello {{ release.name }}
+<div class="frame banner small">
+    <img class="image lazy-load" [errorImage]="errorImage" [lazyLoad]="release.image.original">
+</div>
+<div class="frame">
+    <div class="wrapper">
+        <div class="release-header">
+            <div class="col-3">
+                <div class="image-container">
+                    <!-- <span class="icon play white pseudo-play">Play</span>
+                    <span class="icon pause white pseudo-pause">Pause</span> -->
+                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.medium" title="{{ release.name }}" alt="{{ release.name }}">
+                </div>
+                <div class="sub-container">
+                    <h5 class="release-header-label">Release Date: </h5>
+                    <h5 class="release-header-date">{{ formatReleaseDate(release.releaseDate) }}</h5>
+                </div>
+                <div class="sub-container">
+                    <a class="silent button" routerLink="/releases">
+                        <div class="button-wrapper">  
+                            <span>Back to releases</span>      
+                            <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="title-container">
+                    <h1>{{ release.name }}</h1>
+                    <h2>{{ formatReleaseArtists(release) }}</h2>
+                </div>
+                <div class="social-media push-right">
+                    <a *ngIf="release.spotify" href="release.spotify" target="_blank">
+                        <i class="fa fa-spotify"></i>
+                    </a>
+                    <a *ngIf="release.appleMusic" href="release.appleMusic" target="_blank">
+                        <i class="fa fa-apple"></i>
+                    </a>
+                    <a *ngIf="release.googlePlay" href="release.googlePlay" target="_blank">
+                        <i class="fa fa-google"></i>
+                    </a>
+                    <a *ngIf="release.soundcloud" href="release.soundcloud" target="_blank">
+                        <i class="fa fa-soundcloud"></i>
+                    </a>
+                    <a *ngIf="release.amazon" href="release.amazon" target="_blank">
+                        <i class="fa fa-amazon"></i>
+                    </a>
+                </div>
+
+                <!-- <div class="text-container release-description">
+                    <read-more class="text-container artist-description" [text]="release.description" [maxLength]="500"></read-more>
+                </div> -->
+
+                <div class="release-songs">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="shrink">#</th>
+                                <th class="shrink nopad"></th>
+                                <th>Title</th>
+                                <th>Artists</th>
+                                <th class="col-xs-hidden col-md-visible">Genre</th>
+                                <th class="col-xs-hidden col-md-visible">Time</th>
+                                <th class="col-xs-hidden col-md-visible">BPM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let song of release.songs">
+                                <td class="shrink">{{ song.trackNumber }}</td>
+                                <td class="shrink nopad">
+                                    <button class="faux button--mobile" (click)="playSong(song)">
+                                        <i class="fa fa-play-circle-o inactive" aria-hidden="true"></i>
+                                        <i class="fa fa-pause-circle-o active" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                                <td>{{ song.name }}</td>
+                                <td>
+                                    <a *ngFor="let songArtist of song.artists" routerLink="/artists/{{ songArtist.slug }}">{{ songArtist.name }}</a>
+                                </td>
+                                <td class="col-xs-hidden col-md-visible">{{ song.genre.name }}</td>
+                                <td class="col-xs-hidden col-md-visible">{{ song.duration }}</td>
+                                <td class="col-xs-hidden col-md-visible">{{ song.bpm }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div *ngIf="release.contests" class="frame frame-contests">
+                    <div class="wrapper">
+                        <div class="text-container present divider">
+                            <h2>Contest</h2>
+                        </div>
+                        <div class="frame-items">
+                            <a class="item react black" routerLink="/contests/{{ release.contests.slug }}">
+                                <div class="image-container">
+                                    <!-- do this later -->
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Release video(s) -->
+
+                <div class="text-container present divider">
+                    <h2>Release Artists</h2>
+                </div>
+                <div class="frame-items">
+                    <a class="item artist artist-mix" *ngFor="let artist of artists" routerLink="/artists/{{ artist.slug }}">
+                        <div class="image-container no-margin">
+                            <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.image.medium" title="artist.name" alt="artist.name">
+                        </div>
+                        <div class="text-container no-margin">
+                            <h2>{{ artist.name }}</h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

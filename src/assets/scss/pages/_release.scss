@@ -1,0 +1,131 @@
+.release-header {
+    display: inline-block;
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+
+    .social-media {
+        margin: 20px 0;
+        line-height: 1;
+        display: block;
+        float: left;
+
+        & i {
+            font-size: 24px;
+
+            &.spotify-logo-bt {
+                float: left;
+                font-size: 18px;
+            }
+        }
+    }
+
+    .push-right a {
+        margin-right: 1.5em;
+    }
+
+    .spotify-bt {
+        background: #333333;
+        border-radius: 500px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 11px;
+        border-width: 0;
+
+        &:hover {
+            @include media($desktop) {
+                background: $red;
+                transition: all 200ms ease-in-out;
+            }
+        }
+    }
+
+    .spotify-bt-text {
+        display: block;
+        text-transform: uppercase;
+        font-weight: 200;
+        letter-spacing: 1px;
+        padding: 4px 5px 0px 10px;
+        float: left;
+    }
+
+    .release-songs {
+        margin: 15px 0;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            display: table-header-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+
+        tbody {
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+
+            &:nth-child(odd) > td {
+                background: #dfdfdf;
+            }
+        }
+
+        th {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        td {
+            & a {
+                margin-right: 3px;
+                text-decoration: underline;
+            }
+
+            & button {
+                font-size: 24px;
+
+                & > i.inactive,
+                &.active > i.active {
+                    display: inherit;
+                }
+
+                &.active > i.inactive,
+                & > i.active {
+                    display: none;
+                }
+
+                &.faux {
+                    border: none;
+                    background: transparent;
+                    padding: 0;
+                    color: #383838;
+                }
+            }
+        }
+
+        th, td {
+            padding: 0.5em 1em;
+            display: table-cell;
+            vertical-align: inherit;
+
+            &.shrink {
+                white-space: nowrap;
+                width: 1px;
+            }
+
+            &.nopad {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+}
