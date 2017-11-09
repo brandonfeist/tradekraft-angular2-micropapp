@@ -11,6 +11,8 @@ import { Song } from './../release/song';
 export class MusicService {
     private audio;
     private paused;
+    private songIndexNumber: number;
+    private songs: Song[];
     private song: Song;
     private playPromise;
 
@@ -23,17 +25,29 @@ export class MusicService {
         this.paused = true;
     }
 
-    load(song: Song) {
-        this.song = song;
-        this.audio.src = song.songFile.m4a;
+    load(songs: Song[], songIndexNumber: number) {
+        this.songs = songs;
+        this.song = songs[songIndexNumber]
+        this.songIndexNumber = songIndexNumber;
+
+        this.audio.src = this.song.songFile.m4a;
         this.audio.load();
 
         this.audioChange.next(this.audio);
         this.songChange.next(this.song);
 
+        this.audio.currentTime = 120;
         this.playPromise = this.audio.play();
         this.paused = false;
         this.pauseChange.next(this.paused);
+
+        this.audio.onended = () => {
+            if((this.songIndexNumber + 1) < songs.length) {
+                this.load(this.songs, (this.songIndexNumber + 1));
+            } else {
+                this.stop();
+            }
+        }
     }
 
     pausePlay() {
@@ -55,5 +69,13 @@ export class MusicService {
 
         this.paused = true;
         this.pauseChange.next(this.paused);
+    }
+
+    getPausedState(): boolean {
+        return this.paused;
+    }
+
+    getSongPlaying(): Song {
+        return this.song;
     }
 }

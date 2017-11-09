@@ -64,10 +64,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let song of release.songs">
+                            <tr *ngFor="let song of release.songs; let songIndex = index">
                                 <td class="shrink">{{ song.trackNumber }}</td>
                                 <td class="shrink nopad">
-                                    <button class="faux button--mobile" (click)="playSong(song)">
+                                    <button class="faux button--mobile" (click)="playSong(release.songs, songIndex)">
                                         <i *ngIf="paused || !checkIfSongPlaying(song)" class="fa fa-play-circle-o" aria-hidden="true"></i>
                                         <i *ngIf="checkIfSongPlaying(song)" class="fa fa-pause-circle-o" aria-hidden="true"></i>
                                     </button>

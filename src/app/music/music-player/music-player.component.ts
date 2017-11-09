@@ -36,6 +36,11 @@ export class MusicPlayerComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.pauseSubscription.unsubscribe();
+    this.audioSubscription.unsubscribe();
+  }
+
   // Played
   @Input() elapsed: string;
   // Total time
@@ -63,9 +68,5 @@ export class MusicPlayerComponent implements OnInit {
   stop() {
     this.musicService.stop();
     this.getCurrentPlayTime();
-  }
-
-  ngOnDestroy() {
-    this.pauseSubscription.unsubscribe();
   }
 }

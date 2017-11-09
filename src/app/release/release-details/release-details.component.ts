@@ -13,9 +13,9 @@ import { MusicService } from './../../services/music.service';
 })
 export class ReleaseDetailsComponent implements OnInit {
   private releaseSlug: string;
-  private paramSubscription: any;
   private release: Release;
   private artists: Artist[];
+  private songs: Song[];
   private paused = true;
   private currentSongLoaded: Song;
   private test: boolean = true;
@@ -23,6 +23,7 @@ export class ReleaseDetailsComponent implements OnInit {
   defaultImage: string = "assets/images/preload-image.jpg";
   errorImage: string = "assets/images/error-image.jpg";
 
+  private paramSubscription: any;
   private pauseSubscription;
   private songSubscription;
 
@@ -36,17 +37,26 @@ export class ReleaseDetailsComponent implements OnInit {
 
     this.artists = this.getArtists(this.release);
 
+    this.songs = this.release.songs;
+
     this.pauseSubscription = this.musicService.pauseChange.subscribe((paused) => { 
       this.paused = paused; 
     });
 
     this.songSubscription = this.musicService.songChange.subscribe((song) => { 
       this.currentSongLoaded = song; 
+      this.checkIfSongPlaying(this.currentSongLoaded);
     });
+
+    this.paused = this.musicService.getPausedState();
+    this.currentSongLoaded = this.musicService.getSongPlaying();
   }
+  
 
   ngOnDestroy() {
     this.paramSubscription.unsubscribe();
+    this.paramSubscription.unsubscribe();
+    this.songSubscription.unsubscribe();
   }
 
   formatReleaseDate(releaseDate: Date): string {
@@ -119,13 +129,15 @@ export class ReleaseDetailsComponent implements OnInit {
     return artistsNameString
   }
 
-  playSong(song: Song) {
+  playSong(songs: Song[], songIndex: number) {
+    let song = songs[songIndex];
+
     if(this.checkIfSongPlaying(song)) {
       this.musicService.pausePlay();
     } else if(this.currentSongLoaded && this.currentSongLoaded.slug === song.slug) {
       this.musicService.pausePlay();
     } else {
-      this.musicService.load(song);
+      this.musicService.load(songs, songIndex);
     }
   }
 
