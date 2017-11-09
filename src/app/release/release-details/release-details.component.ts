@@ -6,6 +6,7 @@ import * as moment from 'moment-timezone';
 
 import { Release } from './../release';
 import { ReleaseService } from './../release.service';
+import { MusicService } from './../../services/music.service';
 
 @Component({
   templateUrl: './release-details.component.html'
@@ -15,10 +16,17 @@ export class ReleaseDetailsComponent implements OnInit {
   private paramSubscription: any;
   private release: Release;
   private artists: Artist[];
+  private paused = true;
+  private currentSongLoaded: Song;
+  private test: boolean = true;
+  private audio = new Audio();
   defaultImage: string = "assets/images/preload-image.jpg";
   errorImage: string = "assets/images/error-image.jpg";
 
-  constructor(private releaseService: ReleaseService, private activatedRoute: ActivatedRoute,
+  private pauseSubscription;
+  private songSubscription;
+
+  constructor(private releaseService: ReleaseService, private musicService: MusicService, private activatedRoute: ActivatedRoute,
     private router: ActivatedRoute) { }
 
   ngOnInit() { 
@@ -27,6 +35,14 @@ export class ReleaseDetailsComponent implements OnInit {
     this.release = this.router.snapshot.data['release'];
 
     this.artists = this.getArtists(this.release);
+
+    this.pauseSubscription = this.musicService.pauseChange.subscribe((paused) => { 
+      this.paused = paused; 
+    });
+
+    this.songSubscription = this.musicService.songChange.subscribe((song) => { 
+      this.currentSongLoaded = song; 
+    });
   }
 
   ngOnDestroy() {
@@ -104,6 +120,20 @@ export class ReleaseDetailsComponent implements OnInit {
   }
 
   playSong(song: Song) {
-    console.log("Play song: " + song.songFile.m4a);
+    if(this.checkIfSongPlaying(song)) {
+      this.musicService.pausePlay();
+    } else if(this.currentSongLoaded && this.currentSongLoaded.slug === song.slug) {
+      this.musicService.pausePlay();
+    } else {
+      this.musicService.load(song);
+    }
+  }
+
+  checkIfSongPlaying(song: Song): boolean {
+    if(!this.paused && this.currentSongLoaded.slug === song.slug) {
+      return true;
+    }
+
+    return false;
   }
 }

@@ -68,8 +68,8 @@
                                 <td class="shrink">{{ song.trackNumber }}</td>
                                 <td class="shrink nopad">
                                     <button class="faux button--mobile" (click)="playSong(song)">
-                                        <i class="fa fa-play-circle-o inactive" aria-hidden="true"></i>
-                                        <i class="fa fa-pause-circle-o active" aria-hidden="true"></i>
+                                        <i *ngIf="paused || !checkIfSongPlaying(song)" class="fa fa-play-circle-o" aria-hidden="true"></i>
+                                        <i *ngIf="checkIfSongPlaying(song)" class="fa fa-pause-circle-o" aria-hidden="true"></i>
                                     </button>
                                 </td>
                                 <td>{{ song.name }}</td>
