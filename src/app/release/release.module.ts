@@ -16,7 +16,8 @@ import { ReleaseRoutingModule } from './release-routing.module';
       SharedModule,
       ReleaseRoutingModule,
       LazyLoadImageModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      SharedModule
     ],
     declarations: [ 
       ReleaseComponent,

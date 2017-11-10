@@ -1,0 +1,33 @@
+<div class="release-songs">
+    <table>
+        <thead>
+            <tr>
+                <th class="shrink">#</th>
+                <th class="shrink nopad"></th>
+                <th>Title</th>
+                <th>Artists</th>
+                <th class="col-xs-hidden col-md-visible">Genre</th>
+                <th class="col-xs-hidden col-md-visible">Time</th>
+                <th class="col-xs-hidden col-md-visible">BPM</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let song of songs; let songIndex = index">
+                <td class="shrink">{{ song.trackNumber }}</td>
+                <td class="shrink nopad">
+                    <button class="faux button--mobile" (click)="playSong(songs, songIndex)">
+                        <i *ngIf="paused || !checkIfSongPlaying(song)" class="fa fa-play-circle-o" aria-hidden="true"></i>
+                        <i *ngIf="checkIfSongPlaying(song)" class="fa fa-pause-circle-o" aria-hidden="true"></i>
+                    </button>
+                </td>
+                <td>{{ song.name }}</td>
+                <td>
+                    <a *ngFor="let songArtist of song.artists" routerLink="/artists/{{ songArtist.slug }}">{{ songArtist.name }}</a>
+                </td>
+                <td class="col-xs-hidden col-md-visible">{{ song.genre.name }}</td>
+                <td class="col-xs-hidden col-md-visible">{{ song.duration }}</td>
+                <td class="col-xs-hidden col-md-visible">{{ song.bpm }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

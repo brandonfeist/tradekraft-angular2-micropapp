@@ -36,7 +36,6 @@ export class MusicService {
         this.audioChange.next(this.audio);
         this.songChange.next(this.song);
 
-        this.audio.currentTime = 120;
         this.playPromise = this.audio.play();
         this.paused = false;
         this.pauseChange.next(this.paused);

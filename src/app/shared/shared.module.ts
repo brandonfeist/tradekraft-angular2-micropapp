@@ -1,6 +1,7 @@
+import { MusicTableComponent } from './music-table/music-table.component';
 import { NgModule }     from '@angular/core';
 import { CommonModule }       from '@angular/common';
-import {RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 import { EventPreviewComponent } from './event-preview/event-preview.component';
@@ -13,10 +14,12 @@ import { ReadMoreComponent } from './read-more/read-more.component';
       LazyLoadImageModule
     ],
     exports: [
-        EventPreviewComponent,
-        ReadMoreComponent
+      MusicTableComponent,
+      EventPreviewComponent,
+      ReadMoreComponent
     ],
     declarations: [ 
+      MusicTableComponent,
       EventPreviewComponent,
       ReadMoreComponent
     ]

@@ -15,6 +15,14 @@
                     <h5 class="release-header-date">{{ formatReleaseDate(release.releaseDate) }}</h5>
                 </div>
                 <div class="sub-container">
+                    <a *ngIf="!release.spotify" class="silent button" (click)="addToSpotifyPlaylist(release.spotify)">
+                        <div class="button-wrapper">  
+                            <span>Add to your Spotify playlist</span>      
+                            <i class="fa fa-spotify spotify-green" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="sub-container">
                     <a class="silent button" routerLink="/releases">
                         <div class="button-wrapper">  
                             <span>Back to releases</span>      
@@ -29,60 +37,24 @@
                     <h2>{{ formatReleaseArtists(release) }}</h2>
                 </div>
                 <div class="social-media push-right">
-                    <a *ngIf="release.spotify" href="release.spotify" target="_blank">
+                    <a *ngIf="!release.spotify" href="release.spotify" target="_blank">
                         <i class="fa fa-spotify"></i>
                     </a>
-                    <a *ngIf="release.appleMusic" href="release.appleMusic" target="_blank">
+                    <a *ngIf="!release.appleMusic" href="release.appleMusic" target="_blank">
                         <i class="fa fa-apple"></i>
                     </a>
-                    <a *ngIf="release.googlePlay" href="release.googlePlay" target="_blank">
+                    <a *ngIf="!release.googlePlay" href="release.googlePlay" target="_blank">
                         <i class="fa fa-google"></i>
                     </a>
-                    <a *ngIf="release.soundcloud" href="release.soundcloud" target="_blank">
+                    <a *ngIf="!release.soundcloud" href="release.soundcloud" target="_blank">
                         <i class="fa fa-soundcloud"></i>
                     </a>
-                    <a *ngIf="release.amazon" href="release.amazon" target="_blank">
+                    <a *ngIf="!release.amazon" href="release.amazon" target="_blank">
                         <i class="fa fa-amazon"></i>
                     </a>
                 </div>
 
-                <!-- <div class="text-container release-description">
-                    <read-more class="text-container artist-description" [text]="release.description" [maxLength]="500"></read-more>
-                </div> -->
-
-                <div class="release-songs">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="shrink">#</th>
-                                <th class="shrink nopad"></th>
-                                <th>Title</th>
-                                <th>Artists</th>
-                                <th class="col-xs-hidden col-md-visible">Genre</th>
-                                <th class="col-xs-hidden col-md-visible">Time</th>
-                                <th class="col-xs-hidden col-md-visible">BPM</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let song of release.songs; let songIndex = index">
-                                <td class="shrink">{{ song.trackNumber }}</td>
-                                <td class="shrink nopad">
-                                    <button class="faux button--mobile" (click)="playSong(release.songs, songIndex)">
-                                        <i *ngIf="paused || !checkIfSongPlaying(song)" class="fa fa-play-circle-o" aria-hidden="true"></i>
-                                        <i *ngIf="checkIfSongPlaying(song)" class="fa fa-pause-circle-o" aria-hidden="true"></i>
-                                    </button>
-                                </td>
-                                <td>{{ song.name }}</td>
-                                <td>
-                                    <a *ngFor="let songArtist of song.artists" routerLink="/artists/{{ songArtist.slug }}">{{ songArtist.name }}</a>
-                                </td>
-                                <td class="col-xs-hidden col-md-visible">{{ song.genre.name }}</td>
-                                <td class="col-xs-hidden col-md-visible">{{ song.duration }}</td>
-                                <td class="col-xs-hidden col-md-visible">{{ song.bpm }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <music-table [songs]="release.songs"></music-table>
 
                 <div *ngIf="release.contests" class="frame frame-contests">
                     <div class="wrapper">
