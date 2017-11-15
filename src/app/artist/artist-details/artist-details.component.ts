@@ -1,6 +1,9 @@
-import { Component, OnInit }  from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { Component, OnInit, Inject }  from '@angular/core';
+import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { MatDialog } from '@angular/material';
 import * as moment from 'moment-timezone';
+
+import { ArtistSpotifyDialog } from './../../shared/dialogs/artist-spotify/artist-spotify.component';
 
 import { ArtistService } from './../artist.service';
 import { Artist } from './../artist';
@@ -16,13 +19,13 @@ export class ArtistDetailsComponent implements OnInit {
   defaultImage: string = "assets/images/preload-image.jpg";
   errorImage: string = "assets/images/error-image.jpg";
 
-  constructor(private artistService: ArtistService, private activatedRoute: ActivatedRoute,
-    private router: ActivatedRoute) { }
+  constructor(private artistService: ArtistService, private activatedRoute: ActivatedRoute, 
+    private router: Router, public dialog: MatDialog) {}
 
   ngOnInit() { 
     this.paramSubscription = this.activatedRoute.params.subscribe(params => this.artistSlug = params['slug']);
 
-    this.artist = this.router.snapshot.data['artist'];
+    this.artist = this.activatedRoute.snapshot.data['artist'];
   }
 
   ngOnDestroy() {
@@ -66,8 +69,10 @@ export class ArtistDetailsComponent implements OnInit {
     }
   }
 
-  followSpotify(artistSpotifyLink: string) {
-    console.log("Following artist " + artistSpotifyLink);
+  openSpotifyDialog() {
+    this.dialog.open(ArtistSpotifyDialog, {
+      data: { artist: this.artist }
+    });
   }
 
   formatReleaseArtists(release): string {

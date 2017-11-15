@@ -1,9 +1,10 @@
+import { MatDialog } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
-import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
@@ -12,6 +13,7 @@ import { PageNotFoundModule } from './404/not-found.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { MusicModule } from './music/music.module';
 
+import { ReleaseService } from './services/release.service';
 import { EventService } from './services/event.service';
 import { SpotifyService } from './services/spotify.service';
 import { MusicService } from './services/music.service';
@@ -22,19 +24,21 @@ import { MusicService } from './services/music.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HomeModule,
     FormsModule,
     HttpModule,
-    SlimLoadingBarModule.forRoot(),
     AppRoutingModule,
     PageNotFoundModule,
     NavbarModule,
-    MusicModule
+    MusicModule,
   ],
   providers: [ 
+    ReleaseService,
     EventService,
     SpotifyService,
-    MusicService
+    MusicService,
+    SpotifyService
   ],
   bootstrap: [AppComponent]
 })

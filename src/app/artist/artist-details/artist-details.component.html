@@ -6,37 +6,21 @@
         <div class="artist-header">
             <div class="col-3">
                 <div class="image-container">
-                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.image.medium" title="{{ artist.name }}" alt="{{ artist.name }}">
+                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.image.medium" title="{{ artist.name }}"
+                        alt="{{ artist.name }}">
                 </div>
-                <!-- <div class="tk-container">
-                    <div class="event-holder">
-                        <div class="text-container">
-                            <h2>Events</h2>
+                <div class="sub-container">
+                    <a *ngIf="artist.spotify" class="silent button" (click)="openSpotifyDialog()">
+                        <div class="button-wrapper">  
+                            <span>Follow {{ artist.name }} on Spotify</span>      
+                            <i class="fa fa-spotify spotify-green" aria-hidden="true"></i>
                         </div>
-                        <div class="frame-items">
-                            <a class="item artist-event mix" *ngFor="let event of artist.events | slice:0:2; let i=index" routerLink="/events/{{ event.slug }}">
-                                <div class="image-container">
-                                    <div class="count active">
-                                        <div class="count-ribbon">{{ getDaysRemaining(event) }}</div>
-                                    </div>
-                                    <div class="date">
-                                        <h1>{{ formatEventStartDateTime(event) }}</h1>
-                                    </div>
-                                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.image.original" alt="event title">
-                                </div>
-                                <div class="text-container">
-                                    <h2>{{ event.name }}</h2>
-                                    <h4>{{ getEventLocationShortFormat(event) }}</h4>
-                                    <span class="btn default">View More</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div> -->
+                    </a>
+                </div>
                 <div class="sub-container">
                     <a class="silent button" routerLink="/artists">
-                        <div class="button-wrapper">  
-                            <span>Back to artists</span>      
+                        <div class="button-wrapper">
+                            <span>Back to artists</span>
                             <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
                         </div>
                     </a>
@@ -59,13 +43,15 @@
                     <a *ngIf="artist.soundcloud" href="{{ artist.soundcloud }}" target="_blank">
                         <i class="fa fa-soundcloud"></i>
                     </a>
-                    <button class="spotify-bt" *ngIf="artist.spotify" (click)="followSpotify(artist.spotify)" title="Follow {{ artist.name }} on Spotify">
+                    <a *ngIf="artist.spotify" href="{{ artist.spotify }}" target="_blank">
+                        <i class="fa fa-spotify"></i>
+                    </a>
+                    <!-- <button class="spotify-bt" *ngIf="artist.spotify" (click)="openSpotifyDialog()" title="Follow {{ artist.name }} on Spotify">
                         <i class="fa fa-spotify spotify-logo-bt"></i>
-                        <!-- possibly check if user is authenticated and already follows, then have it say following -->
+                        possibly check if user is authenticated and already follows, then have it say following
                         <span class="spotify-bt-text">Follow</span>
-                    </button>
+                    </button> -->
                 </div>
-                <!-- <div class="text-container artist-description" [innerHTML]="artist.description"></div> -->
                 <read-more class="text-container artist-description" [text]="artist.description" [maxLength]="500"></read-more>
 
                 <div class="text-container present divider">
@@ -75,7 +61,8 @@
                     <div class="item artist-music" *ngFor="let release of artist.releases.artistReleases">
                         <a routerLink="/releases/{{release.slug}}">
                             <div class="image-container">
-                                <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.thumb" title="release.name" alt="release.name">
+                                <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.thumb" title="release.name"
+                                    alt="release.name">
                             </div>
                         </a>
                         <div class="text-container">
@@ -93,8 +80,9 @@
                 <div class="frame-items">
                     <div class="item artist-music" *ngFor="let release of artist.releases.appearsOn">
                         <a routerLink="/releases/{{release.slug}}">
-                            <div class="image-container">
-                                <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.thumb" title="release.name" alt="release.name">
+                            <div class="image-container no-margin">
+                                <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.thumb" title="release.name"
+                                    alt="release.name">
                             </div>
                         </a>
                         <div class="text-container">

@@ -1,0 +1,28 @@
+<div class="frame frame-events">
+    <div class="wrapper">
+        <div class="frame-title">
+            <div class="col-8">
+                <h1>Recent Releases</h1>
+            </div>
+            <div class="col-4">
+                <a class="btn action-third right" routerLink="/releases">More Releases</a>
+            </div>
+        </div>
+        <!-- 8 releases 2 rows -->
+        <div class="frame-items">
+          <div class="item music" *ngFor="let release of releases">
+              <a routerLink="/releases/{{ release.slug }}">
+                  <div class="image-container">
+                      <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.medium" title="release.name" alt="release.name">
+                  </div>
+              </a>
+              <div class="text-container">
+                  <h2>
+                      <a routerLink="/releases/{{ release.slug }}">{{ release.name }}</a>
+                  </h2>
+                  <p>{{ formatReleaseArtists(release) }}</p>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>

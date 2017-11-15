@@ -1,5 +1,23 @@
 <div class="frame">
     <div class="wrapper">
+        <form [formGroup]="releaseSearchForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="tk-container">
+                <div class="container-white search-holder col-6">
+                    <input type="search" placeholder="Search for releases..." formControlName="search">
+                    <input type="submit" value="">
+                </div>
+                <div class="container-white filter-holder col-3">
+                    <select class="search_form_genre" formControlName="genre">
+                        <!-- <option *ngFor="let year of years" [value]="year.value">{{ year.name }}</option> -->
+                    </select>
+                </div>
+                <div class="container-white filter-holder col-3">
+                    <select class="search_form_genre" formControlName="releaseType">
+                        <!-- <option *ngFor="let year of years" [value]="year.value">{{ year.name }}</option> -->
+                    </select>
+                </div>
+            </div>
+        </form>
         <div class="tk-container">
             <div class="tk-container">
                 <div class="col-8">
@@ -23,4 +41,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> 

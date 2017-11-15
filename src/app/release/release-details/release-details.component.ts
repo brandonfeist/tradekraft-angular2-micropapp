@@ -5,7 +5,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import * as moment from 'moment-timezone';
 
 import { Release } from './../release';
-import { ReleaseService } from './../release.service';
+import { ReleaseService } from './../../services/release.service';
 import { MusicService } from './../../services/music.service';
 
 @Component({

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import { ReleaseService } from './../release.service';
+import { ReleaseService } from './../../services/release.service';
 
 @Injectable()
 export class ReleaseDetailsResolve implements Resolve<any> {

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
 import { Release } from './release';
-import { ReleaseService } from './release.service';
+import { ReleaseService } from './../services/release.service';
 
 @Component({
   selector: 'releases',

@@ -6,9 +6,9 @@ import 'rxjs/add/operator/map';
 export class ReleaseService {
     constructor(private http: Http) {}
 
-    getReleases(params?: URLSearchParams) {
+    getReleases(parameters?: URLSearchParams) {
         return this.http.get('http://localhost:8087/v1/releases',
-        { search: params })
+        { params: parameters })
         .map((res:Response) => res.json());
     }
 

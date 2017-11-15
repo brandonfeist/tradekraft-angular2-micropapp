@@ -6,9 +6,9 @@ import 'rxjs/add/operator/map';
 export class EventService {
     constructor(private http: Http) {}
 
-    getEvents(params?: URLSearchParams) {
+    getEvents(parameters?: URLSearchParams) {
         return this.http.get('http://localhost:8087/v1/events',
-        { search: params })
+        { params: parameters })
         .map((res:Response) => res.json());
     }
 

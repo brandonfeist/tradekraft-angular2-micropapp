@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ReleaseComponent } from './release.component';
 import { ReleaseDetailsComponent } from './release-details/release-details.component';
 import { ReleaseDetailsResolve } from './release-details/release-details.resolve';
-import { ReleaseService } from './release.service';
 import { ReleaseRoutingModule } from './release-routing.module';
 
 @NgModule({
@@ -23,8 +22,7 @@ import { ReleaseRoutingModule } from './release-routing.module';
       ReleaseComponent,
       ReleaseDetailsComponent
     ],
-    providers: [ 
-      ReleaseService,
+    providers: [
       ReleaseDetailsResolve
     ]
   })
