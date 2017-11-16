@@ -5,4 +5,7 @@
 <p *ngIf="connectButton">You need to connect with Spotify to follow {{ artist.name }}</p>
 <a *ngIf="connectButton" (click)="spotifyService.connectToSpotify()">Connect to Spotify</a>
 
-<a *ngIf="followButton" (click)="followArtist(artist)">Follow {{ artist.name }}</a>
+<a *ngIf="unfollowButton" (click)="unfollowArtist()">Unfollow {{ artist.name }}</a>
+<a *ngIf="followButton" (click)="followArtist()">Follow {{ artist.name }}</a>
+
+<p *ngIf="showErrorMessage">{{ errorMessage }}</p>

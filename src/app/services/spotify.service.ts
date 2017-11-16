@@ -14,6 +14,7 @@ export class SpotifyService {
     private responseType: string;
     private redirectUri: string;
     private scope: string;
+    private spotifyLinkInfoRegex = /https:\/\/open.spotify.com\/(artist|user)\/(\S+)/;
 
     isAuthenticatedToSpotify: boolean = false;
 
@@ -51,7 +52,7 @@ export class SpotifyService {
         .map((res:Response) => res.json());
     }
 
-    isLoggedIn() {
+    getAuthHeader(): Headers {
         let accessToken: any = undefined;
         if(JSON.parse(localStorage.getItem('tradekraft.spotify.access'))) {
             accessToken = JSON.parse(localStorage.getItem('tradekraft.spotify.access')).access_token;
@@ -60,32 +61,63 @@ export class SpotifyService {
         let headers: Headers = new Headers();
         headers.append('Authorization', 'Bearer ' + accessToken);
 
+        console.log(headers.get('Authorization'));
+
+        return headers;
+    }
+
+    isLoggedIn() {
         return this.http.get(this.spotifyUri + '/v1/me', {
-            headers: headers
+            headers: this.getAuthHeader()
         })
         .take(1)
         .map((res:Response) => res.json());
     }
 
-    isTokenValid(): Observable<boolean> {
-        return this.isLoggedIn().map(loggedIn => {
-            console.log("what")
-            return true;
+    isFollowingArtist(artistSpotifyUrl: string) {
+        let parameters: URLSearchParams = new URLSearchParams(
+            'type=' + this.getArtistType(artistSpotifyUrl) +
+            '&ids=' + this.getArtistId(artistSpotifyUrl)
+        );
+
+        return this.http.get(this.spotifyUri + '/v1/me/following/contains', {
+            headers: this.getAuthHeader(),
+            params: parameters
         })
-        .catch((error: any) => {
-            console.log("nut")
-            this.router.navigateByUrl('/login');
-            return Observable.of(false);
-        });
+        .map((res:Response) => res.json());
     }
 
-    // Client ID
-    // 750ea4f964cb4012a1ac34c50654ae7f
-    // Client Secret
-    // 6a49fb3a01b448c5a33592d2aa2534c9
+    followArtist(artistSpotifyUrl: string) {
+        let parameters: URLSearchParams = new URLSearchParams(
+            'type=' + this.getArtistType(artistSpotifyUrl) +
+            '&ids=' + this.getArtistId(artistSpotifyUrl)
+        );
 
-    // On click to do spotify check, in localstorage set current router state/url 
-    // then have url https://www.tradekraftcollective.com/login/check-spotify be spotify uri redirect
-    // Check if got spotify authroization code
-    // Redirect to tradekraft.redirect.referurl or homepage if it does not exist in localStorage
+        return this.http.put(this.spotifyUri + '/v1/me/following', {}, {
+            headers: this.getAuthHeader(),
+            params: parameters
+        })
+        .map((res:Response) => res.json());
+    }
+
+    unfollowArtist(artistSpotifyUrl: string) {
+        let parameters: URLSearchParams = new URLSearchParams(
+            'type=' + this.getArtistType(artistSpotifyUrl) +
+            '&ids=' + this.getArtistId(artistSpotifyUrl)
+        );
+
+        return this.http.delete(this.spotifyUri + '/v1/me/following', {
+            headers: this.getAuthHeader(),
+            params: parameters
+        })
+        .map((res:Response) => res.json()); 
+    }
+
+    getArtistType(artistSpotifyUrl: string): string {
+        return artistSpotifyUrl.match(this.spotifyLinkInfoRegex)[1];
+    }
+
+    getArtistId(artistSpotifyUrl: string): string {
+        return artistSpotifyUrl.match(this.spotifyLinkInfoRegex)[2];
+    }
 }
