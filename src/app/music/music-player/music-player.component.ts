@@ -1,4 +1,4 @@
-import { Song } from './../../release/song';
+import { Song } from './../../model/song';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 
 import {Observable} from 'rxjs/Rx';

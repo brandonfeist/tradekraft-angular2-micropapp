@@ -5,7 +5,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { Subject }  from 'rxjs/Subject';
 
-import { Song } from './../release/song';
+import { Song } from './../model/song';
 
 @Injectable()
 export class MusicService {

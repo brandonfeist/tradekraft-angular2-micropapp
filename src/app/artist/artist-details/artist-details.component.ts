@@ -6,8 +6,8 @@ import * as moment from 'moment-timezone';
 import { ArtistSpotifyDialog } from './../../shared/dialogs/artist-spotify/artist-spotify.component';
 
 import { ArtistService } from './../artist.service';
-import { Artist } from './../artist';
-import { Event } from './../../event/event';
+import { Artist } from './../../model/artist';
+import { Event } from './../../model/event';
 
 @Component({
   templateUrl: './artist-details.component.html'

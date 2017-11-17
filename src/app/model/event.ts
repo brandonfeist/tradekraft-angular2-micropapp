@@ -1,4 +1,4 @@
-import { Artist } from './../artist/artist';
+import { Artist } from './artist';
 
 export class Event {
     id: number;

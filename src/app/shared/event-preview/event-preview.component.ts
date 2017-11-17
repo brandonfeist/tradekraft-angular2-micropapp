@@ -2,7 +2,7 @@ import { Component, OnInit }      from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import * as moment from 'moment-timezone';
 
-import { Event } from './../../event/event';
+import { Event } from './../../model/event';
 import { EventService } from './../../services/event.service';
 
 @Component({

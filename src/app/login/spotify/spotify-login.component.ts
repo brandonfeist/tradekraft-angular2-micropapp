@@ -18,7 +18,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
         // Check params for code and state(optional)
         this.spotifyService.getSpotifyToken(this.spotifyAccessCode).subscribe(data => {
           localStorage.setItem("tradekraft.spotify.access", JSON.stringify(data));
-          this.spotifyService.isAuthenticatedToSpotify = true;
 
           this.redirect();
         },

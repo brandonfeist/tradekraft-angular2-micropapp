@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 
-import { Release } from './../../../release/release';
+import { Release } from './../../../model/release';
 
 @Component({
   selector: 'release-container',

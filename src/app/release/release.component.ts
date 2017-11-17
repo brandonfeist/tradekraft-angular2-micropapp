@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
-import { Release } from './release';
+import { Release } from './../model/release';
 import { ReleaseService } from './../services/release.service';
 
 @Component({

@@ -16,8 +16,6 @@ export class SpotifyService {
     private scope: string;
     private spotifyLinkInfoRegex = /https:\/\/open.spotify.com\/(artist|user)\/(\S+)/;
 
-    isAuthenticatedToSpotify: boolean = false;
-
     constructor(private http: Http, private router: Router) {
         this.spotifyUri = 'https://api.spotify.com';
         this.spotifyCredentialsUri = 'https://accounts.spotify.com';
@@ -52,6 +50,19 @@ export class SpotifyService {
         .map((res:Response) => res.json());
     }
 
+    resfreshSpotifyToken() {
+        let refreshToken = JSON.parse(localStorage.getItem('tradekraft.spotify.access')).refresh_token;
+        let parameters: URLSearchParams = new URLSearchParams(
+            'refresh_token=' + refreshToken
+        );
+
+        return this.http.get('http://localhost:8087/v1/spotify/authorize/refresh', {
+            params: parameters,
+            headers: this.getAuthHeader()
+        })
+        .map((res:Response) => res.json());
+    }
+
     getAuthHeader(): Headers {
         let accessToken: any = undefined;
         if(JSON.parse(localStorage.getItem('tradekraft.spotify.access'))) {
@@ -61,9 +72,11 @@ export class SpotifyService {
         let headers: Headers = new Headers();
         headers.append('Authorization', 'Bearer ' + accessToken);
 
-        console.log(headers.get('Authorization'));
-
         return headers;
+    }
+
+    hasSpotifyAuthToken():boolean {
+        return (!!localStorage.getItem('tradekraft.spotify.access'));
     }
 
     isLoggedIn() {

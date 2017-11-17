@@ -4,7 +4,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
-import { Artist } from './artist';
+import { Artist } from './../model/artist';
 
 @Component({
   selector: 'artists',

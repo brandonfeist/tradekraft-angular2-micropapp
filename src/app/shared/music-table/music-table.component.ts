@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { MusicService } from './../../services/music.service';
 
-import { Song } from './../../release/song';
+import { Song } from './../../model/song';
 
 @Component({
     selector: 'music-table',

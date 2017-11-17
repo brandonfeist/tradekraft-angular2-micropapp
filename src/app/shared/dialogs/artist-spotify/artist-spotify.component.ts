@@ -1,4 +1,4 @@
-import { Artist } from './../../../artist/artist';
+import { Artist } from './../../../model/artist';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogTitle, MatDialogContent, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
@@ -27,20 +27,32 @@ export class ArtistSpotifyDialog {
   }
 
   checkIfConnectedToSpotify() {
-    this.spotifyService.isLoggedIn().subscribe(data => {
-      if(data.email) {
-        this.checkIfFollowingArtist()
-      } else {
-        this.connectButton = true;
-        this.loading = false;
-      }
-    },
-    err => {
-      console.log("error", err);
+    // If token doesnt exist in localstorage, dont even check is logged in, just show connect button
+    if(this.spotifyService.hasSpotifyAuthToken()) {
+      this.spotifyService.isLoggedIn().subscribe(data => {
+        if(data.email) {
+          this.checkIfFollowingArtist()
+        } else {
+          this.connectButton = true;
+          this.loading = false;
+        }
+      },
+      err => {
+        console.log("error", err);
 
+        // Check if token exists first on localStorage and then try to use refreshToken if token is invalid
+        this.spotifyService.resfreshSpotifyToken().subscribe(data => {
+          localStorage.setItem("tradekraft.spotify.access", JSON.stringify(data));
+          this.checkIfFollowingArtist()
+        }, err => {
+          this.connectButton = true;
+          this.loading = false;
+        });
+      });
+    } else {
       this.connectButton = true;
       this.loading = false;
-    });
+    }
   }
 
   checkIfFollowingArtist() {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 
 import { ReleaseService } from './../../../services/release.service';
-import { Release } from './../../../release/release';
+import { Release } from './../../../model/release';
 
 @Component({
   selector: 'release-preview',

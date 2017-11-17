@@ -1,10 +1,10 @@
-import { Song } from './../song';
-import { Artist } from './../../artist/artist';
+import { Song } from './../../model/song';
+import { Artist } from './../../model/artist';
 import { Component, OnInit }  from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import * as moment from 'moment-timezone';
 
-import { Release } from './../release';
+import { Release } from './../../model/release';
 import { ReleaseService } from './../../services/release.service';
 import { MusicService } from './../../services/music.service';
 
