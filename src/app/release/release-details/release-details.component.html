@@ -15,7 +15,7 @@
                     <h5 class="release-header-date">{{ formatReleaseDate(release.releaseDate) }}</h5>
                 </div>
                 <div class="sub-container">
-                    <a *ngIf="!release.spotify" class="silent button" (click)="addToSpotifyPlaylist(release.spotify)">
+                    <a *ngIf="release.spotify" mat-raised-button class="silent" (click)="addToSpotifyPlaylist(release.spotify)">
                         <div class="button-wrapper">  
                             <span>Add to your Spotify playlist</span>      
                             <i class="fa fa-spotify spotify-green" aria-hidden="true"></i>
@@ -23,7 +23,7 @@
                     </a>
                 </div>
                 <div class="sub-container">
-                    <a class="silent button" routerLink="/releases">
+                    <a mat-raised-button class="silent" routerLink="/releases">
                         <div class="button-wrapper">  
                             <span>Back to releases</span>      
                             <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>

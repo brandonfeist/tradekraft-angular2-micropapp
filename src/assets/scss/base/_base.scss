@@ -77,3 +77,12 @@ hr {
 .spotify-green {
     color: #84bd00;
 }
+
+.loading-overlay {
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    z-index: 5000;
+}

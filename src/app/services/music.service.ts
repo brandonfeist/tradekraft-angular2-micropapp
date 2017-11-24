@@ -5,6 +5,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { Subject }  from 'rxjs/Subject';
 
+import * as _ from "lodash";
+
 import { Song } from './../model/song';
 
 @Injectable()
@@ -26,25 +28,32 @@ export class MusicService {
     }
 
     load(songs: Song[], songIndexNumber: number) {
-        this.songs = songs;
-        this.song = songs[songIndexNumber]
-        this.songIndexNumber = songIndexNumber;
+        if(!_.isEmpty(songs[songIndexNumber].songFile)) {
+            this.songs = songs;
+            this.song = songs[songIndexNumber]
+            this.songIndexNumber = songIndexNumber;
 
-        this.audio.src = this.song.songFile.m4a;
-        this.audio.load();
-
-        this.audioChange.next(this.audio);
-        this.songChange.next(this.song);
-
-        this.playPromise = this.audio.play();
-        this.paused = false;
-        this.pauseChange.next(this.paused);
-
-        this.audio.onended = () => {
-            if((this.songIndexNumber + 1) < songs.length) {
-                this.load(this.songs, (this.songIndexNumber + 1));
+            if(this.song.songFile.external) {
+                this.audio.src = this.song.songFile.external;
             } else {
-                this.stop();
+                this.audio.src = this.song.songFile.m4a;
+            }
+
+            this.audio.load();
+
+            this.audioChange.next(this.audio);
+            this.songChange.next(this.song); 
+
+            this.playPromise = this.audio.play();
+            this.paused = false;
+            this.pauseChange.next(this.paused);
+
+            this.audio.onended = () => {
+                if((this.songIndexNumber + 1) < songs.length) {
+                    this.load(this.songs, (this.songIndexNumber + 1));
+                } else {
+                    this.stop();
+                }
             }
         }
     }

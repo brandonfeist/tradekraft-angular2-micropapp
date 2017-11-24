@@ -575,6 +575,27 @@
 }
 
 a {
+    &.mat-raised-button {
+        width: 100%;
+        height: 47px;
+
+        .mat-button-wrapper {
+            font-size: 12px;
+            text-transform: uppercase;
+
+            span {
+                float: left;
+                margin-top: 4px;
+            }
+
+            i {
+                float: right;
+                font-size: 18px;
+                margin-top: 12px;
+            }
+        }
+    }
+
     &.button {
         .button-wrapper {
             font-size: 12px;

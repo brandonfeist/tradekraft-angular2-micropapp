@@ -8,6 +8,7 @@ import { ReleaseComponent } from './release.component';
 import { ReleaseDetailsComponent } from './release-details/release-details.component';
 import { ReleaseDetailsResolve } from './release-details/release-details.resolve';
 import { ReleaseRoutingModule } from './release-routing.module';
+import { CustomMaterialModule } from 'app/custom-material/custom-material.module';
 
 @NgModule({
     imports:  [ 
@@ -16,6 +17,7 @@ import { ReleaseRoutingModule } from './release-routing.module';
       ReleaseRoutingModule,
       LazyLoadImageModule,
       ReactiveFormsModule,
+      CustomMaterialModule,
       SharedModule
     ],
     declarations: [ 

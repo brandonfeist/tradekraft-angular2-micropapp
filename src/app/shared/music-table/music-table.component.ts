@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import * as _ from "lodash";
 
 import { MusicService } from './../../services/music.service';
 
@@ -11,6 +12,7 @@ import { Song } from './../../model/song';
 export class MusicTableComponent implements OnInit {
     @Input() songs: Song[];
 
+    private tooltipPos: string;
     private currentSongLoaded: Song;
     private paused: boolean;
 
@@ -18,6 +20,7 @@ export class MusicTableComponent implements OnInit {
     private songSubscription;
 
     constructor(private musicService: MusicService) { 
+        this.tooltipPos = "right";
         this.paused = true;
     }
 
@@ -58,5 +61,9 @@ export class MusicTableComponent implements OnInit {
         }
 
         return false;
+    }
+
+    songAvailable(song: Song): boolean {
+        return !_.isEmpty(song.songFile);
     }
 }

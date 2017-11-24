@@ -71,3 +71,8 @@ h5 {
 button::-moz-focus-inner {
     border: 0;
 }
+
+.fa-disabled {
+    opacity: 0.6;
+    cursor: default;
+}

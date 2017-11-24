@@ -10,19 +10,15 @@
                         alt="{{ artist.name }}">
                 </div>
                 <div class="sub-container">
-                    <a *ngIf="artist.spotify" class="silent button" (click)="openSpotifyDialog()">
-                        <div class="button-wrapper">  
-                            <span>Follow {{ artist.name }} on Spotify</span>      
+                    <a *ngIf="artist.spotify" mat-raised-button class="silent" (click)="openSpotifyDialog()">
+                            <span>Follow on Spotify</span>      
                             <i class="fa fa-spotify spotify-green" aria-hidden="true"></i>
-                        </div>
                     </a>
                 </div>
                 <div class="sub-container">
-                    <a class="silent button" routerLink="/artists">
-                        <div class="button-wrapper">
+                    <a mat-raised-button class="silent" routerLink="/artists">
                             <span>Back to artists</span>
                             <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
-                        </div>
                     </a>
                 </div>
             </div>
