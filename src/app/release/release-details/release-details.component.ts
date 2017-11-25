@@ -1,12 +1,14 @@
 import { Song } from './../../model/song';
 import { Artist } from './../../model/artist';
 import { Component, OnInit }  from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import * as moment from 'moment-timezone';
 
 import { Release } from './../../model/release';
 import { ReleaseService } from './../../services/release.service';
 import { MusicService } from './../../services/music.service';
+import { PlaylistSpotifyDialog } from 'app/shared/dialogs/playlist-spotify/playlist-spotify.component';
 
 @Component({
   templateUrl: './release-details.component.html'
@@ -24,7 +26,7 @@ export class ReleaseDetailsComponent implements OnInit {
   private songSubscription;
 
   constructor(private releaseService: ReleaseService, private musicService: MusicService, private activatedRoute: ActivatedRoute,
-    private router: ActivatedRoute) { }
+    private router: ActivatedRoute, public dialog: MatDialog) { }
 
   ngOnInit() { 
     this.paramSubscription = this.activatedRoute.params.subscribe(params => this.releaseSlug = params['slug']);
@@ -111,7 +113,10 @@ export class ReleaseDetailsComponent implements OnInit {
     return artistsNameString
   }
 
-  addToSpotifyPlaylist(spotifyLink: string) {
-    console.log("adding to spotify playlist");
+  openSpotifyDialog() {
+    this.dialog.open(PlaylistSpotifyDialog, {
+      height: '350px',
+      data: { release: this.release }
+    });
   }
 }

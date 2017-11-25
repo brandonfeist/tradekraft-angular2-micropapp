@@ -1,0 +1,47 @@
+playlist-spotify-dialog {
+  mat-spinner {
+    margin: auto;
+  }
+
+  .spotify-playlists {
+    tbody {
+      display: table-row-group;
+      vertical-align: middle;
+      border-color: inherit;
+    }
+
+    tr {
+      display: table-row;
+      vertical-align: inherit;
+      border-color: inherit;
+      cursor: pointer;
+
+      &:nth-child(odd) > td {
+          background: #dfdfdf;
+      }
+    }
+
+    td {
+      & a {
+          margin-right: 3px;
+          text-decoration: underline;
+      }
+    }
+
+    th, td {
+      padding: 0.8em 1em;
+      display: table-cell;
+      vertical-align: inherit;
+
+      &.shrink {
+          white-space: nowrap;
+          width: 1px;
+      }
+
+      &.nopad {
+          padding-left: 0;
+          padding-right: 0;
+      }
+    }
+  }
+}

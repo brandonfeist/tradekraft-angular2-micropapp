@@ -15,6 +15,7 @@ export class SpotifyService {
     private redirectUri: string;
     private scope: string;
     private spotifyLinkInfoRegex = /https:\/\/open.spotify.com\/(artist|user)\/(\S+)/;
+    private spotifyReleaseLinkInfoRegex = /https:\/\/open.spotify.com\/album\/(\S+)/;
 
     constructor(private http: Http, private router: Router) {
         this.spotifyUri = 'https://api.spotify.com';
@@ -79,11 +80,18 @@ export class SpotifyService {
         return (!!localStorage.getItem('tradekraft.spotify.access'));
     }
 
-    isLoggedIn() {
+    getUserInfo() {
         return this.http.get(this.spotifyUri + '/v1/me', {
             headers: this.getAuthHeader()
         })
         .take(1)
+        .map((res:Response) => res.json());
+    }
+
+    getReleaseAlbum(releaseSpotifyUrl: string) {
+        return this.http.get(this.spotifyUri + '/v1/albums/' + this.getReleaseId(releaseSpotifyUrl), {
+            headers: this.getAuthHeader()
+        })
         .map((res:Response) => res.json());
     }
 
@@ -126,11 +134,33 @@ export class SpotifyService {
         .map((res:Response) => res.json()); 
     }
 
+    getUsersPlaylists() {
+        return this.http.get(this.spotifyUri + '/v1/me/playlists', {
+            headers: this.getAuthHeader()
+        })
+        .map((res:Response) => res.json()); 
+    }
+
+    addTracksToUserPlaylist(userId: string, playlistId: string, trackUris: string[]) {
+        let uris = {
+            uris: trackUris
+        };
+
+        return this.http.post(this.spotifyUri + '/v1/users/' + userId + '/playlists/' + playlistId + '/tracks', uris, {
+            headers: this.getAuthHeader()
+        })
+        .map((res:Response) => res.json());
+    }
+
     getArtistType(artistSpotifyUrl: string): string {
         return artistSpotifyUrl.match(this.spotifyLinkInfoRegex)[1];
     }
 
     getArtistId(artistSpotifyUrl: string): string {
         return artistSpotifyUrl.match(this.spotifyLinkInfoRegex)[2];
+    }
+
+    getReleaseId(releaseSpotifyUrl: string): string {
+        return releaseSpotifyUrl.match(this.spotifyReleaseLinkInfoRegex)[1];
     }
 }

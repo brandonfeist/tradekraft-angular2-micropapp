@@ -76,3 +76,10 @@ button::-moz-focus-inner {
     opacity: 0.6;
     cursor: default;
 }
+
+.truncate {
+    max-width: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

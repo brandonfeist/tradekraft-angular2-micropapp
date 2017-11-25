@@ -1,3 +1,4 @@
+import { PlaylistSpotifyDialog } from './dialogs/playlist-spotify/playlist-spotify.component';
 import { ArtistSpotifyDialog } from './dialogs/artist-spotify/artist-spotify.component';
 import { ReleaseContainerComponent } from './release/release-container/release-container.component';
 import { ReleasePreviewComponent } from './release/release-preview/release-preview.component';
@@ -24,6 +25,7 @@ import { CustomMaterialModule } from 'app/custom-material/custom-material.module
       ReleasePreviewComponent,
       ReleaseContainerComponent,
       ArtistSpotifyDialog,
+      PlaylistSpotifyDialog,
       ReadMoreComponent
     ],
     declarations: [ 
@@ -32,10 +34,12 @@ import { CustomMaterialModule } from 'app/custom-material/custom-material.module
       ReleasePreviewComponent,
       ReleaseContainerComponent,
       ArtistSpotifyDialog,
+      PlaylistSpotifyDialog,
       ReadMoreComponent
     ],
     entryComponents: [
-      ArtistSpotifyDialog
+      ArtistSpotifyDialog,
+      PlaylistSpotifyDialog
     ]
   })
   export class SharedModule { }

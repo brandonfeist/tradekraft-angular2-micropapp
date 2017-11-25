@@ -29,7 +29,7 @@ export class ArtistSpotifyDialog {
   checkIfConnectedToSpotify() {
     // If token doesnt exist in localstorage, dont even check is logged in, just show connect button
     if(this.spotifyService.hasSpotifyAuthToken()) {
-      this.spotifyService.isLoggedIn().subscribe(data => {
+      this.spotifyService.getUserInfo().subscribe(data => {
         if(data.email) {
           this.checkIfFollowingArtist()
         } else {
