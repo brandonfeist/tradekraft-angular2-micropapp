@@ -11,13 +11,15 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { EventPreviewComponent } from './event-preview/event-preview.component';
 import { ReadMoreComponent } from './read-more/read-more.component';
 import { CustomMaterialModule } from 'app/custom-material/custom-material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports:  [ 
       CommonModule,
       RouterModule,
       CustomMaterialModule,
-      LazyLoadImageModule
+      LazyLoadImageModule,
+      ReactiveFormsModule
     ],
     exports: [
       MusicTableComponent,

@@ -8,12 +8,26 @@
 <div *ngIf="showPlaylists" class="spotify-playlists">
   <table>
     <tbody>
-        <tr *ngFor="let playlist of playlists" (click)="addToPlaylist(playlist.id)">
-            <td class="truncate">{{ playlist.name }}</td>
-            <td>
-              <i class="fa fa-plus" aria-hidden="true"></i>
-            </td>
-        </tr>
+      <tr class="playlist-field">
+        <td>
+          <form [formGroup]="playlistForm" (ngSubmit)="onSubmit()" novalidate>
+            <mat-form-field>
+              <input matInput placeholder="Create a new Spotify playlist" formControlName="playlist">
+            </mat-form-field>
+          </form>
+        </td>
+        <td>
+          <button mat-icon-button (click)="onSubmit()">
+            <mat-icon class="fa fa-plus-circle"></mat-icon>
+          </button>
+        </td>
+      </tr>
+      <tr *ngFor="let playlist of playlists" (click)="addToPlaylist(playlist.id)">
+          <td class="truncate">{{ playlist.name }}</td>
+          <td>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </td>
+      </tr>
     </tbody>
   </table>
 </div>

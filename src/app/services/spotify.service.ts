@@ -59,7 +59,7 @@ export class SpotifyService {
 
         return this.http.get('http://localhost:8087/v1/spotify/authorize/refresh', {
             params: parameters,
-            headers: this.getAuthHeader()
+            headers: this.getSpotifyAuthHeader()
         })
         .map((res:Response) => res.json());
     }
@@ -72,6 +72,18 @@ export class SpotifyService {
 
         let headers: Headers = new Headers();
         headers.append('Authorization', 'Bearer ' + accessToken);
+
+        return headers;
+    }
+
+    getSpotifyAuthHeader(): Headers {
+        let accessToken: any = undefined;
+        if(JSON.parse(localStorage.getItem('tradekraft.spotify.access'))) {
+            accessToken = JSON.parse(localStorage.getItem('tradekraft.spotify.access')).access_token;
+        }
+
+        let headers: Headers = new Headers();
+        headers.append('Spotify-Authorization', 'Bearer ' + accessToken);
 
         return headers;
     }
@@ -139,6 +151,13 @@ export class SpotifyService {
             headers: this.getAuthHeader()
         })
         .map((res:Response) => res.json()); 
+    }
+
+    createPlaylist(userId: string, playlistName: string) {
+        return this.http.post(this.spotifyUri + '/v1/users/' + userId + '/playlists', { name: playlistName }, {
+            headers: this.getAuthHeader()
+        })
+        .map((res:Response) => res.json());
     }
 
     addTracksToUserPlaylist(userId: string, playlistId: string, trackUris: string[]) {

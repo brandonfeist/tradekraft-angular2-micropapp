@@ -37,19 +37,19 @@
                     <h2>{{ formatReleaseArtists(release) }}</h2>
                 </div>
                 <div class="social-media push-right">
-                    <a *ngIf="!release.spotify" href="release.spotify" target="_blank">
+                    <a *ngIf="release.spotify" href="{{ release.spotify }}" target="_blank">
                         <i class="fa fa-spotify"></i>
                     </a>
-                    <a *ngIf="!release.appleMusic" href="release.appleMusic" target="_blank">
+                    <a *ngIf="release.appleMusic" href="{{ release.appleMusic }}" target="_blank">
                         <i class="fa fa-apple"></i>
                     </a>
-                    <a *ngIf="!release.googlePlay" href="release.googlePlay" target="_blank">
+                    <a *ngIf="release.googlePlay" href="{{ release.googlePlay }}" target="_blank">
                         <i class="fa fa-google"></i>
                     </a>
-                    <a *ngIf="!release.soundcloud" href="release.soundcloud" target="_blank">
+                    <a *ngIf="release.soundcloud" href="{{ release.soundcloud }}" target="_blank">
                         <i class="fa fa-soundcloud"></i>
                     </a>
-                    <a *ngIf="!release.amazon" href="release.amazon" target="_blank">
+                    <a *ngIf="release.amazon" href="{{ release.amazon }}" target="_blank">
                         <i class="fa fa-amazon"></i>
                     </a>
                 </div>

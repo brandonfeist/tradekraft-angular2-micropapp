@@ -16,7 +16,15 @@ playlist-spotify-dialog {
       border-color: inherit;
       cursor: pointer;
 
-      &:nth-child(odd) > td {
+      &.playlist-field {
+        cursor: default;
+      }
+
+      & mat-form-field {
+        width: 100%;
+      }
+
+      &:nth-child(even) > td {
           background: #dfdfdf;
       }
     }
@@ -25,6 +33,10 @@ playlist-spotify-dialog {
       & a {
           margin-right: 3px;
           text-decoration: underline;
+      }
+
+      & button {
+        border-style: none;
       }
     }
 

@@ -115,7 +115,7 @@ export class ReleaseDetailsComponent implements OnInit {
 
   openSpotifyDialog() {
     this.dialog.open(PlaylistSpotifyDialog, {
-      height: '350px',
+      height: '450px',
       data: { release: this.release }
     });
   }
