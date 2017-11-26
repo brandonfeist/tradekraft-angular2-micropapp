@@ -1,3 +1,4 @@
+import { CustomMaterialModule } from './custom-material/custom-material.module';
 import { MatDialog } from '@angular/material';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -26,12 +27,13 @@ import { MusicService } from './services/music.service';
     BrowserModule,
     BrowserAnimationsModule,
     HomeModule,
+    NavbarModule,
+    MusicModule,
+    CustomMaterialModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    PageNotFoundModule,
-    NavbarModule,
-    MusicModule
+    PageNotFoundModule
   ],
   providers: [ 
     Title,

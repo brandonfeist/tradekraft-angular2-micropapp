@@ -1,202 +1,27 @@
-.menu-item {
-    border-bottom: 1px solid $light-white-transparent;
-    clear: both;
-    float: left;
-    font-size: 16px;
-    font-weight: 300;
-    padding: 20px 10%;
-    text-transform: uppercase;
-    width: 100%;
-
-    &.sub {
-        padding-left: 20%;
-    }
-
-    img {
-        cursor: pointer;
-        float: right;
-        width: 20px;
-    }
-
-    &:hover {
-        color: $white;
-    }
-}
-
-li {
-    .dropdown-trigger span {
-        cursor: pointer;
-        float: left;
-        margin: 0;
-        position: relative;
-
-        &::before {
-            background-image: url('/images/icons/slim_arrow_white.svg');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 50%;
-            content: '';
-            display: block;
-            height: 15px;
-            position: absolute;
-            right: -25px;
-            top: 3px;
-            transform: rotate(90deg);
-            width: 15px;
-        }
-    }
-
-    &.active .dropdown-trigger span::before {
-        transform: rotate(-90deg);
-    }
-}
-
-.slideout-menu {
-    bottom: 0;
-    display: none;
-    overflow-y: auto;
-    position: fixed;
+.example-sidenav-fab-container {
+    width: 100vw;
+    height: 100vh;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  
+.example-sidenav-fab-container mat-sidenav {
+    width: 230px;
     top: 50px;
-    width: 300px;
-    z-index: 0;
-
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    li ul {
-        display: none;
-    }
-
-    .active ul {
-        display: block;
-    }
 }
 
-.main-menu {
-    background: $dark-blue;
-    color: $white;
-    left: 0;
-    right: auto;
+// .example-sidenav-fab-container .mat-sidenav-content,
+// .example-sidenav-fab-container mat-sidenav {
+//     display: flex;
+//     overflow: visible;
+// }
 
-    .search-holder {
-        background: $white;
-        float: left;
-        padding-bottom: 10px;
-        position: relative;
-        width: 100%;
-    }
+.example-scrolling-content {
+    overflow: auto;
+    height: 100%;
 }
 
-.slideout-panel {
-    margin-top: 50px;
-    padding-bottom: 50px;
-    position: relative;
-    z-index: 1;
-
-    @include media($mobile) {
-        &.index-page {
-            padding-top: 40px;
-        }
-    }
-}
-
-.slideout-open,
-.slideout-open body,
-.slideout-open .slideout-panel {
-    overflow: hidden;
-}
-
-.slideout-open .slideout-menu {
-    display: block;
-}
-
-.burger {
-    cursor: pointer;
-    display: inline-block;
-    height: 20px;
-    margin-left: 20px;
-    margin-top: 15px;
-    position: relative;
-    width: 30px;
-
-    div {
-        background: $white;
-        height: 4px;
-        position: absolute;
-        transition: transform 0.3s ease, top 0.1s ease;
-        width: 100%;
-    }
-
-    .x {
-        top: 0;
-    }
-
-    .y {
-        top: 8px;
-    }
-
-    .z {
-        top: 16px;
-    }
-
-    &.opened {
-        .x {
-            left: 0;
-            position: absolute;
-            top: 3px;
-            transform: rotate(-32deg);
-            width: 60%;
-        }
-
-        .z {
-            left: 0;
-            position: absolute;
-            top: 13px;
-            transform: rotate(32deg);
-            width: 60%;
-        }
-    }
-}
-
-.toggle-account {
-    .burger {
-        display: none;
-        margin-left: 16px;
-        transform: rotate(180deg);
-
-        div {
-            background: $white;
-        }
-    }
-
-    &.opened {
-        .burger {
-            display: block;
-        }
-
-        .user.loggedin {
-            display: none;
-        }
-    }
-}
-
-.action-holder {
-    float: left;
-    height: 50px;
-    position: relative;
-    text-align: center;
-    width: 100%;
-
-    .icon {
-        display: inline-block;
-        float: none;
-        height: 30px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 10px;
-        width: 30px;
-    }
+.example-fab.mat-mini-fab {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
 }
