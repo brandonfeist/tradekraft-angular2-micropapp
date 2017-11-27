@@ -12,10 +12,14 @@ export const routes: Routes = [
   { path: 'artists', loadChildren: 'app/artist/artist.module#ArtistModule' },
   { path: 'connect', loadChildren: 'app/connect/connect.module#ConnectModule' },
   { path: 'login', loadChildren: 'app/login/login.module#LoginModule' },
+  { 
+    path: 'admin', 
+    loadChildren: 'app/admin/admin.module#AdminModule', 
+    canActivate: [RoleGuard], 
+    data: { permissions: ['VIEW_ADMIN_PANEL_PERMISSION'] }  
+  },
   { path: '**', component: PageNotFoundComponent }
 ];
-
-// , canActivate: [RoleGuard], data: {roles: ['SuperAdmin', 'TestRole']} 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -3,6 +3,8 @@ import { Http, Headers, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
 
+import * as _ from "lodash";
+
 @Injectable()
 export class AuthService {
 
@@ -39,8 +41,28 @@ export class AuthService {
     return tokenNotExpired();
   }
 
-  getRoles() {
+  getPermissions() {
     return this.decodeToken().authorities;
+  }
+
+  hasAllPermissions(permissions: string[]): boolean {
+    if(this.loggedIn()) {
+      let usersPermissions = this.getPermissions();
+      
+      return (_.difference(permissions, usersPermissions).length === 0)
+    }
+
+    return false;
+  }
+
+  hasAtLeastOnePermission(permissions: string[]): boolean {
+    if(this.loggedIn()) {
+      let usersPermissions = this.getPermissions();
+      
+      return (_.difference(permissions, usersPermissions).length !== permissions.length)
+    }
+
+    return false;
   }
 
   decodeToken() {

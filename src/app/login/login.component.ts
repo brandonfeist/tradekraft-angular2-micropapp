@@ -26,7 +26,6 @@ import { Router } from '@angular/router';
     }
 
     onSubmit() {
-      console.log("Logging in.");
       let username = this.userLoginForm.get("username").value;
       let password = this.userLoginForm.get("password").value;
 

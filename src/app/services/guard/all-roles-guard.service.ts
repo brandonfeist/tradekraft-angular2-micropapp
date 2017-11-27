@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import * as _ from "lodash";
 
 @Injectable()
-export class RoleGuard implements CanActivate {
+export class AllRolesGuard implements CanActivate {
 
   constructor(private auth: AuthService, private router: Router) {}
 
@@ -23,7 +23,7 @@ export class RoleGuard implements CanActivate {
         return false;
       }
 
-      if(this.auth.hasAtLeastOnePermission(permissions)) {
+      if(this.auth.hasAllPermissions(permissions)) {
         return true;
       } else {
         this.router.navigate(['/']);

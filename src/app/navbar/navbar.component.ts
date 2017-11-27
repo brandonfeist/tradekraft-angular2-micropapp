@@ -7,6 +7,8 @@ import { AuthService } from 'app/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
+  private adminPanelPermissions: string[] = ['VIEW_ADMIN_PANEL_PERMISSION']
+
   constructor(private authService: AuthService) { }
 
   ngOnInit() {}
