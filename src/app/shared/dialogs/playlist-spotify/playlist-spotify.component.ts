@@ -1,3 +1,4 @@
+import { SnackbarService } from 'app/services/snackbar.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogTitle, MatDialogContent, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
@@ -23,7 +24,8 @@ export class PlaylistSpotifyDialog {
   private playlistForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<PlaylistSpotifyDialog>, private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any, private spotifyService: SpotifyService) {}
+    @Inject(MAT_DIALOG_DATA) public data: any, private spotifyService: SpotifyService,
+    private snackbarService: SnackbarService) {}
 
   ngOnInit() {
     this.release = this.data.release;
@@ -57,8 +59,6 @@ export class PlaylistSpotifyDialog {
         }
       },
       err => {
-        console.log("error", err);
-
         // Check if token exists first on localStorage and then try to use refreshToken if token is invalid
         this.spotifyService.resfreshSpotifyToken().subscribe(data => {
           localStorage.setItem("tradekraft.spotify.access", JSON.stringify(data));
@@ -82,10 +82,7 @@ export class PlaylistSpotifyDialog {
     },
     err => {
       console.log("Playlist retrieval error.");
-
-      this.loading = false;
-      this.errorMessage = "There was a problem getting your playlists.";
-      this.showErrorMessage = true;
+      this.displayErrorMessage("There was a problem getting your playlists.");
     });
   }
 
@@ -99,18 +96,23 @@ export class PlaylistSpotifyDialog {
         this.spotifyService.createPlaylist(user.id, playlistName).subscribe(playlistInfo => {
           this.spotifyService.addTracksToUserPlaylist(user.id, playlistInfo.id, trackUris).subscribe(response => {
             this.closeDialog();
+            this.snackbarService.openSnackbar("Successfully added " + this.release.name + " to your playlist", "Close");
           }, err => {
             console.log("There was a problem adding to the spotify playlist, ", err);
             this.closeDialog();
+            this.snackbarService.openSnackbar("There was a problem adding " + this.release.name + " to your playlist", "Close");
           });
         }, err => {
           console.log("There was a problem creating a new Spotify playlist, ", err);
+          this.displayErrorMessage("There was a problem creating a new playlist")
         });
       }, err => {
         console.log("Problem getting album info from Spotify, ", err);
+        this.displayErrorMessage("There was a problem getting the release info from Spotify.");
       });
     }, err => {
       console.log("Trouble getting user info from Spotify right now, ", err);
+      this.displayErrorMessage("There was a problem with Spotify right now.");
     });
   }
 
@@ -123,16 +125,26 @@ export class PlaylistSpotifyDialog {
 
         this.spotifyService.addTracksToUserPlaylist(user.id, playlistId, trackUris).subscribe(response => {
           this.closeDialog();
+          this.snackbarService.openSnackbar("Successfully added " + this.release.name + " to your playlist", "Close");
         }, err => {
           console.log("There was a problem adding to the spotify playlist, ", err);
           this.closeDialog();
+          this.snackbarService.openSnackbar("There was a problem adding " + this.release.name + " to your playlist", "Close");
         });
       }, err => {
         console.log("Problem getting album info from Spotify, ", err);
+        this.displayErrorMessage("There was a problem getting the release info from Spotify.");
       })
     }, err => {
       console.log("Trouble getting user info from Spotify right now, ", err);
+      this.displayErrorMessage("There was a problem with Spotify right now.");
     });
+  }
+
+  private displayErrorMessage(message: string) {
+    this.loading = false;
+    this.errorMessage = message;
+    this.showErrorMessage = true;
   }
 
   closeDialog() {

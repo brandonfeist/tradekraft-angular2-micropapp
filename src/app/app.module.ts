@@ -21,6 +21,7 @@ import { EventService } from './services/event.service';
 import { SpotifyService } from './services/spotify.service';
 import { MusicService } from './services/music.service';
 import { RoleGuard } from 'app/services/guard/role-guard.service';
+import { SnackbarService } from 'app/services/snackbar.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { RoleGuard } from 'app/services/guard/role-guard.service';
     MusicService,
     SpotifyService,
     AuthService,
+    SnackbarService,
     AuthGuard,
     RoleGuard
   ],

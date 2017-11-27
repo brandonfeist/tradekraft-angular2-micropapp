@@ -29,12 +29,8 @@
     <div class="example-scrolling-content">
       <nav class="nav-menu">
         <ul class="nav-items">
-          <li class="nav-item">
-              <a routerLink="/releases" routerLinkActive="active" (click)="sidenav.close()">Releases</a>
-          </li>
-          <li class="nav-item">
-              <a routerLink="/artists" routerLinkActive="active" (click)="sidenav.close()">Artist</a>
-          </li>
+          <main-navbar *ngIf="!isAdminNavbar()" [sidenav]="sidenav"></main-navbar>
+          <admin-navbar *ngIf="isAdminNavbar()" [sidenav]="sidenav"></admin-navbar>
           <li *ngIf="authService.hasAtLeastOnePermission(adminPanelPermissions)" class="nav-item">
               <a routerLink="/admin" routerLinkActive="active" (click)="sidenav.close()">Admin</a>
           </li>
@@ -46,19 +42,6 @@
           </li>
         </ul>
       </nav>
-      <!-- <a routerLink="/events" routerLinkActive="active">Events</a>
-      <a routerLink="/shop" routerLinkActive="active">Shop</a>
-      <a routerLink="/events" routerLinkActive="active">About</a> -->
-      <!-- <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Personal data
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-      </mat-accordion> -->
-
     </div>
   </mat-sidenav>
   <ng-content select="[content]"></ng-content>

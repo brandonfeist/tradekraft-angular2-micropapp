@@ -1,3 +1,4 @@
+import { SnackbarService } from 'app/services/snackbar.service';
 import { Artist } from './../../../model/artist';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogTitle, MatDialogContent, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
@@ -18,7 +19,8 @@ export class ArtistSpotifyDialog {
   private errorMessage: string;
 
   constructor(public dialogRef: MatDialogRef<ArtistSpotifyDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private spotifyService: SpotifyService) {}
+    @Inject(MAT_DIALOG_DATA) public data: any, private spotifyService: SpotifyService,
+    private snackbarService: SnackbarService) {}
 
   ngOnInit() {
     this.artist = this.data.artist;
@@ -38,8 +40,6 @@ export class ArtistSpotifyDialog {
         }
       },
       err => {
-        console.log("error", err);
-
         // Check if token exists first on localStorage and then try to use refreshToken if token is invalid
         this.spotifyService.resfreshSpotifyToken().subscribe(data => {
           localStorage.setItem("tradekraft.spotify.access", JSON.stringify(data));
@@ -67,35 +67,36 @@ export class ArtistSpotifyDialog {
     },
     err => {
       console.log("error", err);
-      
-      this.loading = false;
-      this.errorMessage = "There was a problem with Spotify :("
-      this.showErrorMessage = true;
+      this.displayErrorMessage("There was a problem with Spotify right now.");
     });
   }
 
   followArtist() {
     this.spotifyService.followArtist(this.artist.spotify).subscribe(followed => {
       this.closeDialog();
+      this.snackbarService.openSnackbar("Successfully followed " + this.artist.name + " on Spotify", "Close");
     },
     err => {
       console.log("error", err);
-
-      this.errorMessage = "There was a problem following" + this.artist.name + " :("
-      this.showErrorMessage = true;
+      this.displayErrorMessage("There was a problem following " + this.artist.name + ", please try again.");
     });
   }
 
   unfollowArtist() {
     this.spotifyService.unfollowArtist(this.artist.spotify).subscribe(unfollowed => {
       this.closeDialog();
+      this.snackbarService.openSnackbar("Successfully unfollowed " + this.artist.name + " on Spotify", "Close");
     },
     err => {
       console.log("error", err);
-
-      this.errorMessage = "There was a problem unfollowing" + this.artist.name + " :("
-      this.showErrorMessage = true;
+      this.displayErrorMessage("There was a problem unfollowing " + this.artist.name + ", please try again.");
     });
+  }
+
+  private displayErrorMessage(message: string) {
+    this.loading = false;
+    this.errorMessage = message;
+    this.showErrorMessage = true;
   }
 
   closeDialog() {
