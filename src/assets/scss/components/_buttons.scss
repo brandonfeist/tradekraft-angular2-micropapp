@@ -1,3 +1,7 @@
+.btn-center-wrapper {
+    text-align: center;
+}
+
 .btn {
     cursor: pointer;
     display: inline-block;
@@ -7,6 +11,7 @@
     position: relative;
     text-transform: uppercase;
     user-select: none;
+    border-radius: 0;
 
     &.fixed {
         background: $white;
@@ -116,10 +121,11 @@
     }
 
     &.btn-connect {
+        text-align: center;
+
         @include media($mobile) {
             margin-left: 0;
             margin-right: 0;
-            text-align: center;
             width: 100%;
         }
     }
@@ -226,7 +232,6 @@
         background: $sf-green;
         border: 1px solid $sf-green;
         color: $white;
-        float: left;
         font-weight: 500;
         margin-right: 10px;
         margin-top: 10px;
@@ -234,16 +239,18 @@
         text-transform: initial;
 
         &::before {
-            background-image: url('/images/icons/spotify_white.svg');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 95%;
-            content: '';
-            display: block;
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            content: "\f1bc";
+            display: inline-block;
+            text-decoration: inherit;
             height: 20px;
             position: absolute;
             right: 15px;
+            top: 10px;
             width: 20px;
+            font-size: 18px;
         }
     }
 

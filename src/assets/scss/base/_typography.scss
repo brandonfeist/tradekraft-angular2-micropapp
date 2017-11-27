@@ -72,6 +72,13 @@ button::-moz-focus-inner {
     border: 0;
 }
 
+.dialog-title {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
 .fa-disabled {
     opacity: 0.6;
     cursor: default;

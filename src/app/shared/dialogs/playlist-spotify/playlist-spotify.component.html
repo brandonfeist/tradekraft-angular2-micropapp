@@ -1,9 +1,11 @@
-<h2 mat-dialog-title>Add {{ release.name }} to your Spotify playlist</h2>
+<h2 class="dialog-title" mat-dialog-title>Add {{ release.name }} to your Spotify playlist</h2>
 
 <mat-spinner *ngIf="loading"></mat-spinner>
 
-<p *ngIf="connectButton">You need to connect with Spotify to add {{ release.name }} to your playlist</p>
-<a *ngIf="connectButton" (click)="spotifyService.connectToSpotify()">Connect to Spotify</a>
+<p *ngIf="connectButton">You need to connect with Spotify to add {{ release.name }} to your playlist.</p>
+<div *ngIf="connectButton" class="btn-center-wrapper">
+  <a class="btn btn-connect spotify" (click)="spotifyService.connectToSpotify()">Connect to Spotify</a>
+</div>
 
 <div *ngIf="showPlaylists" class="spotify-playlists">
   <table>

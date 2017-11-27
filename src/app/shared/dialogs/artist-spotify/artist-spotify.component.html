@@ -1,9 +1,11 @@
-<h2 mat-dialog-title>Follow {{ artist.name }} on Spotify</h2>
+<h2 class="dialog-title" mat-dialog-title>Follow {{ artist.name }} on Spotify</h2>
 
 <mat-spinner *ngIf="loading"></mat-spinner>
 
 <p *ngIf="connectButton">You need to connect with Spotify to follow {{ artist.name }}</p>
-<a *ngIf="connectButton" (click)="spotifyService.connectToSpotify()">Connect to Spotify</a>
+<div *ngIf="connectButton" class="btn-center-wrapper">
+  <a *ngIf="connectButton" class="btn btn-connect spotify" (click)="spotifyService.connectToSpotify()">Connect to Spotify</a>
+</div>
 
 <a *ngIf="unfollowButton" (click)="unfollowArtist()">Unfollow {{ artist.name }}</a>
 <a *ngIf="followButton" (click)="followArtist()">Follow {{ artist.name }}</a>
