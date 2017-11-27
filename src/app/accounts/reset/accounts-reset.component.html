@@ -1,11 +1,12 @@
 <mat-card class="login-form">
   <form [formGroup]="passwordResetForm" (ngSubmit)="onSubmit()" novalidate>
     <mat-form-field class="login-input">
-        <input matInput placeholder="Email" formControlName="email" required>
+      <input matInput placeholder="Email" formControlName="email" required email>
+      <mat-error *ngIf="passwordResetForm.controls.email.errors?.email">Not a valid email</mat-error>
     </mat-form-field>
 
     <div class="btn-center-wrapper login-btn">
-      <button mat-raised-button color="primary" type="submit">Request New Password</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!passwordResetForm.valid">Request New Password</button>
     </div>
   </form>
 

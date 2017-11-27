@@ -1,5 +1,6 @@
+import { PasswordValidation } from './../../validators/password-validation';
 import { Component, OnInit }      from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, EmailValidator, Validators } from '@angular/forms';
 import { AuthService } from 'app/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -22,8 +23,10 @@ import { Router } from '@angular/router';
       this.userRegistrationForm = this.formBuilder.group({
         username: '',
         email: '',
-        password: '',
-        passwordVerification: ''
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required]
+      }, {
+        validator: PasswordValidation.MatchPassword
       });
     }
 

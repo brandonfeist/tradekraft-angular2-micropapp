@@ -10,7 +10,7 @@
     </mat-form-field>
 
     <div class="btn-center-wrapper login-btn">
-      <button mat-raised-button color="primary" type="submit">Login</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!userLoginForm.valid">Login</button>
     </div>
   </form>
 
