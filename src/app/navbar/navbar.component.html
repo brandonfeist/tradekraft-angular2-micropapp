@@ -35,6 +35,12 @@
           <li class="nav-item">
               <a routerLink="/artists" routerLinkActive="active" (click)="sidenav.close()">Artist</a>
           </li>
+          <li *ngIf="authService.loggedIn()" class="nav-item">
+              <a (click)="sidenav.close(); authService.logout()">Logout</a>
+          </li>
+          <li *ngIf="!authService.loggedIn()" class="nav-item">
+              <a routerLink="/login" routerLinkActive="active" (click)="sidenav.close()">Login</a>
+          </li>
         </ul>
       </nav>
       <!-- <a routerLink="/events" routerLinkActive="active">Events</a>

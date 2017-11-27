@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Router } from '@angular/router';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: Http, private router: Router) {}
+
+  private  authenticationServiceUrl: string;
+
+  constructor(private http: Http, private router: Router) {
+    this.authenticationServiceUrl = 'http://localhost:8086';
+  }
 
   authenticate(username: string, password: string) {
-    let url = 'http://localhost:8086/oauth/token?grant_type=password' +
+    let url = this.authenticationServiceUrl + '/oauth/token?grant_type=password' +
       '&client_id=testjwtclientid' +
       '&username=' + username +
       '&password=' + password;
@@ -27,6 +33,10 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/']);
+  }
+
+  loggedIn() {
+    return tokenNotExpired();
   }
 
   getBasicAuthHeader(username: string, password: string): Headers {
