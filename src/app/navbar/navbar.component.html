@@ -19,7 +19,10 @@
         <li><a routerLink="/shop" routerLinkActive="active">Shop</a></li>
         <li><a routerLink="/events" routerLinkActive="active">About</a></li>
       </ul> -->
-      <ul class="nav navbar-nav navbar-right"></ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="!authService.loggedIn()"><a class="login-button" routerLink="/login">Login</a></li>
+        <li *ngIf="authService.loggedIn()"><a (click)="authService.logout()">Logout</a></li>
+      </ul>
     </div>
   </div>
 </nav>

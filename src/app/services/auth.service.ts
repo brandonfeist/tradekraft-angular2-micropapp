@@ -1,3 +1,4 @@
+import { SnackbarService } from './snackbar.service';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Router } from '@angular/router';
@@ -10,7 +11,7 @@ export class AuthService {
 
   private  authenticationServiceUrl: string;
 
-  constructor(private http: Http, private router: Router) {
+  constructor(private http: Http, private router: Router, private snackbarService: SnackbarService) {
     this.authenticationServiceUrl = 'http://localhost:8086';
   }
 
@@ -35,6 +36,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/']);
+    this.snackbarService.openSnackbar("Successfully logged out.");
   }
 
   loggedIn() {
