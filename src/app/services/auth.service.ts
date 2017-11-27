@@ -39,6 +39,22 @@ export class AuthService {
     return tokenNotExpired();
   }
 
+  getRoles() {
+    return this.decodeToken().authorities;
+  }
+
+  decodeToken() {
+    if(localStorage.getItem('token')) {
+      let token = localStorage.getItem('token');
+      let base64Url = token.split('.')[1];
+      let base64 = base64Url.replace('-', '+').replace('_', '/');
+
+      return JSON.parse(window.atob(base64));
+    }
+
+    return undefined;
+  }
+
   getBasicAuthHeader(username: string, password: string): Headers {
     let headers: Headers = new Headers();
     headers.append('Authorization', "Basic " + btoa(username + ":" + password));

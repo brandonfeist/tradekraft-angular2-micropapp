@@ -1,3 +1,4 @@
+import { AuthGuard } from './services/guard/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { CustomMaterialModule } from './custom-material/custom-material.module';
 import { MatDialog } from '@angular/material';
@@ -19,6 +20,7 @@ import { ReleaseService } from './services/release.service';
 import { EventService } from './services/event.service';
 import { SpotifyService } from './services/spotify.service';
 import { MusicService } from './services/music.service';
+import { RoleGuard } from 'app/services/guard/role-guard.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { MusicService } from './services/music.service';
     SpotifyService,
     MusicService,
     SpotifyService,
-    AuthService
+    AuthService,
+    AuthGuard,
+    RoleGuard
   ],
   bootstrap: [AppComponent]
 })
