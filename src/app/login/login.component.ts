@@ -2,6 +2,7 @@ import { Component, OnInit }      from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'app/services/auth.service';
 import { Router } from '@angular/router';
+import { SnackbarService } from 'app/services/snackbar.service';
 
 @Component({
     templateUrl: './login.component.html'
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
     private userLoginForm: FormGroup;
 
     constructor(private authService: AuthService, private formBuilder: FormBuilder,
-      private router: Router) {}
+      private router: Router, private snackbarService: SnackbarService) {}
 
     ngOnInit() {
       this.createLoginForm();
@@ -33,6 +34,19 @@ import { Router } from '@angular/router';
         this.router.navigate(['/']);
       }, err => {
         console.log("Error logging in: ", err);
+        this.showLoginError(err);
       });
+    }
+
+    showLoginError(error) {
+      let loginErrorMessage = JSON.parse(error._body).error;
+
+      if(loginErrorMessage === "unauthorized") {
+        this.snackbarService.openSnackbar("Sorry your username and password was incorrect. Please try again or contact support@tradekraftcollective.com",
+          undefined, 5000);
+      } else {
+        this.snackbarService.openSnackbar("Login error: " + loginErrorMessage,
+          undefined, 5000);
+      }
     }
   }
