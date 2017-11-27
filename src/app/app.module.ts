@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { CustomMaterialModule } from './custom-material/custom-material.module';
 import { MatDialog } from '@angular/material';
 import { BrowserModule, Title } from '@angular/platform-browser';
@@ -41,7 +42,8 @@ import { MusicService } from './services/music.service';
     EventService,
     SpotifyService,
     MusicService,
-    SpotifyService
+    SpotifyService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
