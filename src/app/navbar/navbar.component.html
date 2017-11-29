@@ -12,14 +12,13 @@
       <a class="navbar-brand" routerLink="/" (click)="sidenav.close()">TradeKraft</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse" >
-      <!-- <ul class="nav navbar-nav">
-        <li><a routerLink="/releases" routerLinkActive="active">Releases</a></li>
-        <li><a routerLink="/artists" routerLinkActive="active">Artist</a></li>
-        <li><a routerLink="/events" routerLinkActive="active">Events</a></li>
-        <li><a routerLink="/shop" routerLinkActive="active">Shop</a></li>
-        <li><a routerLink="/events" routerLinkActive="active">About</a></li>
-      </ul> -->
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a>
+            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+            Newsletter
+          </a>
+        </li>
         <li *ngIf="!authService.loggedIn()"><a class="login-button" routerLink="/login">Login</a></li>
         <li *ngIf="authService.loggedIn()"><a (click)="authService.logout()">Logout</a></li>
       </ul>

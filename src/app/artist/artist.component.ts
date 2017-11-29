@@ -5,27 +5,31 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
 import { Artist } from './../model/artist';
+import { YearService } from 'app/services/year.service';
 
 @Component({
   selector: 'artists',
   templateUrl: './artist.component.html'
 })
 export class ArtistComponent implements OnInit {
-  subscription;
-  yearQuery: string;
-  artistSearchQuery: string;
+  private subscription;
+  private yearQuery: string;
+  private artistSearchQuery: string;
 
-  artists: Artist[] = [];
-  defaultImage: string = "assets/images/preload-image.jpg";
-  errorImage: string = "assets/images/error-image.jpg";
-  artistSearchForm: FormGroup;
-  years = [{value: 2017, name: "2017"},
-          {value: 2016, name: "2016"}];
+  private artists: Artist[] = [];
+  private defaultImage: string = "assets/images/preload-image.jpg";
+  private errorImage: string = "assets/images/error-image.jpg";
+  private artistSearchForm: FormGroup;
+  private years;
 
   constructor(private artistService: ArtistService, private formBuilder: FormBuilder,
-    private route: ActivatedRoute, private router: Router) { }
+    private route: ActivatedRoute, private router: Router, private yearService: YearService,
+    private activatedRoute: ActivatedRoute) {
+    }
 
   ngOnInit() { 
+    this.years = this.activatedRoute.snapshot.data['years'];
+
     this.getQueryParams();
 
     this.createForm();
@@ -80,12 +84,12 @@ export class ArtistComponent implements OnInit {
   createForm(): void {
     this.artistSearchForm = this.formBuilder.group({
       search: this.artistSearchQuery || '',
-      year: this.findYearByValue(this.yearQuery) || this.years[0].value
+      year: this.years[0].year || ''
     });
   }
 
   onSubmit(): void {
-    let formmatedYear = this.artistSearchForm.get("year").value != 0 ? this.artistSearchForm.get("year").value : '';
+    let formmatedYear = this.artistSearchForm.get("year").value;
 
     this.router.navigate(['artists'], { queryParams: { 
       search: this.artistSearchForm.get("search").value,
@@ -102,15 +106,5 @@ export class ArtistComponent implements OnInit {
     this.artistSearchForm.get('year').valueChanges.subscribe(val => {
       this.onSubmit();
     });
-  }
-
-  findYearByValue(value): number {
-    for(let year of this.years) {
-      if(year.value == value) {
-        return year.value;
-      }
-    }
-
-    return undefined;
   }
 }

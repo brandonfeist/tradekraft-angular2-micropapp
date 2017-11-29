@@ -1,3 +1,4 @@
+import { ArtistYearsResolve } from 'app/artist/artist-year.resolve';
 import { CustomMaterialModule } from './../custom-material/custom-material.module';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule }     from '@angular/core';
@@ -25,7 +26,8 @@ import { ArtistDetailsResolve } from './artist-details/artist-details.resolve';
     ],
     providers: [ 
       ArtistService, 
-      ArtistDetailsResolve
+      ArtistDetailsResolve,
+      ArtistYearsResolve
     ]
   })
   export class ArtistModule { }

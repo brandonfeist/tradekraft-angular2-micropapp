@@ -1,3 +1,4 @@
+import { YearService } from './services/year.service';
 import { AuthGuard } from './services/guard/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { CustomMaterialModule } from './custom-material/custom-material.module';
@@ -45,6 +46,7 @@ import { SnackbarService } from 'app/services/snackbar.service';
     EventService,
     SpotifyService,
     MusicService,
+    YearService,
     SpotifyService,
     AuthService,
     SnackbarService,
