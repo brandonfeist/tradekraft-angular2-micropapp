@@ -23,6 +23,7 @@ import { SpotifyService } from './services/spotify.service';
 import { MusicService } from './services/music.service';
 import { RoleGuard } from 'app/services/guard/role-guard.service';
 import { SnackbarService } from 'app/services/snackbar.service';
+import { GenreService } from 'app/services/genre.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { SnackbarService } from 'app/services/snackbar.service';
   providers: [ 
     Title,
     ReleaseService,
+    GenreService,
     EventService,
     SpotifyService,
     MusicService,

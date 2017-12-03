@@ -1,3 +1,4 @@
+import { ReleaseGenresResolve } from './release-genre.resolve';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -25,7 +26,8 @@ import { CustomMaterialModule } from 'app/custom-material/custom-material.module
       ReleaseDetailsComponent
     ],
     providers: [
-      ReleaseDetailsResolve
+      ReleaseDetailsResolve,
+      ReleaseGenresResolve
     ]
   })
   export class ReleaseModule { }

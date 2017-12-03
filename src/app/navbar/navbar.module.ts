@@ -1,4 +1,3 @@
-import { NavbarSearchComponent } from './search/search.component';
 import { AdminNavbarComponent } from './admin/admin-navbar.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -22,8 +21,7 @@ import { MainNavbarComponent } from 'app/navbar/main/main-navbar.component';
     declarations: [
       NavbarComponent,
       MainNavbarComponent,
-      AdminNavbarComponent,
-      NavbarSearchComponent
+      AdminNavbarComponent
     ],
 })
 export class NavbarModule { }

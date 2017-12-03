@@ -5,24 +5,38 @@ import { URLSearchParams } from '@angular/http';
 
 import { Release } from './../model/release';
 import { ReleaseService } from './../services/release.service';
+import { Genre } from 'app/model/genre';
 
 @Component({
   selector: 'releases',
   templateUrl: './release.component.html'
 })
 export class ReleaseComponent implements OnInit {
-  subscription;
-  releaseSearchQuery: string;
+  private subscription;
+  private releaseSearchQuery: string;
+  private releaseGenreQuery: string;
+  private releaseTypeQuery: string;
 
-  releases: Release[] = [];
+  private releases: Release[] = [];
+  private releaseTypes: Object[];
+  private genres: Genre[];
+
   defaultImage: string = "assets/images/preload-image.jpg";
   errorImage: string = "assets/images/error-image.jpg";
-  releaseSearchForm: FormGroup;
+  private releaseSearchForm: FormGroup;
 
   constructor(private releaseService: ReleaseService, private formBuilder: FormBuilder,
-    private route: ActivatedRoute, private router: Router) { }
+    private route: ActivatedRoute, private router: Router, private activatedRoute: ActivatedRoute) { 
+      this.releaseTypes = [
+        { type: "EP" },
+        { type: "LP" },
+        { type: "Single" }
+      ]
+    }
 
   ngOnInit() { 
+    this.genres = this.activatedRoute.snapshot.data['genres'].content;
+
     this.getQueryParams();
 
     this.createForm();
@@ -49,8 +63,9 @@ export class ReleaseComponent implements OnInit {
     this.subscription = this.route
     .queryParams
     .subscribe(params => {
-    //   this.yearQuery = params['year'];
-    //   this.artistSearchQuery = params['search'];
+      this.releaseSearchQuery = params['search'];
+      this.releaseGenreQuery = params['genre'];
+      this.releaseTypeQuery = params['type'];
     });
 
     this.subscription.unsubscribe();
@@ -58,28 +73,61 @@ export class ReleaseComponent implements OnInit {
 
   getQueryString(): string {
     let query: string;
+    
+    if(this.releaseSearchQuery) {
+      query = "search=" + this.releaseSearchQuery;
+    }
+
+    if(this.releaseGenreQuery) {
+      if(query) {
+        query += "&genre=" + this.releaseGenreQuery;
+      } else {
+        query = "genre=" + this.releaseGenreQuery;
+      }
+    }
+
+    if(this.releaseTypeQuery) {
+      if(query) {
+        query += "&type=" + this.releaseTypeQuery;
+      } else {
+        query = "type=" + this.releaseTypeQuery;
+      }
+    }
 
     return query
   }
 
   createForm(): void {
     this.releaseSearchForm = this.formBuilder.group({
-      search: this.releaseSearchQuery || ''
+      search: this.releaseSearchQuery || null,
+      genre: this.releaseGenreQuery || null,
+      type: this.releaseTypeQuery || null
     });
   }
 
   onSubmit(): void {
-    this.router.navigate(['artists'], { queryParams: { 
-      search: this.releaseSearchForm.get("search").value} 
+    this.router.navigate(['releases'], { queryParams: { 
+        search: this.releaseSearchForm.get("search").value,
+        genre: this.releaseSearchForm.get("genre").value,
+        type: this.releaseSearchForm.get("type").value
+      }
     });
 
     this.releaseSearchQuery = this.releaseSearchForm.get("search").value;
+    this.releaseGenreQuery = this.releaseSearchForm.get("genre").value;
+    this.releaseTypeQuery = this.releaseSearchForm.get("type").value;
     
     this.getReleases();
   }
 
   onChanges(): void {
+    this.releaseSearchForm.get('genre').valueChanges.subscribe(val => {
+      this.onSubmit();
+    });
 
+    this.releaseSearchForm.get('type').valueChanges.subscribe(val => {
+      this.onSubmit();
+    });
   }
 
   formatReleaseArtists(release): string {

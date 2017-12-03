@@ -66,8 +66,8 @@ export class ArtistComponent implements OnInit {
   getQueryString(): string {
     let query: string;
 
-    if(this.yearQuery) {
-      query = "yearQuery=" + this.yearQuery;
+    if(this.artistSearchForm.get("year").value) {
+      query = "yearQuery=" + this.artistSearchForm.get("year").value;
     }
 
     if(this.artistSearchQuery) {
@@ -83,8 +83,8 @@ export class ArtistComponent implements OnInit {
 
   createForm(): void {
     this.artistSearchForm = this.formBuilder.group({
-      search: this.artistSearchQuery || '',
-      year: this.years[0].year || ''
+      search: this.artistSearchQuery || null,
+      year: this.years[0].year || null
     });
   }
 

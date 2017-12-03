@@ -1,3 +1,4 @@
+import { ReleaseGenresResolve } from './release-genre.resolve';
 import {NgModule}     from '@angular/core';
 import {RouterModule} from '@angular/router';
 
@@ -8,8 +9,12 @@ import { ReleaseDetailsResolve } from './release-details/release-details.resolve
 @NgModule({
     imports: [
         RouterModule.forChild([
-            { path: '', component: ReleaseComponent },
-            { path: ':slug', component: ReleaseDetailsComponent,
+            { 
+                path: '', component: ReleaseComponent,
+                resolve: { genres: ReleaseGenresResolve } 
+            },
+            { 
+                path: ':slug', component: ReleaseDetailsComponent,
                 resolve: { release: ReleaseDetailsResolve }
             }
         ])

@@ -9,10 +9,12 @@ import { ArtistYearsResolve } from 'app/artist/artist-year.resolve';
 @NgModule({
     imports: [
         RouterModule.forChild([
-            { path: '', component: ArtistComponent,
-            resolve: { years: ArtistYearsResolve }
-        },
-            { path: ':slug', component: ArtistDetailsComponent,
+            { 
+                path: '', component: ArtistComponent,
+                resolve: { years: ArtistYearsResolve }
+            },
+            { 
+                path: ':slug', component: ArtistDetailsComponent,
                 resolve: { artist: ArtistDetailsResolve }
             }
         ])
