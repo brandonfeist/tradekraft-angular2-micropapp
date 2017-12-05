@@ -10,6 +10,7 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'releases', loadChildren: 'app/release/release.module#ReleaseModule'},
   { path: 'artists', loadChildren: 'app/artist/artist.module#ArtistModule' },
+  { path: 'events', loadChildren: 'app/event/event.module#EventModule' },
   { path: 'connect', loadChildren: 'app/connect/connect.module#ConnectModule' },
   { path: 'accounts', loadChildren: 'app/accounts/accounts.module#AccountsModule' },
   { path: 'login', loadChildren: 'app/login/login.module#LoginModule' },

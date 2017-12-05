@@ -24,8 +24,7 @@ export class ArtistComponent implements OnInit {
 
   constructor(private artistService: ArtistService, private formBuilder: FormBuilder,
     private route: ActivatedRoute, private router: Router, private yearService: YearService,
-    private activatedRoute: ActivatedRoute) {
-    }
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() { 
     this.years = this.activatedRoute.snapshot.data['years'];

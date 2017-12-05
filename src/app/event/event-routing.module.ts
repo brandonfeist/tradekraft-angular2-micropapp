@@ -1,3 +1,4 @@
+import { HighlightedEventResolve } from './highlighted-event.resolve';
 import {NgModule}     from '@angular/core';
 import {RouterModule} from '@angular/router';
 
@@ -8,7 +9,8 @@ import { EventComponent } from './event.component';
         RouterModule.forChild([
             {
                 path: '',
-                component: EventComponent
+                component: EventComponent,
+                resolve: { highlightedEvent: HighlightedEventResolve }
             }
         ])
     ],

@@ -20,7 +20,9 @@
           </a>
         </li>
         <li *ngIf="!authService.loggedIn()"><a class="login-button" routerLink="/login">Login</a></li>
-        <li *ngIf="authService.loggedIn()"><a (click)="authService.logout()">Logout</a></li>
+        <li *ngIf="authService.loggedIn()">
+          <img class="img-circle profile-image" src="{{ authService.getUserImage() }}">
+        </li>
       </ul>
     </div>
   </div>

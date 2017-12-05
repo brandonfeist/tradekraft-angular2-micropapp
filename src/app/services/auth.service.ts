@@ -9,7 +9,7 @@ import * as _ from "lodash";
 @Injectable()
 export class AuthService {
 
-  private  authenticationServiceUrl: string;
+  private authenticationServiceUrl: string;
 
   constructor(private http: Http, private router: Router, private snackbarService: SnackbarService) {
     this.authenticationServiceUrl = 'http://localhost:8086';
@@ -40,7 +40,17 @@ export class AuthService {
   }
 
   loggedIn() {
-    return tokenNotExpired();
+    let jwt = JSON.parse(localStorage.getItem('token'));
+    if(jwt) {
+      if(tokenNotExpired(undefined, jwt.access_token)) {
+        return true;
+      }
+
+      localStorage.removeItem('token');
+      return false;
+    } 
+
+    return false;
   }
 
   getPermissions() {
@@ -67,9 +77,19 @@ export class AuthService {
     return false;
   }
 
+  getUserImage(): string {
+    let decodedToken = this.decodeToken();
+
+    if(decodedToken && decodedToken.image !== null) {
+      return decodedToken.image;
+    }
+
+    return '/assets/images/default-profile.png';
+  }
+
   decodeToken() {
     if(localStorage.getItem('token')) {
-      let token = localStorage.getItem('token');
+      let token = JSON.parse(localStorage.getItem('token')).access_token;
       let base64Url = token.split('.')[1];
       let base64 = base64Url.replace('-', '+').replace('_', '/');
 
