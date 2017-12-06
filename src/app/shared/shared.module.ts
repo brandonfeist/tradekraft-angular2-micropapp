@@ -12,6 +12,7 @@ import { EventPreviewComponent } from './event-preview/event-preview.component';
 import { ReadMoreComponent } from './read-more/read-more.component';
 import { CustomMaterialModule } from 'app/custom-material/custom-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DateAbbr } from 'app/shared/date-abbr/date-abbr';
 
 @NgModule({
     imports:  [ 
@@ -38,6 +39,9 @@ import { ReactiveFormsModule } from '@angular/forms';
       ArtistSpotifyDialog,
       PlaylistSpotifyDialog,
       ReadMoreComponent
+    ],
+    providers: [
+      DateAbbr
     ],
     entryComponents: [
       ArtistSpotifyDialog,

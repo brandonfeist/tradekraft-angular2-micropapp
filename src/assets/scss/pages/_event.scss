@@ -1,0 +1,89 @@
+@include media($desktop) {
+  table td.push-right {
+    text-align: right;
+  }
+}
+
+.buy-tickets {
+  margin-right: 15px;
+  
+  & i {
+    margin-right: 10px;
+  }
+}
+
+.event-toggle {
+  margin-top: 20px;
+
+  mat-slide-toggle {
+    margin: 0 10px;
+  }
+
+  p {
+    float: right;
+    font-weight: bold;
+  }
+}
+
+.events-table {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    &.events {
+      & tr {
+        overflow: hidden;
+
+        &:nth-child(odd) > td {
+          background: $light-grey;
+        }
+      }
+
+      & td {
+        padding: 0.5em 1em;
+
+        &.date {
+          width: 10%;
+
+          & .month {
+            text-transform: uppercase;
+            display: block;
+          }
+
+          & .day {
+            font-size: 1.65rem;
+            font-weight: bold;
+          }
+        }
+
+        &.title {
+          width: 25%;
+
+          & .name {
+            font-weight: bold;
+            font-size: 1.2rem;
+          }
+
+          & .time {
+            display: block;
+            color: $mid-dark-grey;
+          }
+        }
+
+        &.address {
+          width: 30%;
+
+          & .venue {
+            display: block;
+            font-weight: bold;
+          }
+
+          & .city {
+            display: block;
+            color: $mid-dark-grey;
+          }
+        }
+      }
+    }
+  }
+}

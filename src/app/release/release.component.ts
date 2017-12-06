@@ -1,3 +1,4 @@
+import { SnackbarService } from './../services/snackbar.service';
 import { Component, OnInit }  from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,7 +27,8 @@ export class ReleaseComponent implements OnInit {
   private releaseSearchForm: FormGroup;
 
   constructor(private releaseService: ReleaseService, private formBuilder: FormBuilder,
-    private route: ActivatedRoute, private router: Router, private activatedRoute: ActivatedRoute) { 
+    private route: ActivatedRoute, private router: Router, private activatedRoute: ActivatedRoute,
+    private snackbarService: SnackbarService) { 
       this.releaseTypes = [
         { type: "EP" },
         { type: "LP" },
@@ -56,6 +58,7 @@ export class ReleaseComponent implements OnInit {
     },
     err => {
       console.log("error", err);
+      this.snackbarService.openSnackbar("There was a problem getting the releases.");
     });
   }
 

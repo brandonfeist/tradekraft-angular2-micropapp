@@ -1,0 +1,52 @@
+<div class="frame">
+  <div class="wrapper">
+      <div class="tk-container">
+        <div class="tk-container">
+            <div class="col-8">
+                <h1>Events</h1>
+            </div>
+            <div class="col-4 event-toggle">
+              <p>All Events<mat-slide-toggle (change)="onChange($event)"></mat-slide-toggle>TradeKraft Events</p>
+            </div>
+        </div>
+        <div class="events-table">
+          <table class="events">
+            <tbody>
+              <tr *ngFor="let event of events">
+                <td class="date">
+                  <div>
+                    <span class="month">{{ getEventMonth(event) }}</span>
+                    <span class="day">{{ getEventDay(event) }}</span>
+                  </div>
+                </td>
+                <td class="title">
+                  <div>
+                    <span class="name">
+                      <a routerLink="/events/{{event.slug}}" >{{ event.name }}</a>
+                    </span>
+                    <span class="time">{{ getWeekday(event) }}</span>
+                  </div>
+                </td>
+                <td class="address">
+                  <div>
+                    <span class="venue">{{ event.venueName }}</span>
+                    <span class="city">{{ formatCity(event) }}</span>
+                  </div>
+                </td>
+                <td class="push-right">
+                  <div>
+                    <a *ngIf="event.ticketLink" class="buy-tickets" href="{{ event.ticketLink }}" target="_blank">
+                      <i class="fa fa-shopping-cart" aria-hidden="true"></i>Buy Tickets
+                    </a>
+                    <a routerLink="/events/{{ event.slug }}">
+                      <i class="fa fa-link" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+</div>

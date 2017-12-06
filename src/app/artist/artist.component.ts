@@ -6,6 +6,7 @@ import { URLSearchParams } from '@angular/http';
 
 import { Artist } from './../model/artist';
 import { YearService } from 'app/services/year.service';
+import { SnackbarService } from 'app/services/snackbar.service';
 
 @Component({
   selector: 'artists',
@@ -24,7 +25,7 @@ export class ArtistComponent implements OnInit {
 
   constructor(private artistService: ArtistService, private formBuilder: FormBuilder,
     private route: ActivatedRoute, private router: Router, private yearService: YearService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute, private snackbarService: SnackbarService) { }
 
   ngOnInit() { 
     this.years = this.activatedRoute.snapshot.data['years'];
@@ -48,6 +49,7 @@ export class ArtistComponent implements OnInit {
     },
     err => {
       console.log("error", err);
+      this.snackbarService.openSnackbar("There was a problem getting the artists.");
     });
   }
 
