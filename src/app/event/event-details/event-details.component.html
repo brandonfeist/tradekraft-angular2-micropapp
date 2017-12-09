@@ -1,0 +1,34 @@
+<div class="frame banner small">
+    <img class="image lazy-load" [errorImage]="errorImage" [lazyLoad]="event.image.original">
+</div>
+<div class="frame">
+  <div class="wrapper">
+    <div class="event-header">
+      <div class="col-3">
+        <div class="image-container">
+          <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.image.original" title="{{ event.name }}"
+              alt="{{ event.name }}">
+        </div>
+        <div class="sub-container">
+          <a mat-raised-button class="silent" routerLink="/events">
+            <span>Back to events</span>
+            <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="title-container">
+          <h1>{{ event.name }}</h1>
+        </div>
+        <read-more class="text-container event-description" [text]="event.description" [maxLength]="500"></read-more>
+
+        <div class="text-container present divider">
+            <h2>Artists</h2>
+            <div class="frame-items">
+              <artist-container *ngFor="let artist of event.artists" [artist]="artist" [noMargin]="true"></artist-container>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

@@ -1,3 +1,5 @@
+import { ArtistContainerComponent } from './artist/artist-container/artist-container.component';
+import { EventContainerComponent } from './event/event-container/event-container.component';
 import { PlaylistSpotifyDialog } from './dialogs/playlist-spotify/playlist-spotify.component';
 import { ArtistSpotifyDialog } from './dialogs/artist-spotify/artist-spotify.component';
 import { ReleaseContainerComponent } from './release/release-container/release-container.component';
@@ -8,7 +10,7 @@ import { CommonModule }       from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
-import { EventPreviewComponent } from './event-preview/event-preview.component';
+import { EventPreviewComponent } from './event/event-preview/event-preview.component';
 import { ReadMoreComponent } from './read-more/read-more.component';
 import { CustomMaterialModule } from 'app/custom-material/custom-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,8 +27,10 @@ import { DateAbbr } from 'app/shared/date-abbr/date-abbr';
     exports: [
       MusicTableComponent,
       EventPreviewComponent,
+      EventContainerComponent,
       ReleasePreviewComponent,
       ReleaseContainerComponent,
+      ArtistContainerComponent,
       ArtistSpotifyDialog,
       PlaylistSpotifyDialog,
       ReadMoreComponent
@@ -34,6 +38,8 @@ import { DateAbbr } from 'app/shared/date-abbr/date-abbr';
     declarations: [ 
       MusicTableComponent,
       EventPreviewComponent,
+      EventContainerComponent,
+      ArtistContainerComponent,
       ReleasePreviewComponent,
       ReleaseContainerComponent,
       ArtistSpotifyDialog,

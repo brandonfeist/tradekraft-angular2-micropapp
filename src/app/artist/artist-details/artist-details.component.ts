@@ -26,53 +26,43 @@ export class ArtistDetailsComponent implements OnInit {
     this.paramSubscription = this.activatedRoute.params.subscribe(params => this.artistSlug = params['slug']);
 
     this.artist = this.activatedRoute.snapshot.data['artist'];
+
+    this.processArtistEvents(this.artist.events);
   }
 
   ngOnDestroy() {
     this.paramSubscription.unsubscribe();
   }
 
-  formatEventStartDateTime(event: Event) {
-    let formatedStartDateTime = moment(event.startDateTime);
-
-    return formatedStartDateTime.format("MMM DD YYYY");
-  }
-
-  getDaysRemaining(event: Event) {
-    let currentDate = new Date();
-    currentDate.setHours(23);
-    currentDate.setMinutes(59);
-    currentDate.setSeconds(59);
-    currentDate.setMilliseconds(999);
-
-    let eventStartDate = new Date(event.startDateTime);
-    eventStartDate.setHours(23);
-    eventStartDate.setMinutes(59);
-    eventStartDate.setSeconds(59);
-    eventStartDate.setMilliseconds(999);
-
-    if((eventStartDate.getDay() - currentDate.getDay()) >= 0) {
-      let timeDiff = Math.abs(eventStartDate.getTime() - currentDate.getTime());
-      let daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-
-      return (daysRemaining + " days left");
-    } else {
-      return "Event Over";
-    }
-  }
-
-  getEventLocationShortFormat(event: Event) {
-    if(event.country.toLowerCase() === "united states") {
-      return (event.city + ", " + event.state);
-    } else {
-      return (event.city + ", " + event.country);
-    }
-  }
-
   openSpotifyDialog() {
     this.dialog.open(ArtistSpotifyDialog, {
       data: { artist: this.artist }
     });
+  }
+
+  processArtistEvents(events: Event[]) {
+    let indexToSplice: number[] = new Array();
+
+    let now = new Date();
+    now.setHours(23);
+    now.setMinutes(59);
+    now.setSeconds(59);
+    now.setMilliseconds(999);
+
+    for(let eventIndex = (events.length - 1); eventIndex >= 0; eventIndex--) {
+
+      let eventStartDate = new Date(events[eventIndex].startDateTime);
+      eventStartDate.setHours(23);
+      eventStartDate.setMinutes(59);
+      eventStartDate.setSeconds(59);
+      eventStartDate.setMilliseconds(999);
+      
+      console.log("check: " + (eventStartDate.getDay() - now.getDay()));
+      
+      if((eventStartDate.getDay() - now.getDay()) < 0) {
+        events.splice(eventIndex, 1);
+      }
+    }
   }
 
   formatReleaseArtists(release): string {

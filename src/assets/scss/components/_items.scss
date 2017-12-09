@@ -71,6 +71,10 @@
 
         .image-container {
             height: 315px;
+
+            &.shorter {
+                height: 200px;
+            }
         }
     }
 
@@ -177,10 +181,18 @@
                 font-size: 14px;
                 margin: 14px;
             }
+
+            &.shorter {
+                padding: 13px 40px;
+            }
         }
 
         .image-container {
             height: 315px;
+
+            &.shorter {
+                height: 200px;
+            }
         }
 
         .date {
@@ -560,14 +572,6 @@
 
     &.artist {
         box-shadow: 0 1px 2px $shadow-black;
-
-        @include span-columns(3);
-        @include omega(4n);
-
-        @include media($mobile) {
-            @include span-columns(6 of 12);
-            @include omega(2n);
-        }
     }
 
     &.artist-event {

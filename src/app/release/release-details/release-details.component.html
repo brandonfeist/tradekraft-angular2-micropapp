@@ -77,14 +77,7 @@
                     <h2>Release Artists</h2>
                 </div>
                 <div class="frame-items">
-                    <a class="item artist artist-mix" *ngFor="let artist of artists" routerLink="/artists/{{ artist.slug }}">
-                        <div class="image-container no-margin">
-                            <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.image.medium" title="artist.name" alt="artist.name">
-                        </div>
-                        <div class="text-container no-margin">
-                            <h2>{{ artist.name }}</h2>
-                        </div>
-                    </a>
+                    <artist-container *ngFor="let artist of artists" [artist]="artist" [noMargin]="true"></artist-container>
                 </div>
             </div>
         </div>

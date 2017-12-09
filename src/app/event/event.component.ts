@@ -87,4 +87,8 @@ import * as moment from 'moment-timezone';
 
       return event.city + ", " + event.country;
     }
+
+    hasPastEvents(): boolean {
+      return this.pastEvents && this.pastEvents.length > 0;
+    }
   }

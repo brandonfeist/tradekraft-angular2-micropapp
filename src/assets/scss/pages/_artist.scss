@@ -1,3 +1,20 @@
+artist-container {
+    margin-top: 15px;
+    box-shadow: 0 1px 2px $shadow-black;
+    
+    @include span-columns(3);
+    @include omega(4n);
+
+    @include media($mobile) {
+        @include span-columns(6 of 12);
+        @include omega(2n);
+    }
+
+    .item {
+        margin-bottom: 0;
+    }
+}
+
 .artist-header {
     display: inline-block;
     margin-bottom: 20px;

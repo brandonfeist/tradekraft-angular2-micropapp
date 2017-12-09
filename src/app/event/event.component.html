@@ -47,6 +47,15 @@
             </tbody>
           </table>
         </div>
+
+        <div *ngIf="hasPastEvents()" class="tk-container">
+            <div class="col-8">
+                <h1>Past Events</h1>
+            </div>
+        </div>
+        <div class="frame-items">
+            <event-container class="col-3" *ngFor="let event of pastEvents" [event]="event" [shorter]="true"></event-container>
+        </div>
       </div>
   </div>
 </div>
