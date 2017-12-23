@@ -1,3 +1,4 @@
+import { VideoService } from './services/video.service';
 import { YearService } from './services/year.service';
 import { AuthGuard } from './services/guard/auth-guard.service';
 import { AuthService } from './services/auth.service';
@@ -48,6 +49,7 @@ import { GenreService } from 'app/services/genre.service';
     EventService,
     SpotifyService,
     MusicService,
+    VideoService,
     YearService,
     SpotifyService,
     AuthService,
