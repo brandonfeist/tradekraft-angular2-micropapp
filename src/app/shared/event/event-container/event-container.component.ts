@@ -16,6 +16,11 @@ export class EventContainerComponent {
   defaultImage = "assets/images/preload-image.jpg";
   errorImage = "assets/images/error-image.jpg";
 
+  private MILLIS_IN_SECS = 1000;
+  private SECS_IN_MINS = 60;
+  private MINS_IN_HOURS = 60;
+  private HOURS_IN_DAYS = 24;
+
   constructor(private dateAbbr: DateAbbr) { }
 
   formatEventStartDateTime(event: Event) {
@@ -25,23 +30,40 @@ export class EventContainerComponent {
   }
 
   getDaysRemaining(event: Event) {
-    let currentDate = new Date();
-    currentDate.setHours(23);
-    currentDate.setMinutes(59);
-    currentDate.setSeconds(59);
-    currentDate.setMilliseconds(999);
+    let currentDateMilli = (new Date()).getTime();
 
-    let eventStartDate = new Date(event.startDateTime);
-    eventStartDate.setHours(23);
-    eventStartDate.setMinutes(59);
-    eventStartDate.setSeconds(59);
-    eventStartDate.setMilliseconds(999);
+    let startDifference = event.startDateTime - currentDateMilli;
+    let endDifference = event.endDateTime - currentDateMilli;
 
-    if((eventStartDate.getDay() - currentDate.getDay()) >= 0) {
-      let timeDiff = Math.abs(eventStartDate.getTime() - currentDate.getTime());
-      let daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+    let minsLeft = Math.floor(startDifference / this.MILLIS_IN_SECS / 
+      this.SECS_IN_MINS);
+    let hoursLeft = Math.floor(startDifference / this.MILLIS_IN_SECS / 
+      this.SECS_IN_MINS / this.MINS_IN_HOURS);
+    let daysLeft = Math.floor(startDifference / this.MILLIS_IN_SECS / 
+      this.SECS_IN_MINS / this.MINS_IN_HOURS / this.HOURS_IN_DAYS);
 
-      return (daysRemaining + " days left");
+    if(startDifference > 0) {
+      if(daysLeft > 0) {
+        if(daysLeft != 1) {
+          return (daysLeft + " days left");
+        } else {
+          return (daysLeft + " day left");
+        }
+      } else if(hoursLeft > 0) {
+        if(hoursLeft != 1) {
+          return (hoursLeft + " hours left");
+        } else {
+          return (hoursLeft + " hour left");
+        }
+      } else {
+        if(minsLeft != 1) {
+          return (minsLeft + " minutes left");
+        } else {
+          return (minsLeft + " minute left");
+        }
+      }
+    } else if(startDifference < 0 && endDifference > 0) {
+      return "Event Started";
     } else {
       return "Event Over";
     }

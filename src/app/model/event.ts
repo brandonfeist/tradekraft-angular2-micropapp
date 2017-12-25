@@ -13,8 +13,8 @@ export class Event {
     state: string;
     zip: string;
     country: string;
-    startDateTime: Date;
-    endDateTime: Date;
+    startDateTime: number;
+    endDateTime: number;
     officialEvent: boolean;
     slug: string;
     artists: Artist[];
