@@ -1,4 +1,4 @@
-import { Release } from "app/model/release";
+import { Song } from './song';
 
 export class Video {
     id: number;
@@ -10,7 +10,7 @@ export class Video {
     youtubeUrl: string;
     externalUrl: string;
     featured: boolean;
-    release: Release;
+    song: Song;
     createdAt: Date;
     updatedAt: Date;
 }

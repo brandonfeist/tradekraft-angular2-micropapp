@@ -1,3 +1,4 @@
+import { Video } from './video';
 import { Artist } from './artist';
 
 export class Song {
@@ -8,6 +9,7 @@ export class Song {
     duration: string;
     bpm: number;
     artists: Artist[];
+    videos: Video[]
     // genre: Genre;
     slug: string;
 }

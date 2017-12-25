@@ -1,5 +1,5 @@
 <div class="frame banner large video">
-    <a *ngIf="randomVideo.release" routerLink="/releases/{{ randomVideo.release.slug }}" title="{{ videoTitle }}">
+    <a *ngIf="randomVideo.song" routerLink="/releases/{{ randomVideo.song.release.slug }}" title="{{ videoTitle }}">
         <div class="container">
             <div class="wrapper">
                 <div class="col-8">
@@ -14,7 +14,7 @@
         </video>
     </a>
 
-    <a *ngIf="!randomVideo.release" href="{{ randomVideo.externalUrl }}" title="{{ videoTitle }}">
+    <a *ngIf="!randomVideo.song" href="{{ randomVideo.externalUrl }}" title="{{ videoTitle }}">
         <div class="container">
             <div class="wrapper">
                 <div class="col-8">

@@ -1,3 +1,4 @@
+import { Song } from './../model/song';
 import { Release } from 'app/model/release';
 import { SnackbarService } from './../services/snackbar.service';
 import { VideoService } from './../services/video.service';
@@ -6,6 +7,7 @@ import { URLSearchParams } from '@angular/http';
 import { Video } from 'app/model/video';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Artist } from 'app/model/artist';
 
 @Component({
     selector: 'app-home',
@@ -37,8 +39,9 @@ import { ActivatedRoute, Router } from '@angular/router';
     private getRandomFeaturedVideo() {
       this.videoTitle = this.randomVideo.name;
 
-      if(this.randomVideo.release) {
-        this.videoSubtitle = this.formatReleaseArtists(this.randomVideo.release);
+      if(this.randomVideo.song) {
+        this.videoTitle = this.randomVideo.song.name;
+        this.videoSubtitle = this.formatSongArtists(this.randomVideo.song.artists);
       }
 
       this.videoThumnail = this.randomVideo.videoThumbnail;
@@ -48,36 +51,19 @@ import { ActivatedRoute, Router } from '@angular/router';
       this.videoWebmLink = this.randomVideo.videoFile.webm_preview;
     }
 
-    formatReleaseArtists(release): string {
-      let songs = release.songs;
-      let artists = {};
-  
-      for (let songIndex = 0; songIndex < songs.length; songIndex++) {
-        let tempArtists = songs[songIndex].artists;
-        for (let artistIndex = 0; artistIndex < tempArtists.length; artistIndex++) {
-          artists[tempArtists[artistIndex].slug] = tempArtists[artistIndex].name;
-        }
-      }
-  
+    formatSongArtists(artists: Artist[]): string {
       if (Object.keys(artists).length > 2) {
         return "Various Artists";
       } else {
         let artistsNameString = "";
-        let tempArtistArray = [];
   
-        for (var property in artists) {
-          if (artists.hasOwnProperty(property)) {
-            tempArtistArray.push(artists[property]);
-          }
-        }
+        artists.sort();
   
-        tempArtistArray.sort();
-  
-        for (let artistStringIndex = 0; artistStringIndex < tempArtistArray.length; artistStringIndex++) {
+        for (let artistStringIndex = 0; artistStringIndex < artists.length; artistStringIndex++) {
           if (artistStringIndex == 0) {
-            artistsNameString += tempArtistArray[artistStringIndex];
+            artistsNameString += artists[artistStringIndex].name;
           } else {
-            artistsNameString += (" & " + tempArtistArray[artistStringIndex]);
+            artistsNameString += (" & " + artists[artistStringIndex].name);
           }
         }
   

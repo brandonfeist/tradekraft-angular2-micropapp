@@ -9,6 +9,8 @@ import { Release } from './../../model/release';
 import { ReleaseService } from './../../services/release.service';
 import { MusicService } from './../../services/music.service';
 import { PlaylistSpotifyDialog } from 'app/shared/dialogs/playlist-spotify/playlist-spotify.component';
+import { Video } from 'app/model/video';
+import { DomSanitizer,SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   templateUrl: './release-details.component.html'
@@ -26,7 +28,7 @@ export class ReleaseDetailsComponent implements OnInit {
   private songSubscription;
 
   constructor(private releaseService: ReleaseService, private musicService: MusicService, private activatedRoute: ActivatedRoute,
-    private router: ActivatedRoute, public dialog: MatDialog) { }
+    private router: ActivatedRoute, public dialog: MatDialog, private sanitizer: DomSanitizer) { }
 
   ngOnInit() { 
     this.paramSubscription = this.activatedRoute.params.subscribe(params => this.releaseSlug = params['slug']);
@@ -111,6 +113,37 @@ export class ReleaseDetailsComponent implements OnInit {
     }
 
     return artistsNameString
+  }
+
+  hasVideos(): boolean {
+    let songs: Song[] = this.release.songs
+
+    for(let songIndex = 0; songIndex < songs.length; songIndex++) {
+      if(songs[songIndex].videos && songs[songIndex].videos.length > 0) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  getVideos(): Video[] {
+    let videos: Video[] = [];
+    let songs: Song[] = this.release.songs
+
+    for(let songIndex = 0; songIndex < songs.length; songIndex++) {
+      if(songs[songIndex].videos.length > 0) {
+        videos = videos.concat(songs[songIndex].videos);
+      }
+    }
+
+    return videos;
+  }
+
+  getVideoEmbedUrl(video: Video) {
+    let youtubeLink: string = video.youtubeUrl;
+    console.log("https://www.youtube.com/embed/" + youtubeLink.match(/youtube.com\/watch\?v=(\S+)/)[1]);
+    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + youtubeLink.match(/youtube.com\/watch\?v=(\S+)/)[1]);
   }
 
   openSpotifyDialog() {
