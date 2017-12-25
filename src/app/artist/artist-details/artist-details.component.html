@@ -50,10 +50,10 @@
                 </div>
                 <read-more class="text-container artist-description" [text]="artist.description" [maxLength]="500"></read-more>
 
-                <div class="text-container present divider">
+                <div *ngIf="hasReleases(artist)" class="text-container present divider">
                     <h2>Releases</h2>
                 </div>
-                <div class="frame-items">
+                <div *ngIf="hasReleases(artist)" class="frame-items">
                     <div class="item artist-music" *ngFor="let release of artist.releases.artistReleases">
                         <a routerLink="/releases/{{release.slug}}">
                             <div class="image-container">
@@ -70,10 +70,10 @@
                     </div>
                 </div>
 
-                <div class="text-container present divider">
+                <div *ngIf="hasAppearsOn(artist)" class="text-container present divider">
                     <h2>Appears On</h2>
                 </div>
-                <div class="frame-items">
+                <div *ngIf="hasAppearsOn(artist)" class="frame-items">
                     <div class="item artist-music" *ngFor="let release of artist.releases.appearsOn">
                         <a routerLink="/releases/{{release.slug}}">
                             <div class="image-container no-margin">
@@ -90,10 +90,10 @@
                     </div>
                 </div>
 
-                <div class="text-container present divider">
+                <div *ngIf="hasEvents(artist)" class="text-container present divider">
                     <h2>Events</h2>
                 </div>
-                <div class="frame-items">
+                <div *ngIf="hasEvents(artist)" class="frame-items">
                     <event-container class="col-4" *ngFor="let event of artist.events" [event]="event" [shorter]="true" [noMargin]="true"></event-container>
                 </div>
             </div>

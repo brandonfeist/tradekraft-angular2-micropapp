@@ -10,7 +10,8 @@
             </div>
         </div>
         <div class="events-table">
-          <table class="events">
+          <h1 *ngIf="!hasEvents(events)">No events currently, come back soon! * Maybe sign up for info about future events? *</h1>
+          <table *ngIf="hasEvents(events)" class="events">
             <tbody>
               <tr *ngFor="let event of events">
                 <td class="date">

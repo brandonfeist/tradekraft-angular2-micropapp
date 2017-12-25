@@ -91,4 +91,8 @@ import * as moment from 'moment-timezone';
     hasPastEvents(): boolean {
       return this.pastEvents && this.pastEvents.length > 0;
     }
+
+    hasEvents(events: Event[]): boolean {
+      return (events && events.length > 0);
+    }
   }

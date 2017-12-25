@@ -6,8 +6,8 @@ import * as moment from 'moment-timezone';
 import { ArtistSpotifyDialog } from './../../shared/dialogs/artist-spotify/artist-spotify.component';
 
 import { ArtistService } from './../artist.service';
-import { Artist } from './../../model/artist';
 import { Event } from './../../model/event';
+import { Artist } from 'app/model/artist';
 
 @Component({
   templateUrl: './artist-details.component.html'
@@ -73,5 +73,17 @@ export class ArtistDetailsComponent implements OnInit {
 
       return artistsNameString
     }
+  }
+
+  hasEvents(artist: Artist): boolean {
+    return (artist.events && artist.events.length > 0);
+  }
+
+  hasReleases(artist: Artist): boolean {
+    return (artist.releases.artistReleases && artist.releases.artistReleases.length > 0);
+  }
+
+  hasAppearsOn(artist: Artist): boolean {
+    return (artist.releases.appearsOn && artist.releases.appearsOn.length > 0);
   }
 }

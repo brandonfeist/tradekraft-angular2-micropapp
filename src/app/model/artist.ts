@@ -9,6 +9,7 @@ export class Artist {
     facebook: string;
     twitter: string;
     instagram: string;
+    releases;
     spotify: string;
     slug: string;
     events: Event[];
