@@ -1,4 +1,8 @@
 <div class="frame banner large video">
+    <button (click)="muteFeatureVideo()">
+        <i *ngIf="!isFeatureMuted()" class="fa fa-volume-up" aria-hidden="true"></i>
+        <i *ngIf="isFeatureMuted()" class="fa fa-volume-off" aria-hidden="true"></i>
+    </button>
     <a *ngIf="randomVideo.song" routerLink="/releases/{{ randomVideo.song.release.slug }}" title="{{ videoTitle }}">
         <div class="container">
             <div class="wrapper">
@@ -8,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <video id="feature-video" poster="{{ videoThumnail }}" autoplay="autoplay" loop="loop" muted>
+        <video #featureVideo poster="{{ videoThumnail }}" loop="loop">
             <source src="{{ videoMp4Link }}" type="video/mp4" >
             <source src="{{ videoWebmLink }}" type="video/webm" >
         </video>

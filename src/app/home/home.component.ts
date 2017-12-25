@@ -2,7 +2,7 @@ import { Song } from './../model/song';
 import { Release } from 'app/model/release';
 import { SnackbarService } from './../services/snackbar.service';
 import { VideoService } from './../services/video.service';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, ViewChild }      from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Video } from 'app/model/video';
 import { Observable } from 'rxjs/Observable';
@@ -14,6 +14,8 @@ import { Artist } from 'app/model/artist';
     templateUrl: './home.component.html'
   })
   export class HomeComponent implements OnInit {
+
+    @ViewChild('featureVideo') videoplayer: any;
 
     private randomVideo: Video;
 
@@ -34,6 +36,12 @@ import { Artist } from 'app/model/artist';
       this.randomVideo = this.activatedRoute.snapshot.data['featuredVideo'];
 
       this.getRandomFeaturedVideo();
+    }
+
+    ngAfterViewInit() {
+      this.videoplayer.nativeElement.muted = true;
+
+      this.videoplayer.nativeElement.play()
     }
 
     private getRandomFeaturedVideo() {
@@ -69,5 +77,17 @@ import { Artist } from 'app/model/artist';
   
         return artistsNameString
       }
+    }
+
+    private muteFeatureVideo() {
+      this.videoplayer.nativeElement.muted = !this.videoplayer.nativeElement.muted;
+    }
+
+    private isFeatureMuted(): boolean {
+      if(this.videoplayer) {
+        return this.videoplayer.nativeElement.muted;
+      }
+
+      return true;
     }
   }
