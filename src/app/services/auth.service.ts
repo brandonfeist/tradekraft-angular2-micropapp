@@ -37,6 +37,7 @@ export class AuthService {
     localStorage.removeItem('token');
     this.router.navigate(['/']);
     this.snackbarService.openSnackbar("Successfully logged out.");
+    // window.location.reload();
   }
 
   loggedIn() {

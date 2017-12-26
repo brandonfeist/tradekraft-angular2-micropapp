@@ -32,6 +32,52 @@
     text-decoration: none !important;
 }
 
+.navbar-default {
+    border-color: transparent;
+    -webkit-transition: background-color 0.2s ease-in-out; /* Safari */
+    transition: background-color 0.2s ease-in-out;
+}
+
+.navbar-transparent {
+    background-color: transparent;
+    background: linear-gradient(180deg,rgba(0,0,0,.45),transparent 90%);
+}
+
+.container-fluid {
+    padding-left: 0;
+}
+
+.search-bar {
+    margin-left: 15px;
+    margin-top: 15px;
+    position: relative;
+
+    & input {
+        padding: 13.5px 40px 13.5px 15px;
+        border: 1px solid #d8d8d8;
+        border-radius: 0;
+    }
+
+    .search-icon {
+        position: absolute;
+        top: 0;
+        right: 30px;
+        height: 100%;
+
+        & i {
+            width: 16px;
+            position: relative;
+            top: 26%;
+            cursor: pointer;
+            position: relative;
+            font-size: 18px;
+            top: 40%;
+            -webkit-transform: translateY(-40%);
+            transform: translateY(-40%);
+        }
+    }
+}
+
 .nav-items {
     background-color: transparent;
     list-style: none;
@@ -43,12 +89,12 @@
     font-stretch: normal;
     font-style: normal;
     background-color: #fff;
-    border-bottom: 1px solid #f0f0f0;
+    // border-bottom: 1px solid #f0f0f0;
     float: left;
-    font-size: 15px;
+    font-size: 18px;
     position: relative;
     width: 230px;
-    height: 50px;
+    height: 40px;
     line-height: 50px;
 
     &:before {
@@ -59,7 +105,7 @@
         content: '\f08a';
         display: inline-block;
         position: absolute;
-        right: 30px;
+        right: 27px;
         text-align: center;
         top: 0;
         vertical-align: top;
@@ -81,8 +127,10 @@
 
         color: #000;
         display: block;
-        padding-left: 30px;
+        padding-left: 15px;
         text-decoration: none !important;
+        font-weight: bold;
+    text-transform: uppercase;
     }
 }
 
@@ -106,7 +154,7 @@
 }
 
 .slideout-panel {
-    margin-top: 50px;
+    // margin-top: 50px;
     padding-bottom: 50px;
     position: relative;
     z-index: 1;

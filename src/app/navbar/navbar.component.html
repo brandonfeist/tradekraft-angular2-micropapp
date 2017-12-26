@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav [ngClass]="{ 'navbar-transparent': navbarTransparent }" class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <!-- <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed">
@@ -28,9 +28,26 @@
   </div>
 </nav>
 
+<!-- <nav>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button class="hamburger" (click)="sidenav.toggle()">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+      <a class="navbar-brand" routerLink="/" (click)="sidenav.close()">TradeKraft</a>
+    </div>
+  </div>
+</nav> -->
+
 <mat-sidenav-container class="example-sidenav-fab-container">
   <mat-sidenav #sidenav mode="over" opened="false">
     <div class="example-scrolling-content">
+      <div class="search-bar">
+        <input id="search" class="search-input  hed-m" placeholder="Search..." value="">
+        <div class="search-icon">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+      </div>
       <nav class="nav-menu">
         <ul class="nav-items">
           <main-navbar *ngIf="!isAdminNavbar()" [sidenav]="sidenav"></main-navbar>

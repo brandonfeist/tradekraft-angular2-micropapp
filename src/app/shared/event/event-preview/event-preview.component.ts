@@ -23,4 +23,8 @@ import { EventService } from './../../../services/event.service';
         console.log("error getting events: ", err);
       });
     }
+
+    private hasEvents(): boolean {
+      return (this.events && this.events.length > 0);
+    }
   }

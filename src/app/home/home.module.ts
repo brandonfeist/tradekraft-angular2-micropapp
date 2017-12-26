@@ -1,3 +1,4 @@
+import { CustomMaterialModule } from 'app/custom-material/custom-material.module';
 import { NgModule }     from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { SharedModule } from './../shared/shared.module';
@@ -11,6 +12,7 @@ import { HomeVideoResolve } from 'app/home/home-video.resolve';
     imports:      [
       CommonModule,
       HomeRoutingModule,
+      CustomMaterialModule,
       SharedModule
     ],
     declarations: [ 
