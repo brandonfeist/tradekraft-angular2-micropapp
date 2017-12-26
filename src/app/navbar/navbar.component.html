@@ -1,4 +1,4 @@
-<nav [ngClass]="{ 'navbar-transparent': (navbarTransparent && !sidenav.opened) }" class="navbar navbar-default navbar-fixed-top">
+<nav [ngClass]="{ 'navbar-transparent': (navbarTransparent && !sidenav.opened && !onIndexPage()) }" class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <!-- <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed">

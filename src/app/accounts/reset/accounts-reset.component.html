@@ -1,16 +1,18 @@
-<mat-card class="login-form">
-  <form [formGroup]="passwordResetForm" (ngSubmit)="onSubmit()" novalidate>
-    <mat-form-field class="login-input">
-      <input matInput placeholder="Email" formControlName="email" required email>
-      <mat-error *ngIf="passwordResetForm.controls.email.errors?.email">Not a valid email</mat-error>
-    </mat-form-field>
+<div class="index-frame">
+  <mat-card class="login-form">
+    <form [formGroup]="passwordResetForm" (ngSubmit)="onSubmit()" novalidate>
+      <mat-form-field class="login-input">
+        <input matInput placeholder="Email" formControlName="email" required email>
+        <mat-error *ngIf="passwordResetForm.controls.email.errors?.email">Not a valid email</mat-error>
+      </mat-form-field>
 
-    <div class="btn-center-wrapper login-btn">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!passwordResetForm.valid">Request New Password</button>
+      <div class="btn-center-wrapper login-btn">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!passwordResetForm.valid">Request New Password</button>
+      </div>
+    </form>
+
+    <div class="login-links">
+      <p>Back to login. <a routerLink="/login">Login</a></p>
     </div>
-  </form>
-
-  <div class="login-links">
-    <p>Back to login. <a routerLink="/login">Login</a></p>
-  </div>
-</mat-card>
+  </mat-card>
+</div>
