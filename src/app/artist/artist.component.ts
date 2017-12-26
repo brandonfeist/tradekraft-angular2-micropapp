@@ -85,7 +85,7 @@ export class ArtistComponent implements OnInit {
   createForm(): void {
     this.artistSearchForm = this.formBuilder.group({
       search: this.artistSearchQuery || null,
-      year: this.years[0].year || null
+      year: this.yearQuery || this.years[0].year || null
     });
   }
 
