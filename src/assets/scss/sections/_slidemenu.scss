@@ -34,6 +34,17 @@
 
 .navbar-default {
     border-color: transparent;
+
+    & a {
+        color: black !important;
+    }
+
+    -webkit-transition: background-color 0.2s ease-in-out; /* Safari */
+    transition: background-color 0.2s ease-in-out;
+}
+
+.hamburger {
+    color: black !important;
     -webkit-transition: background-color 0.2s ease-in-out; /* Safari */
     transition: background-color 0.2s ease-in-out;
 }
@@ -41,6 +52,10 @@
 .navbar-transparent {
     background-color: transparent;
     background: linear-gradient(180deg,rgba(0,0,0,.45),transparent 90%);
+
+    & .hamburger, a {
+        color: white !important;
+    }
 }
 
 .container-fluid {

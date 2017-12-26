@@ -47,7 +47,7 @@
     }
 
     &::before {
-        background: linear-gradient(to bottom, $white-transparent 0%, $off-white 95%);
+        // background: linear-gradient(to bottom, $white-transparent 0%, $off-white 95%);
         bottom: 0;
         content: '';
         display: block;
@@ -107,6 +107,18 @@
     img:not(.top-image) {
         object-fit: cover;
         width: 100%;
+    }
+
+    .feature-container {
+        width: 100%;
+        margin-bottom: 45px;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+
+        & h1, h2 {
+            color: #ffffff;
+        }
     }
 
     .container {
