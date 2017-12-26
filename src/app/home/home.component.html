@@ -1,10 +1,9 @@
 <div class="frame banner large video">
-    <div class="mute-feature">
-        <button mat-mini-fab class="mute-feature" (click)="muteFeatureVideo()">
-            <mat-icon *ngIf="!isFeatureMuted()" class="fa fa-volume-up" aria-hidden="true"></mat-icon>
-            <mat-icon *ngIf="isFeatureMuted()" class="fa fa-volume-off" aria-hidden="true"></mat-icon>
-        </button>
-    </div>
+    <button mat-mini-fab color="basic" class="mute-feature" (click)="muteFeatureVideo()">
+        <mat-icon *ngIf="!isFeatureMuted()" class="fa fa-volume-up" aria-hidden="true"></mat-icon>
+        <mat-icon *ngIf="isFeatureMuted()" class="fa fa-volume-off" aria-hidden="true"></mat-icon>
+    </button>
+
     <a *ngIf="randomVideo.song" routerLink="/releases/{{ randomVideo.song.release.slug }}" title="{{ videoTitle }}">
         <div class="feature-container">
             <div class="wrapper">

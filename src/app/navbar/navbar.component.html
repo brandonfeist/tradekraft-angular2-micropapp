@@ -1,4 +1,4 @@
-<nav [ngClass]="{ 'navbar-transparent': (navbarTransparent && !sidenav.opened && !onIndexPage()) }" class="navbar navbar-default navbar-fixed-top">
+<nav [ngClass]="{ 'navbar-transparent': isTransparent(sidenav) }" class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <!-- <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed">
@@ -13,6 +13,11 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse" >
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://m.me/tradekraftcollective" target="_blank">
+              <i class="fab fa-facebook-messenger facebook-messenger"></i>
+          </a>
+        </li>
         <li>
           <a>
             <i class="fa fa-envelope-o" aria-hidden="true"></i>

@@ -2,6 +2,15 @@
     text-align: center;
 }
 
+.frame {
+    .mute-feature {
+        margin-top: 65px;
+        margin-left: 15px;
+        // background-color: $off-white;
+        color: #000000;
+    }   
+}
+
 .btn {
     cursor: pointer;
     display: inline-block;
