@@ -82,6 +82,29 @@ music-player {
     }
 }
 
+.scrub {
+    width: 100%;
+    height: 5px;
+    background: #f5f5f5;
+    transition: height 0.1s;
+    border-radius: 0;
+
+    &:hover {
+        height: 15px;
+    }
+
+    .progress {
+        width: 0%;
+        height: 100%;
+        background: #d4d4d4;
+        border-radius: 0;
+
+        &:hover {
+            background-color: dodgerblue;
+        }
+    }
+}
+
 .player-aritst-link {
     margin-right: 3px;
 }

@@ -15,11 +15,12 @@ import { MatDialog } from '@angular/material';
 })
 export class MusicPlayerComponent implements OnInit {
   private MUSIC_BAR_STEP: number = 0.25;
-  private MUSIC_PLAY_UPDATE_INTERVAL: number = 250;
+  private MUSIC_PLAY_UPDATE_INTERVAL: number = 50;
 
   private volumeButtonHover: boolean = false;
   private volumeSliderHover: boolean = false;
 
+  private scrubPosistion: string;
   private muted: boolean = false;
   private previousVolume: number;
   private volume: number;
@@ -38,6 +39,7 @@ export class MusicPlayerComponent implements OnInit {
   constructor(private musicService: MusicService, public dialog: MatDialog) {
     this.volume = 1;
     this.paused = true;
+    this.scrubPosistion = '0%';
   }
 
   ngOnInit() {
@@ -59,6 +61,7 @@ export class MusicPlayerComponent implements OnInit {
 
     Observable.interval(this.MUSIC_PLAY_UPDATE_INTERVAL).subscribe(x => {
       this.getCurrentPlayTime();
+      this.scrubPosistion = this.getSongProgress() + '%';
     });
   }
 
@@ -133,8 +136,8 @@ export class MusicPlayerComponent implements OnInit {
     this.musicService.changeVolume(this.volume);
   }
 
-  onTimeInputChange(event: any) {
-    this.currentPlayTime = event.value;
+  currentPlaytimeChange(newPlaytime: number) {
+    this.currentPlayTime = newPlaytime;
     this.musicService.changePlaytime(this.currentPlayTime);
   }
 
@@ -153,6 +156,22 @@ export class MusicPlayerComponent implements OnInit {
 
   private isVolumeOn() {
     return this.volume > 0;
+  }
+
+  private getSongProgress(): number {
+    if(this.audio && this.currentPlayTime) {
+      return ((this.currentPlayTime / this.audio.duration) * 100);
+    }
+
+    return 0;
+  }
+
+  private scrubClickEvent(event) {
+    let playPos = (event.screenX / window.screen.width);
+
+    if(this.audio) {
+      this.currentPlaytimeChange(this.audio.duration * playPos);
+    }
   }
 
   showShareDialog() {
