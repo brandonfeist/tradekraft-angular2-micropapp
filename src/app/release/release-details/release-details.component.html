@@ -35,6 +35,9 @@
                 <div class="title-container">
                     <h1>{{ release.name }}</h1>
                     <h2>{{ formatReleaseArtists(release) }}</h2>
+                    <div *ngIf="isFreeRelease()" class="small-card">
+                        <h3>Free Release</h3>
+                    </div>
                 </div>
                 <div class="social-media push-right">
                     <a *ngIf="release.spotify" href="{{ release.spotify }}" target="_blank">

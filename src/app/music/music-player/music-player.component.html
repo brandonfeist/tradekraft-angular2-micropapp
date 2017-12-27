@@ -3,8 +3,10 @@
         <div class="progress" [style.width]="scrubPosistion"></div>
     </div>
     <div class="player__main">
+        <button (click)="backwards()" class="player-button-small"><i class="fa fa-backward" aria-hidden="true"></i></button>
         <button *ngIf="!paused" (click)="pausePlay()" class="player-button"><i class="fa fa-pause-circle-o"></i></button>
         <button *ngIf="paused" (click)="pausePlay()" class="player-button"><i class="fa fa-play-circle-o"></i></button>
+        <button (click)="forwards()" class="player-button-small"><i class="fa fa-forward" aria-hidden="true"></i></button>
         <div class="player-playtime">
             <p *ngIf="song">{{ formatSecondsToTimestamp(currentPlayTime) }} / {{ formatSecondsToTimestamp(audio.duration) }}</p>
         </div>

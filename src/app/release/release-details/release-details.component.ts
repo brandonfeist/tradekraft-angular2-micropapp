@@ -152,4 +152,8 @@ export class ReleaseDetailsComponent implements OnInit {
       data: { release: this.release }
     });
   }
+
+  private isFreeRelease() {
+    return this.release.freeRelease;
+  }
 }

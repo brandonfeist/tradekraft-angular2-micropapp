@@ -90,3 +90,16 @@ button::-moz-focus-inner {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.small-card {
+    margin-top: 15px;
+
+    h3 {
+        font-size: 21px;
+        font-weight: bold;
+        display: inline;
+        padding: 3px 10px;
+        color: #ffffff;
+        background-color: #232323;
+    }
+}

@@ -10,8 +10,9 @@
             </div>
         </div>
         <div class="events-table">
-          <h1 *ngIf="!hasEvents(events)">No events currently, come back soon! * Maybe sign up for info about future events? *</h1>
-          <table *ngIf="hasEvents(events)" class="events">
+          <mat-spinner *ngIf="loading"></mat-spinner>
+          <h1 *ngIf="!hasEvents(events) && !loading">No events currently, come back soon! * Maybe sign up for info about future events? *</h1>
+          <table *ngIf="hasEvents(events) && !loading" class="events">
             <tbody>
               <tr *ngFor="let event of events">
                 <td class="date">
@@ -54,7 +55,8 @@
                 <h1>Past Events</h1>
             </div>
         </div>
-        <div class="frame-items">
+        <mat-spinner *ngIf="pastEventsLoading"></mat-spinner>
+        <div *ngIf="!pastEventsLoading" class="frame-items">
             <event-container class="col-3" *ngFor="let event of pastEvents" [event]="event" [shorter]="true"></event-container>
         </div>
       </div>

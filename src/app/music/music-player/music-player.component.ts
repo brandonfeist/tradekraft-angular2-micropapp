@@ -126,6 +126,14 @@ export class MusicPlayerComponent implements OnInit {
     this.musicService.changePlaytime(this.currentPlayTime);
   }
 
+  private forwards() {
+    this.musicService.nextSong();
+  }
+
+  private backwards() {
+    this.musicService.previousSong();
+  }
+
   private muteUnmute() {
     if(this.muted) {
       this.volume = this.previousVolume;

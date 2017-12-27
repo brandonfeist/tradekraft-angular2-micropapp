@@ -13,6 +13,7 @@ export class Release {
     appleMusic: string;
     googlePlay: string;
     amazon: string;
+    freeRelease: boolean;
     songs: Song[];
     slug: string;
 }

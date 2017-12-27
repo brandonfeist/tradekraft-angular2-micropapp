@@ -17,6 +17,7 @@ import * as moment from 'moment-timezone';
     private events: Event[];
     private pastEvents: Event[];
     private highlightedEvent: Event;
+    private loading: boolean = true;
     private officialEventsOnly: boolean = false;
 
     private defaultImage: string = "assets/images/preload-image.jpg";
@@ -41,10 +42,12 @@ import * as moment from 'moment-timezone';
     getEvents() {
       this.eventService.getEvents(new URLSearchParams(this.getQueryString())).subscribe(data => {
         this.events = data.content;
+        this.loading = false;
       },
       err => {
         console.log("error", err);
         this.snackbarService.openSnackbar("There was a problem getting the events.");
+        this.loading = false;
       });
     }
 

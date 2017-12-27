@@ -15,6 +15,15 @@ music-player {
     background: none;
     font-size: 31px;
     vertical-align: middle;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.player-button-small {
+    border: none;
+    background: none;
+    font-size: 18px;
+    vertical-align: middle;
 }
 
 .player-playtime {
