@@ -88,6 +88,16 @@ export class AuthService {
     return '/assets/images/default-profile.png';
   }
 
+  getUsername(): string {
+    let decodedToken = this.decodeToken();
+
+    if(decodedToken && decodedToken.user_name !== null) {
+      return decodedToken.user_name;
+    }
+
+    return undefined;
+  }
+
   decodeToken() {
     if(localStorage.getItem('token')) {
       let token = JSON.parse(localStorage.getItem('token')).access_token;

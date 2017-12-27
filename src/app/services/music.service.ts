@@ -61,13 +61,33 @@ export class MusicService {
             this.pauseChange.next(this.paused);
 
             this.audio.onended = () => {
-                if((this.songIndexNumber + 1) < songs.length) {
-                    this.load(release, (this.songIndexNumber + 1));
-                } else {
-                    this.stop();
-                }
+                this.nextSong();
             }
         }
+    }
+
+    nextSong() {
+        let nextSongIndexNumber = this.songIndexNumber + 1;
+
+        if((nextSongIndexNumber) < this.songs.length) {
+            this.load(this.release, nextSongIndexNumber);
+        } else {
+            this.stop();
+        }
+    }
+
+    previousSong() {
+        let previousSongIndexNumber = this.songIndexNumber - 1;
+
+        if((previousSongIndexNumber) >= 0) {
+            this.load(this.release, previousSongIndexNumber);
+        } else {
+            this.changePlaytime(0);
+        }
+    }
+
+    restartSong() {
+        this.changePlaytime(0);
     }
 
     changeVolume(volume: number) {
@@ -106,6 +126,10 @@ export class MusicService {
         this.songs = null;
         this.song = null;
         this.release = null;
+
+        this.audioChange.next(this.audio);
+        this.releaseChange.next(this.release);
+        this.songChange.next(this.song);
     }
 
     isSongLoaded() {

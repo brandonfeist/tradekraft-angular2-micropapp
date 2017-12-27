@@ -30,10 +30,10 @@
             <img class="img-circle profile-image" src="{{ authService.getUserImage() }}"><span class="caret"></span>
           </a>
           <ul *dropdownMenu class="dropdown-menu">
-            <li role="menuitem"><a href="#">Profile</a></li>
-            <li role="menuitem"><a routerLink="/admin" routerLinkActive="active" (click)="sidenav.close()">Admin</a></li>
+            <li role="menuitem"><a class="dropdown-text" routerLink="/users/{{ authService.getUsername() }}">Profile</a></li>
+            <li role="menuitem"><a class="dropdown-text" routerLink="/admin" routerLinkActive="active" (click)="sidenav.close()">Admin</a></li>
             <li role="separator" class="divider" dropdown-divider></li>
-            <li role="menuitem"><a (click)="sidenav.close(); authService.logout()">Logout</a></li>
+            <li role="menuitem"><a class="dropdown-text" (click)="sidenav.close(); authService.logout()">Logout</a></li>
           </ul>
         </li>
         <!-- <li *ngIf="authService.loggedIn()" class="dropdown">

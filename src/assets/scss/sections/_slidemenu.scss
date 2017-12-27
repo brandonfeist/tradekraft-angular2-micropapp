@@ -2,6 +2,10 @@
     z-index: 1000;
 }
 
+.divider {
+    padding-top: 1px;
+}
+
 .example-sidenav-fab-container {
     width: 100%;
     height: 100%;
@@ -41,7 +45,7 @@
     border-color: transparent;
 
     & a {
-        color: black !important;
+        color: #262626 !important;
     }
 
     & .login-button {
@@ -72,9 +76,13 @@
         background-color: rgba(0, 130, 255, 0.6);
     }
 
-    & .hamburger, a {
+    & .hamburger, .navbar-brand, .nav > li > a {
         color: white !important;
     }
+}
+
+a .dropdown-text {
+    color: #262626 !important;
 }
 
 .container-fluid {
@@ -174,7 +182,7 @@
     background: none;
     float: left;
 
-    color: black;
+    color: #262626;
     -webkit-transition: background-color 0.2s ease-in-out; /* Safari */
     transition: background-color 0.2s ease-in-out;
 

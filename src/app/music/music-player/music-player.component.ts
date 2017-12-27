@@ -77,7 +77,7 @@ export class MusicPlayerComponent implements OnInit {
   // Current time for the progress bar
   @Input() current: number;
 
-  getCurrentPlayTime() {
+  private getCurrentPlayTime() {
     if(this.audio) {
       this.currentPlayTime = this.audio.currentTime;
 
@@ -89,29 +89,14 @@ export class MusicPlayerComponent implements OnInit {
     return;
   }
 
-  pausePlay() {
+  private pausePlay() {
     this.musicService.pausePlay();
     this.getCurrentPlayTime();
   }
 
-  stop() {
+  private stop() {
     this.musicService.stop();
     this.getCurrentPlayTime();
-  }
-
-  formatArtists(song: Song) {
-    let artistsNameString = "";
-    let artists: Artist[] = song.artists;
-
-    for(let artistIndex = 0; artistIndex < artists.length; artistIndex++) {
-      if(artistIndex < artists.length - 1) {
-        artistsNameString += artists[artistIndex].name + ", ";
-      } else {
-        artistsNameString += artists[artistIndex].name;
-      }
-    }
-
-      return artistsNameString
   }
 
   private formatSecondsToTimestamp(timeInSeconds: number): string {
@@ -130,18 +115,18 @@ export class MusicPlayerComponent implements OnInit {
     return formatedMin.substr(formatedMin.length - 2) + ":" + formatedSec.substr(formatedSec.length - 2);
   }
 
-  onVolumeInputChange(event: any) {
+  private onVolumeInputChange(event: any) {
     this.muted = false;
     this.volume = event.value / 100;
     this.musicService.changeVolume(this.volume);
   }
 
-  currentPlaytimeChange(newPlaytime: number) {
+  private currentPlaytimeChange(newPlaytime: number) {
     this.currentPlayTime = newPlaytime;
     this.musicService.changePlaytime(this.currentPlayTime);
   }
 
-  muteUnmute() {
+  private muteUnmute() {
     if(this.muted) {
       this.volume = this.previousVolume;
       this.musicService.changeVolume(this.volume);
@@ -174,14 +159,14 @@ export class MusicPlayerComponent implements OnInit {
     }
   }
 
-  showShareDialog() {
+  private showShareDialog() {
     this.dialog.open(ShareReleaseDialog, {
       height: '350px',
       data: { release: this.release }
     });
   }
 
-  exit() {
+  private exit() {
     this.musicService.stopAndUnload();
     this.song = null;
   }

@@ -22,7 +22,6 @@ export class MusicTableComponent implements OnInit {
     private songSubscription;
 
     constructor(private musicService: MusicService) { 
-        
         this.tooltipPos = "right";
         this.paused = true;
     }
