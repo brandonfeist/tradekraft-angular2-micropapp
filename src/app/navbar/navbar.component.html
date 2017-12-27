@@ -19,15 +19,26 @@
           </a>
         </li>
         <li>
-          <a>
+          <a (click)="openNewsletterDialog()">
             <i class="fa fa-envelope-o" aria-hidden="true"></i>
             Newsletter
           </a>
         </li>
         <li *ngIf="!authService.loggedIn()"><a class="login-button" routerLink="/login">Login</a></li>
-        <li *ngIf="authService.loggedIn()">
-          <img class="img-circle profile-image" src="{{ authService.getUserImage() }}">
+        <li *ngIf="authService.loggedIn()" class="dropdown" dropdown>
+          <a href dropdownToggle (click)="false" class=" profile-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <img class="img-circle profile-image" src="{{ authService.getUserImage() }}"><span class="caret"></span>
+          </a>
+          <ul *dropdownMenu class="dropdown-menu">
+            <li role="menuitem"><a href="#">Profile</a></li>
+            <li role="menuitem"><a routerLink="/admin" routerLinkActive="active" (click)="sidenav.close()">Admin</a></li>
+            <li role="separator" class="divider" dropdown-divider></li>
+            <li role="menuitem"><a (click)="sidenav.close(); authService.logout()">Logout</a></li>
+          </ul>
         </li>
+        <!-- <li *ngIf="authService.loggedIn()" class="dropdown">
+          <img class="img-circle profile-image" src="{{ authService.getUserImage() }}">
+        </li> -->
       </ul>
     </div>
   </div>
@@ -58,13 +69,13 @@
           <main-navbar *ngIf="!isAdminNavbar()" [sidenav]="sidenav"></main-navbar>
           <admin-navbar *ngIf="isAdminNavbar()" [sidenav]="sidenav"></admin-navbar>
           <li *ngIf="authService.hasAtLeastOnePermission(adminPanelPermissions)" class="nav-item">
-              <a routerLink="/admin" routerLinkActive="active" (click)="sidenav.close()">Admin</a>
+            <a routerLink="/admin" routerLinkActive="active" (click)="sidenav.close()">Admin</a>
           </li>
           <li *ngIf="authService.loggedIn()" class="nav-item">
-              <a (click)="sidenav.close(); authService.logout()">Logout</a>
+            <a (click)="sidenav.close(); authService.logout()">Logout</a>
           </li>
           <li *ngIf="!authService.loggedIn()" class="nav-item">
-              <a routerLink="/login" routerLinkActive="active" (click)="sidenav.close()">Login</a>
+            <a routerLink="/login" routerLinkActive="active" (click)="sidenav.close()">Login</a>
           </li>
         </ul>
       </nav>

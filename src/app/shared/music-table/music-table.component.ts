@@ -1,3 +1,4 @@
+import { Release } from 'app/model/release';
 import { Component, OnInit, Input } from '@angular/core';
 import * as _ from "lodash";
 
@@ -10,6 +11,7 @@ import { Song } from './../../model/song';
     templateUrl: './music-table.component.html'
 })
 export class MusicTableComponent implements OnInit {
+    @Input() release: Release;
     @Input() songs: Song[];
 
     private tooltipPos: string;
@@ -20,6 +22,7 @@ export class MusicTableComponent implements OnInit {
     private songSubscription;
 
     constructor(private musicService: MusicService) { 
+        
         this.tooltipPos = "right";
         this.paused = true;
     }
@@ -43,15 +46,15 @@ export class MusicTableComponent implements OnInit {
         this.songSubscription.unsubscribe();
     }
 
-    playSong(songs: Song[], songIndex: number) {
-        let song = songs[songIndex];
+    playSong(release: Release, songIndex: number) {
+        let song = release.songs[songIndex];
 
         if (this.checkIfSongPlaying(song)) {
             this.musicService.pausePlay();
-        } else if (this.currentSongLoaded && this.currentSongLoaded.slug === song.slug) {
+        } else if (this.currentSongLoaded && this.currentSongLoaded.slug === song.slug) {;
             this.musicService.pausePlay();
         } else {
-            this.musicService.load(songs, songIndex);
+            this.musicService.load(release, songIndex);
         }
     }
 

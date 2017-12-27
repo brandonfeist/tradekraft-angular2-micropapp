@@ -1,6 +1,74 @@
 music-player {
+    width: 100%;
+    background-color: gray;
+}
+
+music-player {
     position: fixed;
     left: 0;
     bottom: 0;
     z-index: 1000;
+}
+
+.player-button {
+    border: none;
+    background: none;
+    font-size: 31px;
+    vertical-align: middle;
+}
+
+.player-playtime {
+    font-size: 12px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.player-song-info {
+    vertical-align: middle;
+    font-size: 12px;
+    display: inline-block;
+    margin-right: 15px;
+
+    p {
+        margin: 0;
+    }
+}
+
+.player-duration {
+    display: inline-block;
+}
+
+.player-volume-button {
+    float: right;
+    margin-top: 12px;
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+.player-volume {
+    position: absolute;
+    top: -120px;
+    right: 25px;
+    background-color: gray;
+}
+
+.player-spotify {
+    float: right;
+    margin-top: 12px;
+    font-size: 18px;
+    margin-right: 15px;
+}
+
+.player-close {
+    float: right;
+    border: none;
+    background: none;
+    font-size: 21px;
+    vertical-align: middle;
+    margin-top: 8px;
+    margin-right: 5px;
+
+    &:hover {
+        color: $red;
+    }
 }

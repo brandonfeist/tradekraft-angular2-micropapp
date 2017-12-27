@@ -1,14 +1,43 @@
-<div class="player">
+<div *ngIf="song" class="player">
     <!-- <div class="player__backward">
         <button (click)="backward.emit()"><i class="fa fa-backward"></i></button>
     </div> -->
     
     <div class="player__main">
-        <p>{{ currentPlayTime }}</p>
+        <!-- <p>{{ currentPlayTime }}</p>
+        <p *ngIf="song">{{ song.name }}</p>
+        <p *ngIf="song">{{ formatArtists(song) }}</p>
+        <p *ngIf="release && release.spotify">{{ release.spotify }}</p>
+        <p *ngIf="release">{{ release.slug }}</p> -->
         <!-- might not even show play time/duration and just have a progress bar -->
         <!-- use promise to have loading symbol over play/pause when loading -->
-        <button *ngIf="!paused" (click)="pausePlay()"><i class="fa fa-pause"></i></button>
-        <button *ngIf="paused" (click)="pausePlay()"><i class="fa fa-play"></i></button>
+        <button *ngIf="!paused" (click)="pausePlay()" class="player-button"><i class="fa fa-pause-circle-o"></i></button>
+        <button *ngIf="paused" (click)="pausePlay()" class="player-button"><i class="fa fa-play-circle-o"></i></button>
+        <div class="player-playtime">
+            <p *ngIf="song">{{ formatSecondsToTimestamp(currentPlayTime) }} / {{ formatSecondsToTimestamp(audio.duration) }}</p>
+        </div>
+        <div class="player-song-info">
+            <p *ngIf="song">{{ song.name }}</p>
+            <p *ngIf="song">{{ formatArtists(song) }}</p>
+        </div>
+        <div *ngIf="song" class="player-duration">
+            <mat-slider (input)="onTimeInputChange($event)" min="0" max="{{ audio.duration }}" step="{{ MUSIC_BAR_STEP }}" value="{{ currentPlayTime }}"></mat-slider>
+        </div>
+        <button class="player-close" (click)="exit()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div *ngIf="song" class="player-volume-button">
+            <i *ngIf="isVolumeOn()" class="fa fa-volume-up" (click)="muteUnmute()" aria-hidden="true"></i>
+            <i *ngIf="!isVolumeOn()" class="fa fa-volume-off" (click)="muteUnmute()" aria-hidden="true"></i>
+        </div>
+        <div *ngIf="song" class="player-volume">
+            <mat-slider vertical (input)="onVolumeInputChange($event)" min="0" max="100" step="1" value="{{ volume }}"></mat-slider>
+        </div>
+        <div *ngIf="release && release.spotify" class="player-spotify">
+            <a href="{{ release.spotify }}" target="_blank">
+                <i class="fa fa-spotify" aria-hidden="true"></i>
+            </a>
+        </div>
         <!-- <button (click)="stop()"><i class="fa fa-stop"></i></button>
         <button (click)="random.emit()"><i class="fa fa-random"></i></button> -->
     </div>
@@ -16,4 +45,4 @@
     <!-- <div class="player__forward">
         <button (click)="forward.emit()"><i class="fa fa-forward"></i></button>
     </div> -->
-</div>
+</div> 

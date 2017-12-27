@@ -15,7 +15,7 @@
             <tr *ngFor="let song of songs; let songIndex = index">
                 <td class="shrink">{{ song.trackNumber }}</td>
                 <td class="shrink nopad">
-                    <button class="faux button--mobile" (click)="playSong(songs, songIndex)">
+                    <button class="faux button--mobile" (click)="playSong(release, songIndex)">
                         <i *ngIf="!songAvailable(song)" matTooltip="Song unavailable" [matTooltipPosition]="tooltipPos" class="fa fa-play-circle-o fa-disabled" aria-hidden="true"></i>
                         <i *ngIf="songAvailable(song) && (paused || !checkIfSongPlaying(song))" class="fa fa-play-circle-o" aria-hidden="true"></i>
                         <i *ngIf="songAvailable(song) && checkIfSongPlaying(song)" class="fa fa-pause-circle-o" aria-hidden="true"></i>

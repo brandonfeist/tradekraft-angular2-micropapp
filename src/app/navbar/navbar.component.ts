@@ -1,6 +1,8 @@
+import { NewsletterDialog } from './../shared/dialogs/newsletter/newsletter.component';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { AuthService } from 'app/services/auth.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +19,7 @@ export class NavbarComponent implements OnInit {
 
   private navbarTransparent: boolean = true;
 
-  constructor(private authService: AuthService, private  _router : Router) { }
+  constructor(private authService: AuthService, private  _router : Router, public dialog: MatDialog) { }
 
   ngOnInit() {}
 
@@ -45,5 +47,9 @@ export class NavbarComponent implements OnInit {
 
   private isTransparent(sideNav): boolean {
     return (this.navbarTransparent && !sideNav.opened && !this.onIndexPage());
+  }
+
+  private openNewsletterDialog() {
+    this.dialog.open(NewsletterDialog);
   }
 }

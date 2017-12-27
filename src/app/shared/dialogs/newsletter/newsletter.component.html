@@ -1,0 +1,14 @@
+<h2 class="dialog-title" mat-dialog-title>Stay updated on all things Tradekraft!</h2>
+
+<div>
+  <form [formGroup]="newsletterForm" (ngSubmit)="onSubmit()" novalidate>
+    <mat-form-field class="login-input">
+      <input matInput placeholder="Enter your email" formControlNamw="email" required email>
+      <mat-error *ngIf="newsletterForm.controls.email.errors?.email">Not a valid email</mat-error>
+    </mat-form-field>
+
+    <div class="btn-center-wrapper">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!newsletterForm.valid">Sign Up</button>
+    </div>
+  </form>
+</div>

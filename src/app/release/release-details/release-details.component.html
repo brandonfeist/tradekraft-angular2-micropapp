@@ -54,7 +54,7 @@
                     </a>
                 </div>
 
-                <music-table [songs]="release.songs"></music-table>
+                <music-table [release]="release" [songs]="release.songs"></music-table>
 
                 <div *ngIf="release.contests" class="frame frame-contests">
                     <div class="wrapper">
