@@ -43,12 +43,21 @@ music-player {
     margin-top: 12px;
     margin-right: 5px;
     font-size: 18px;
+
+    .fa-volume-off {
+        margin-right: 9px;
+    }
+
+    &:hover {
+        color: $red;
+    }
 }
 
 .player-volume {
     position: absolute;
     top: -120px;
     right: 25px;
+    padding: 5px 0;
     background-color: gray;
 }
 
@@ -71,4 +80,8 @@ music-player {
     &:hover {
         color: $red;
     }
+}
+
+.player-aritst-link {
+    margin-right: 3px;
 }

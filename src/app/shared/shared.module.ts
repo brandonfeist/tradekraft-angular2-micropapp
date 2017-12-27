@@ -1,3 +1,4 @@
+import { ShareReleaseDialog } from './dialogs/share-release/share-release.component';
 import { NewsletterDialog } from './dialogs/newsletter/newsletter.component';
 import { ArtistContainerComponent } from './artist/artist-container/artist-container.component';
 import { EventContainerComponent } from './event/event-container/event-container.component';
@@ -35,6 +36,7 @@ import { DateAbbr } from 'app/shared/date-abbr/date-abbr';
       ArtistSpotifyDialog,
       PlaylistSpotifyDialog,
       NewsletterDialog,
+      ShareReleaseDialog,
       ReadMoreComponent
     ],
     declarations: [ 
@@ -47,6 +49,7 @@ import { DateAbbr } from 'app/shared/date-abbr/date-abbr';
       ArtistSpotifyDialog,
       PlaylistSpotifyDialog,
       NewsletterDialog,
+      ShareReleaseDialog,
       ReadMoreComponent
     ],
     providers: [
@@ -55,7 +58,8 @@ import { DateAbbr } from 'app/shared/date-abbr/date-abbr';
     entryComponents: [
       ArtistSpotifyDialog,
       PlaylistSpotifyDialog,
-      NewsletterDialog
+      NewsletterDialog,
+      ShareReleaseDialog
     ]
   })
   export class SharedModule { }

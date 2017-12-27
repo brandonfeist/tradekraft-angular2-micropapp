@@ -1,3 +1,4 @@
+import { ShareReleaseDialog } from './../../shared/dialogs/share-release/share-release.component';
 import { Release } from './../../model/release';
 import { Artist } from './../../model/artist';
 import { Song } from './../../model/song';
@@ -6,6 +7,7 @@ import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 
 import { MusicService } from './../../services/music.service';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'music-player',
@@ -14,6 +16,9 @@ import { MusicService } from './../../services/music.service';
 export class MusicPlayerComponent implements OnInit {
   private MUSIC_BAR_STEP: number = 0.25;
   private MUSIC_PLAY_UPDATE_INTERVAL: number = 250;
+
+  private volumeButtonHover: boolean = false;
+  private volumeSliderHover: boolean = false;
 
   private muted: boolean = false;
   private previousVolume: number;
@@ -30,8 +35,8 @@ export class MusicPlayerComponent implements OnInit {
   private songSubscription;
   private releaseSubscription;
 
-  constructor(private musicService: MusicService) {
-    this.volume = 100;
+  constructor(private musicService: MusicService, public dialog: MatDialog) {
+    this.volume = 1;
     this.paused = true;
   }
 
@@ -46,11 +51,11 @@ export class MusicPlayerComponent implements OnInit {
 
     this.songSubscription = this.musicService.songChange.subscribe((song) => {
       this.song = song;
-    }) 
+    });
 
     this.releaseSubscription = this.musicService.releaseChange.subscribe((release) => {
       this.release = release;
-    })
+    });
 
     Observable.interval(this.MUSIC_PLAY_UPDATE_INTERVAL).subscribe(x => {
       this.getCurrentPlayTime();
@@ -107,6 +112,10 @@ export class MusicPlayerComponent implements OnInit {
   }
 
   private formatSecondsToTimestamp(timeInSeconds: number): string {
+    if(timeInSeconds == null || isNaN(timeInSeconds)) {
+      return "00:00";
+    }
+
     timeInSeconds = Math.trunc(timeInSeconds);
     
     let minutes = Math.trunc(timeInSeconds / 60);
@@ -120,8 +129,8 @@ export class MusicPlayerComponent implements OnInit {
 
   onVolumeInputChange(event: any) {
     this.muted = false;
-    this.volume = event.value;
-    this.musicService.changeVolume(this.volume / 100);
+    this.volume = event.value / 100;
+    this.musicService.changeVolume(this.volume);
   }
 
   onTimeInputChange(event: any) {
@@ -132,11 +141,11 @@ export class MusicPlayerComponent implements OnInit {
   muteUnmute() {
     if(this.muted) {
       this.volume = this.previousVolume;
-      this.musicService.changeVolume(this.volume / 100);
+      this.musicService.changeVolume(this.volume);
     } else {
         this.previousVolume = this.volume;
         this.volume = 0;
-        this.musicService.changeVolume(this.volume / 100);
+        this.musicService.changeVolume(this.volume);
     }
 
     this.muted = !this.muted;
@@ -144,6 +153,13 @@ export class MusicPlayerComponent implements OnInit {
 
   private isVolumeOn() {
     return this.volume > 0;
+  }
+
+  showShareDialog() {
+    this.dialog.open(ShareReleaseDialog, {
+      height: '350px',
+      data: { release: this.release }
+    });
   }
 
   exit() {

@@ -18,7 +18,7 @@
         </div>
         <div class="player-song-info">
             <p *ngIf="song">{{ song.name }}</p>
-            <p *ngIf="song">{{ formatArtists(song) }}</p>
+            <p *ngIf="song"><a class="player-aritst-link" *ngFor="let artist of song.artists" routerLink="/artists/{{artist.slug}}">{{ artist.name }}</a></p>
         </div>
         <div *ngIf="song" class="player-duration">
             <mat-slider (input)="onTimeInputChange($event)" min="0" max="{{ audio.duration }}" step="{{ MUSIC_BAR_STEP }}" value="{{ currentPlayTime }}"></mat-slider>
@@ -26,16 +26,22 @@
         <button class="player-close" (click)="exit()">
             <i class="fa fa-times" aria-hidden="true"></i>
         </button>
-        <div *ngIf="song" class="player-volume-button">
+        <div *ngIf="song" class="player-volume-button" (mouseenter)="volumeButtonHover=true" (mouseleave)="volumeButtonHover=false">
             <i *ngIf="isVolumeOn()" class="fa fa-volume-up" (click)="muteUnmute()" aria-hidden="true"></i>
             <i *ngIf="!isVolumeOn()" class="fa fa-volume-off" (click)="muteUnmute()" aria-hidden="true"></i>
         </div>
-        <div *ngIf="song" class="player-volume">
-            <mat-slider vertical (input)="onVolumeInputChange($event)" min="0" max="100" step="1" value="{{ volume }}"></mat-slider>
-        </div>
+        <!-- && (volumeButtonHover || volumeSliderHover) -->
+        <!-- <div *ngIf="song" class="player-volume" (mouseenter)="volumeSliderHover=true" (mouseleave)="volumeSliderHover=false">
+            <mat-slider vertical (input)="onVolumeInputChange($event)" min="0" max="100" step="1" value="{{ volume * 100 }}"></mat-slider>
+        </div> -->
         <div *ngIf="release && release.spotify" class="player-spotify">
             <a href="{{ release.spotify }}" target="_blank">
                 <i class="fa fa-spotify" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div *ngIf="release" class="player-spotify">
+            <a (click)="showShareDialog()">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
         </div>
         <!-- <button (click)="stop()"><i class="fa fa-stop"></i></button>

@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { MusicPlayerComponent } from './music-player/music-player.component';
 import { CustomMaterialModule } from 'app/custom-material/custom-material.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
     imports: [
       CommonModule,
-      CustomMaterialModule
+      CustomMaterialModule,
+      RouterModule
     ],
     exports: [
       MusicPlayerComponent,

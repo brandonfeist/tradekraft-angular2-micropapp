@@ -13,6 +13,7 @@ import { Song } from './../model/song';
 @Injectable()
 export class MusicService {
     private audio;
+    private volume: number = 1;
     private paused;
     private songIndexNumber: number;
     private songs: Song[];
@@ -54,6 +55,7 @@ export class MusicService {
             this.songChange.next(this.song); 
             this.releaseChange.next(this.release)
 
+            this.audio.volume = this.volume;
             this.playPromise = this.audio.play();
             this.paused = false;
             this.pauseChange.next(this.paused);
@@ -69,7 +71,8 @@ export class MusicService {
     }
 
     changeVolume(volume: number) {
-        this.audio.volume = volume * volume;
+        this.volume = volume * volume;
+        this.audio.volume = this.volume;
     }
 
     changePlaytime(playtime: number) {
