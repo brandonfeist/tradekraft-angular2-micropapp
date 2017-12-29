@@ -2,6 +2,14 @@ body {
     font-family: $font;
 }
 
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
 input {
     color: $dark-grey;
     font-family: $font;

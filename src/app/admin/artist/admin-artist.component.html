@@ -1,0 +1,43 @@
+<div class="frame index-frame">
+  <div class="wrapper">
+    <div class="tk-container">
+      <div class="col-8">
+          <h1>Artist Administration</h1>
+      </div>
+    </div>
+
+    <div>
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="">
+          <mat-header-cell *matHeaderCellDef>
+              <button routerLink="/admin/artists/create" mat-raised-button color="primary">Create Artist</button>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+              <img class="lazy-load admin-thumb" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="element.image.thumb" title="{{ element.name }}" alt="{{ element.name }}">
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-raised-button color="primary">Edit</button>
+            <button mat-raised-button color="warn" (click)="deleteArtist(element)">Delete</button>
+          </mat-cell>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+          <mat-cell *matCellDef="let element" [innerHTML]="element.description"></mat-cell>
+        </ng-container> -->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

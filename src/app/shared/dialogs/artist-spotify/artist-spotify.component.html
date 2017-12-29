@@ -7,7 +7,9 @@
   <a *ngIf="connectButton" class="btn btn-connect spotify" (click)="spotifyService.connectToSpotify()">Connect to Spotify</a>
 </div>
 
-<a *ngIf="unfollowButton" (click)="unfollowArtist()">Unfollow {{ artist.name }}</a>
-<a *ngIf="followButton" (click)="followArtist()">Follow {{ artist.name }}</a>
+<div *ngIf="unfollowButton || followButton" class="btn-center-wrapper">
+  <a *ngIf="unfollowButton" class="btn btn-connect follow" (click)="unfollowArtist()">Unfollow {{ artist.name }}</a>
+  <a *ngIf="followButton" class="btn btn-connect follow" (click)="followArtist()">Follow {{ artist.name }}</a>
+</div>
 
 <p *ngIf="showErrorMessage">{{ errorMessage }}</p>

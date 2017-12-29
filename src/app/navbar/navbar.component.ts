@@ -19,6 +19,10 @@ export class NavbarComponent implements OnInit {
 
   private navbarTransparent: boolean = true;
 
+  private blackLogo: string = "assets/images/tradekraft-logo-black.png";
+
+  private whiteLogo: string = "assets/images/tradekraft-logo-white.png";
+
   constructor(private authService: AuthService, private  _router : Router, public dialog: MatDialog) { }
 
   ngOnInit() {}

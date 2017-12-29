@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MainNavbarComponent implements OnInit {
 
   @Input() sidenav;
+  
+  private adminPanelPermissions: string[] = ['VIEW_ADMIN_PANEL_PERMISSION'];
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {}
 }

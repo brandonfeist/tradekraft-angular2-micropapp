@@ -263,6 +263,16 @@
         }
     }
 
+    &.follow {
+        background: dodgerblue;
+        border: 1px solid dodgerblue;
+        color: $white;
+        font-weight: 500;
+        margin-right: 10px;
+        margin-top: 10px;
+        text-transform: initial;
+    }
+
     &.share-social {
         color: $white;
         float: left;

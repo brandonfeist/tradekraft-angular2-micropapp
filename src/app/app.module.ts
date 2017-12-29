@@ -25,6 +25,7 @@ import { MusicService } from './services/music.service';
 import { RoleGuard } from 'app/services/guard/role-guard.service';
 import { SnackbarService } from 'app/services/snackbar.service';
 import { GenreService } from 'app/services/genre.service';
+import { FooterModule } from 'app/footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { GenreService } from 'app/services/genre.service';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    PageNotFoundModule
+    PageNotFoundModule,
+    FooterModule
   ],
   providers: [ 
     Title,
@@ -57,6 +59,6 @@ import { GenreService } from 'app/services/genre.service';
     AuthGuard,
     RoleGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

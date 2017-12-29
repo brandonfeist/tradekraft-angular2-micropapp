@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from 'app/admin/admin-routing.module';
+import { AdminArtistComponent } from 'app/admin/artist/admin-artist.component';
+import { ArtistService } from 'app/artist/artist.service';
 
 @NgModule({
     imports:  [ 
@@ -17,7 +19,11 @@ import { AdminRoutingModule } from 'app/admin/admin-routing.module';
       SharedModule
     ],
     declarations: [ 
-      AdminDashboardComponent
+      AdminDashboardComponent,
+      AdminArtistComponent
+    ],
+    providers: [
+      ArtistService
     ]
   })
   export class AdminModule { }
