@@ -1,6 +1,6 @@
+import { ArtistService } from 'app/services/artist.service';
 import { SnackbarService } from 'app/services/snackbar.service';
 import { Artist } from 'app/model/artist';
-import { ArtistService } from './../../artist/artist.service';
 import { Component, OnInit }  from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -41,6 +41,23 @@ export class AdminArtistComponent implements OnInit {
   }
 
   private deleteArtist(artist: Artist) {
-    
+    if(confirm("Are you sure you want to delete " + artist.name + "?")) {
+      this.artistService.deleteArtist(artist.slug).subscribe((data) => {
+        console.log("Artist deleted: ", data);
+
+        for(let artistIndex = 0; artistIndex < this.artists.length; artistIndex++) {
+          if(artist.slug === this.artists[artistIndex].slug) {
+            this.artists.splice(artistIndex, 1);
+          }
+        }
+
+        this.dataSource = new MatTableDataSource<Artist>(this.artists);
+
+        this.snackbarService.openSnackbar(artist.name + " deleted.");
+      }, err => {
+        console.log("err: ", err);
+        this.snackbarService.openSnackbar("There was a problem deleting " + artist.name + ".");
+      });
+    }
   }
 }

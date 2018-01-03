@@ -1,4 +1,4 @@
-import { ArtistService } from './artist.service';
+import { ArtistService } from 'app/services/artist.service';
 import { Component, OnInit }  from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';

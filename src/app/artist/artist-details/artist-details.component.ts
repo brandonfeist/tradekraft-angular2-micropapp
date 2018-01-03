@@ -1,3 +1,4 @@
+import { ArtistService } from 'app/services/artist.service';
 import { Component, OnInit, Inject }  from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -5,7 +6,6 @@ import * as moment from 'moment-timezone';
 
 import { ArtistSpotifyDialog } from './../../shared/dialogs/artist-spotify/artist-spotify.component';
 
-import { ArtistService } from './../artist.service';
 import { Event } from './../../model/event';
 import { Artist } from 'app/model/artist';
 

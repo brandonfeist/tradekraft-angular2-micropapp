@@ -100,6 +100,7 @@ export class MusicService {
     }
 
     pausePlay() {
+        console.log(this.audio.buffered.length); // Can use this to create buffered bar 
         if(this.audio.src) {
             if(this.paused) {
                 this.playPromise = this.audio.play();

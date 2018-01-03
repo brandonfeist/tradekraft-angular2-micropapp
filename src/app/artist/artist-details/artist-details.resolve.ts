@@ -1,8 +1,7 @@
+import { ArtistService } from 'app/services/artist.service';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
-
-import { ArtistService } from './../artist.service';
 
 @Injectable()
 export class ArtistDetailsResolve implements Resolve<any> {

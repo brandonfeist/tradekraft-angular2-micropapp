@@ -1,3 +1,4 @@
+import { TinyMceComponent } from './tinymce/tinymce.component';
 import { ShareReleaseDialog } from './dialogs/share-release/share-release.component';
 import { NewsletterDialog } from './dialogs/newsletter/newsletter.component';
 import { ArtistContainerComponent } from './artist/artist-container/artist-container.component';
@@ -17,6 +18,7 @@ import { ReadMoreComponent } from './read-more/read-more.component';
 import { CustomMaterialModule } from 'app/custom-material/custom-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DateAbbr } from 'app/shared/date-abbr/date-abbr';
+import { AuthModule } from 'app/auth/auth.module';
 
 @NgModule({
     imports:  [ 
@@ -24,7 +26,8 @@ import { DateAbbr } from 'app/shared/date-abbr/date-abbr';
       RouterModule,
       CustomMaterialModule,
       LazyLoadImageModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      AuthModule
     ],
     exports: [
       MusicTableComponent,
@@ -37,7 +40,8 @@ import { DateAbbr } from 'app/shared/date-abbr/date-abbr';
       PlaylistSpotifyDialog,
       NewsletterDialog,
       ShareReleaseDialog,
-      ReadMoreComponent
+      ReadMoreComponent,
+      TinyMceComponent
     ],
     declarations: [ 
       MusicTableComponent,
@@ -50,7 +54,8 @@ import { DateAbbr } from 'app/shared/date-abbr/date-abbr';
       PlaylistSpotifyDialog,
       NewsletterDialog,
       ShareReleaseDialog,
-      ReadMoreComponent
+      ReadMoreComponent,
+      TinyMceComponent
     ],
     providers: [
       DateAbbr

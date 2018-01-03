@@ -26,6 +26,7 @@ import { RoleGuard } from 'app/services/guard/role-guard.service';
 import { SnackbarService } from 'app/services/snackbar.service';
 import { GenreService } from 'app/services/genre.service';
 import { FooterModule } from 'app/footer/footer.module';
+import { ArtistService } from 'app/services/artist.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { FooterModule } from 'app/footer/footer.module';
   ],
   providers: [ 
     Title,
+    ArtistService,
     ReleaseService,
     GenreService,
     EventService,

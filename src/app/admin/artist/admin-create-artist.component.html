@@ -1,0 +1,49 @@
+<div class="frame index-frame">
+  <div class="wrapper">
+    <div class="tk-container">
+      <div class="col-8">
+          <h1>Create Artist</h1>
+      </div>
+    </div>
+
+    <form [formGroup]="artistCreateForm" (ngSubmit)="onSubmit()" novalidate>
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="Artist name..." formControlName="name" required>
+      </mat-form-field>
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="Soundcloud link..." formControlName="soundcloud">
+        <mat-error *ngIf="artistCreateForm.controls.soundcloud.errors?.pattern">Not a valid artist soundcloud url [Ex. https://www.soundcloud.com/artistName]</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="Twitter link..." formControlName="twitter">
+        <mat-error *ngIf="artistCreateForm.controls.twitter.errors?.pattern">Not a valid artist twitter url [Ex. https://www.twitter.com/artistName]</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="Spotify link..." formControlName="spotify">
+        <mat-error *ngIf="artistCreateForm.controls.spotify.errors?.pattern">Not a valid artist spotify url [Ex. https://www.open.spotify.com/artist/artistId]</mat-error>
+      </mat-form-field>
+      <div class="col-xs-6">
+        <button mat-raised-button type="button" (click)="imgFileInput.click()">Artist Photo</button>
+        <input type="file" #imgFileInput (change)="fileChange($event)" accept=".jpg,.png" style="visibility: hidden">
+        <input type="hidden" name="fileHidden" formControlName="image" required/>
+      </div>
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="Instagram link..." formControlName="instagram">
+        <mat-error *ngIf="artistCreateForm.controls.instagram.errors?.pattern">Not a valid artist instagram url [Ex. https://www.instagram.com/artistName]</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-xs-12">
+        <mat-select placeholder="Years artist active..." formControlname="yearsActive" (change)="multiChange($event)" multiple>
+          <mat-option *ngFor="let year of years" [value]="year">{{ year.year }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="col-xs-12">
+        <tiny-mce [elementId]="'my-editor-id'" (onEditorKeyup)="keyupHandlerFunction($event)" formControlname="description"></tiny-mce>
+      </div>
+
+      <div class="btn-center-wrapper login-btn">
+        <button *ngIf="!processing" mat-raised-button color="primary" type="submit" [disabled]="!artistCreateForm.valid">Submit</button>
+        <button *ngIf="processing" mat-raised-button color="primary" type="submit" disabled><i class="fa fa-spinner fa-spin"></i></button>
+      </div>
+    </form>
+  </div>
+</div>

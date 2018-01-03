@@ -7,7 +7,6 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ArtistComponent }  from './artist.component';
 import { ArtistDetailsComponent } from './artist-details/artist-details.component';
-import { ArtistService }    from './artist.service';
 import { ArtistRoutingModule }  from './artist-routing.module';
 import { ArtistDetailsResolve } from './artist-details/artist-details.resolve';
 
@@ -25,7 +24,6 @@ import { ArtistDetailsResolve } from './artist-details/artist-details.resolve';
       ArtistDetailsComponent
     ],
     providers: [ 
-      ArtistService, 
       ArtistDetailsResolve,
       ArtistYearsResolve
     ]
