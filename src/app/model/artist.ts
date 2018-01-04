@@ -1,3 +1,4 @@
+import { Year } from 'app/model/year';
 import { Event } from './event';
 
 export class Artist {
@@ -13,6 +14,7 @@ export class Artist {
     spotify: string;
     slug: string;
     events: Event[];
+    yearsActive: Year[];
     createdAt: Date;
     updatedAt: Date;
 }

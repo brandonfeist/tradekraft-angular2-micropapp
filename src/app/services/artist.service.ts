@@ -26,6 +26,11 @@ export class ArtistService {
         .map((res:Response) => res.json());
     }
 
+    editArtist(artistSlug: string, patches: Object[]) {
+        return this.authHttp.patch('http://localhost:8087/v1/artists/' + artistSlug, patches)
+        .map((res:Response) => res.json());
+    }
+
     getArtists(params?: URLSearchParams) {
         return this.http.get('http://localhost:8087/v1/artists',
         { search: params })

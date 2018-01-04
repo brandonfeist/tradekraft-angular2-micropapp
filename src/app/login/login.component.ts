@@ -39,7 +39,7 @@ import { SnackbarService } from 'app/services/snackbar.service';
     }
 
     showLoginError(error) {
-      let loginErrorMessage = JSON.parse(error._body).error;
+      let loginErrorMessage = JSON.parse(error._body).error_description;
 
       if(loginErrorMessage === "unauthorized") {
         this.snackbarService.openSnackbar("Sorry your username and password was incorrect. Please try again or contact support@tradekraftcollective.com",

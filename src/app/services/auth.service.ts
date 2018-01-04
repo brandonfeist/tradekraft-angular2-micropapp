@@ -18,6 +18,7 @@ export class AuthService {
   authenticate(username: string, password: string) {
     let url = this.authenticationServiceUrl + '/oauth/token?grant_type=password' +
       '&client_id=testjwtclientid' +
+      '&client_secret=MaYzkSjmkzPC57L' +
       '&username=' + username +
       '&password=' + password;
 
