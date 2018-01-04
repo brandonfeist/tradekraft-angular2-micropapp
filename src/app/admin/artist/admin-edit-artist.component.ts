@@ -109,30 +109,27 @@ export class AdminEditArtistComponent implements OnInit {
   }
 
   private onSubmit() {
+    this.processing = true;
+
     let patches = this.getJsonPatches();
 
     this.artistService.editArtist(this.artist.slug, patches).subscribe((artist) => {
-      this.snackbarService.openSnackbar("Edited artist " + artist.name);
-      this.router.navigate(['admin/artists']);
+      if(this.imageFile) {
+        this.artistService.uploadArtistImage(artist.slug, this.imageFile).subscribe((artistWithImage) => {
+          this.snackbarService.openSnackbar("Edited artist " + artist.name);
+          this.router.navigate(['admin/artists']);
+        }, err => {
+          console.log("err: ", err);
+          this.snackbarService.openSnackbar("There was an error editing the artist.");
+
+          this.processing = false;
+        })
+      }
     }, err => {
       console.log("err: ", err);
       this.snackbarService.openSnackbar("There was an error editing the artist.");
-    })
-    // this.processing = true;
 
-    // this.artistService.createArtist(this.artistCreateForm.value).subscribe(artist => {
-    //   this.artistService.uploadArtistImage(artist.slug, this.imageFile).subscribe(data => {
-    //     this.snackbarService.openSnackbar("Created artist " + artist.name);
-    //     this.router.navigate(['admin/artists']);
-    //   }, err => {
-    //     console.log("err: ", err);
-    //     this.snackbarService.openSnackbar("There was an problem uploading the artist image.");
-        
-    //     this.processing = true;
-    //   });
-    // }, err => {
-    //   console.log("err: ", err);
-    //   this.snackbarService.openSnackbar("Artist Create Error: " + JSON.parse(err._body).error, undefined, 5000);
-    // });
+      this.processing = false;
+    })
   }
 }

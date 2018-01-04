@@ -92,11 +92,13 @@ export class AdminCreateArtistComponent implements OnInit {
         console.log("err: ", err);
         this.snackbarService.openSnackbar("There was an problem uploading the artist image.");
         
-        this.processing = true;
+        this.processing = false;
       });
     }, err => {
       console.log("err: ", err);
       this.snackbarService.openSnackbar("Artist Create Error: " + JSON.parse(err._body).error, undefined, 5000);
+
+      this.processing = false;
     });
   }
 }
