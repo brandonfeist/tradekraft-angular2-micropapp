@@ -16,7 +16,7 @@ import { EventService } from './../../../services/event.service';
     constructor(private eventService: EventService) { }
 
     ngOnInit() { 
-      this.eventService.getEvents(new URLSearchParams("pageSize=4")).subscribe(data => {
+      this.eventService.getEvents(new URLSearchParams("futureEvents=true&pageSize=4")).subscribe(data => {
         this.events = data.content;
       },
       err => {

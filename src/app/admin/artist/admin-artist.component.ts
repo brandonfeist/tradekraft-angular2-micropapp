@@ -12,6 +12,8 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class AdminArtistComponent implements OnInit {
 
+  private loading: boolean = true;
+
   private artists: Artist[];
 
   private dataSource;
@@ -32,11 +34,15 @@ export class AdminArtistComponent implements OnInit {
 
   private getAllArtists() {
     this.artistService.getArtists().subscribe((artists) => {
+      this.loading = false;
+      
       this.artists = artists.content;
       this.dataSource = new MatTableDataSource<Artist>(this.artists);
     }, err => {
       console.log("Artist get error, ", err);
       this.snackbarService.openSnackbar("There was a problem getting the artists.");
+
+      this.loading = false;
     })
   }
 

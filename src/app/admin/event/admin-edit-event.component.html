@@ -1,0 +1,84 @@
+<div class="frame index-frame">
+  <div class="wrapper">
+    <div class="tk-container">
+      <div class="col-8">
+          <h1>Edit {{ event.name }}</h1>
+      </div>
+    </div>
+
+    <form [formGroup]="eventEditForm" (ngSubmit)="onSubmit()" novalidate>
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="Event name..." formControlName="name" required>
+      </mat-form-field>
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="Venue name..." formControlName="venueName" required>
+      </mat-form-field>
+
+      <mat-form-field class="col-xs-6">
+        <mat-select placeholder="Event entry age..." formControlName="entryAge" required>
+          <mat-option *ngFor="let entryAge of entryAges" [value]="entryAge">{{ entryAge }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="col-xs-6">
+        <mat-slide-toggle formControlName="officialEvent">Official Event</mat-slide-toggle>
+      </div>
+
+      <div class="col-xs-6">
+        <p-calendar formControlName="startDateTime" showTime="true" hourFormat="24" required></p-calendar>
+      </div>
+      <div class="col-xs-6">
+        <p-calendar formControlName="endDateTime" showTime="true" hourFormat="24" required></p-calendar>
+      </div>
+
+      <mat-form-field class="col-xs-6">
+        <mat-select [compareWith]="compareFn" placeholder="Event artists..." formControlName="artists" multiple>
+          <mat-option *ngFor="let artist of artists" [value]="{ name: artist.name, slug: artist.slug }">{{ artist.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="Ticket Link.." formControlName="ticketLink">
+      </mat-form-field>
+
+      <mat-form-field class="col-xs-12">
+        <input matInput placeholder="Address..." formControlName="address">
+      </mat-form-field>
+
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="City..." formControlName="city" required>
+      </mat-form-field>
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="State / Province / Region..." formControlName="state" required>
+      </mat-form-field>
+
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="Zip code..." formControlName="zip">
+      </mat-form-field>
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="Country..." formControlName="country" required>
+      </mat-form-field>
+
+      <div class="col-xs-12">
+        <div class="col-xs-8">
+          <button mat-raised-button type="button" (click)="imgFileInput.click()">Event Photo</button>
+        </div>
+        <div class="col-xs-4">
+            <button mat-raised-button *ngIf="imageFile" type="button" (click)="removeImageFile()">Remove Image</button>
+        </div>
+        <input type="file" #imgFileInput (change)="fileChange($event)" accept=".jpg,.png" style="visibility: hidden">
+        <input type="hidden" name="fileHidden" formControlName="image" required/>
+      </div>
+
+      <div class="col-xs-12">
+        <tiny-mce [elementId]="'artist-edit-editor'" [initialContent]="event.description" (onEditorKeyup)="keyupHandlerFunction($event)" formControlName="description" ngDefaultControl></tiny-mce>
+      </div>
+
+      <div class="btn-center-wrapper login-btn col-xs-6">
+        <button *ngIf="!processing" mat-raised-button color="primary" type="submit" [disabled]="!eventEditForm.valid">Submit</button>
+        <button *ngIf="processing" mat-raised-button color="primary" type="submit" disabled><i class="fa fa-spinner fa-spin"></i></button>
+      </div>
+      <div class="btn-center-wrapper login-btn col-xs-6">
+          <button mat-raised-button routerLink="/admin/events">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

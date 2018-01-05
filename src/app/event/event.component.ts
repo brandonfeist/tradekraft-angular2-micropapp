@@ -62,10 +62,10 @@ import * as moment from 'moment-timezone';
     }
 
     getQueryString(): string {
-      let query: string;
+      let query: string = "futureEvents=true";
 
       if(this.officialEventsOnly) {
-        query = "officialEvents=" + this.officialEventsOnly;
+        query += "&officialEvents=" + this.officialEventsOnly;
       }
 
       return query

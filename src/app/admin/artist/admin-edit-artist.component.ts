@@ -78,6 +78,9 @@ export class AdminEditArtistComponent implements OnInit {
 
     this.artistEditForm.controls.description.markAsDirty();
     this.artistEditForm.controls.description.markAsTouched();
+
+    this.artistEditForm.markAsDirty();
+    this.artistEditForm.markAsTouched();
   }
 
   private fileChange(event) {
@@ -86,10 +89,13 @@ export class AdminEditArtistComponent implements OnInit {
     if(fileList.length > 0) {
       this.imageFile = fileList[0]
       this.artistEditForm.get('image').setValue(this.imageFile.name);
-
-      this.artistEditForm.controls.image.markAsDirty();
-      this.artistEditForm.controls.image.markAsTouched();
     }
+  }
+
+  removeImageFile() {
+    this.imageFile = undefined;
+
+    this.artistEditForm.get('image').setValue(this.artist.name);
   }
 
   compareFn(c1, c2): boolean {
@@ -113,23 +119,31 @@ export class AdminEditArtistComponent implements OnInit {
 
     let patches = this.getJsonPatches();
 
-    this.artistService.editArtist(this.artist.slug, patches).subscribe((artist) => {
-      if(this.imageFile) {
-        this.artistService.uploadArtistImage(artist.slug, this.imageFile).subscribe((artistWithImage) => {
+    if(this.artistEditForm.touched || this.imageFile) {
+      this.artistService.editArtist(this.artist.slug, patches).subscribe((artist) => {
+        if(this.imageFile) {
+          this.artistService.uploadArtistImage(artist.slug, this.imageFile).subscribe((artistWithImage) => {
+            this.snackbarService.openSnackbar("Edited artist " + artist.name);
+            this.router.navigate(['admin/artists']);
+          }, err => {
+            console.log("err: ", err);
+            this.snackbarService.openSnackbar("There was an error editing the artist.");
+
+            this.processing = false;
+          })
+        } else {
           this.snackbarService.openSnackbar("Edited artist " + artist.name);
           this.router.navigate(['admin/artists']);
-        }, err => {
-          console.log("err: ", err);
-          this.snackbarService.openSnackbar("There was an error editing the artist.");
+        }
+      }, err => {
+        console.log("err: ", err);
+        this.snackbarService.openSnackbar("There was an error editing the artist.");
 
-          this.processing = false;
-        })
-      }
-    }, err => {
-      console.log("err: ", err);
-      this.snackbarService.openSnackbar("There was an error editing the artist.");
-
-      this.processing = false;
-    })
+        this.processing = false;
+      })
+    } else {
+      this.snackbarService.openSnackbar("No edits made to " + this.artist.name);
+      this.router.navigate(['admin/artists']);
+    }
   }
 }

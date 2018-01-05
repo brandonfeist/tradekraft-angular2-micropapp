@@ -77,6 +77,12 @@ export class AdminCreateArtistComponent implements OnInit {
     }
   }
 
+  removeImageFile() {
+    this.imageFile = undefined;
+
+    this.artistCreateForm.get('image').setValue(null);
+  }
+
   private multiChange(event) {
     this.artistCreateForm.get('yearsActive').setValue(event.value);
   }
