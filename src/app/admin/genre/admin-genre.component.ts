@@ -18,6 +18,8 @@ export class AdminGenreComponent implements OnInit {
 
   private dataSource;
 
+  private deleting = [];
+
   private displayedColumns = ['', 'name', 'actions'];
 
   constructor(private genreService: GenreService, private snackbarService: SnackbarService) {}
@@ -36,10 +38,18 @@ export class AdminGenreComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Genre>(this.genres);
     }, err => {
       console.log("Genre get error, ", err);
-      this.snackbarService.openSnackbar("There was a problem getting the genres.");
+      this.snackbarService.openSnackbar("There was a problem getting the genres.", "close");
 
       this.loading = false;
     })
+  }
+
+  private isDeletingGenre(genre: Genre) {
+    for(let deleteIndex = 0; deleteIndex < this.deleting.length; deleteIndex++) {
+      if(this.deleting[deleteIndex].id === genre.id) {
+        return true;
+      }
+    }
   }
 
   private deleteGenre(genre: Genre) {
@@ -55,10 +65,15 @@ export class AdminGenreComponent implements OnInit {
 
         this.dataSource = new MatTableDataSource<Genre>(this.genres);
 
-        this.snackbarService.openSnackbar(genre.name + " deleted.");
+        this.snackbarService.openSnackbar(genre.name + " deleted.", "close");
       }, err => {
         console.log("err: ", err);
-        this.snackbarService.openSnackbar("There was a problem deleting " + genre.name + ".");
+
+        if(err._body && JSON.parse(err._body).message.includes("violates not-null constraint")) {
+          this.snackbarService.openSnackbar("Cannot delete a genre being used by a song.", "close", 4000);
+        } else {
+          this.snackbarService.openSnackbar("There was a problem deleting " + genre.name + ".", "close");
+        }
       });
     }
   }

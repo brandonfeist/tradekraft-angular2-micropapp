@@ -18,6 +18,11 @@ export class GenreService {
         .map((res:Response) => res.json());
     }
 
+    createGenre(genreData) {
+        return this.authHttp.post(this.tkServiceUrl + '/v1/genres', genreData)
+        .map((res:Response) => res.json());
+    }
+
     deleteGenre(genreId: number) {
         return this.authHttp.delete(this.tkServiceUrl + '/v1/genres/' + genreId)
         .map((res:Response) => res.json());

@@ -1,3 +1,4 @@
+import { AdminCreateGenreComponent } from './genre/admin-create-genre.component';
 import { AdminCreateEventComponent } from './event/admin-create-event.component';
 import { AdminEditEventResolve } from 'app/admin/event/admin-edit-event.resolve';
 import { AdminEditArtistResolve } from './artist/admin-edit-artist.resolve';
@@ -14,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from 'app/admin/admin-routing.module';
 import { AdminArtistComponent } from 'app/admin/artist/admin-artist.component';
 import { AdminEditArtistComponent } from 'app/admin/artist/admin-edit-artist.component';
-import { CalendarModule } from 'primeng/primeng';
+import { CalendarModule, ColorPickerModule } from 'primeng/primeng';
 import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
       ReactiveFormsModule,
       CustomMaterialModule,
       CalendarModule,
+      ColorPickerModule,
       SharedModule
     ],
     declarations: [ 
@@ -35,7 +37,8 @@ import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
       AdminEventComponent,
       AdminCreateEventComponent,
       AdminEditEventComponent,
-      AdminGenreComponent
+      AdminGenreComponent,
+      AdminCreateGenreComponent
     ],
     providers: [
       AdminEditArtistResolve,

@@ -1,3 +1,4 @@
+import { AdminCreateGenreComponent } from './genre/admin-create-genre.component';
 import { AdminCreateEventComponent } from './event/admin-create-event.component';
 import { AdminEditEventComponent } from './event/admin-edit-event.component';
 import { AdminEventComponent } from './event/admin-event.component';
@@ -31,7 +32,8 @@ import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
                 resolve: { event: AdminEditEventResolve }
             },
 
-            { path: "genres", component: AdminGenreComponent }
+            { path: "genres", component: AdminGenreComponent },
+            { path: "genres/create", component: AdminCreateGenreComponent },
         ])
     ],
     exports: [
