@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { Component, OnInit, Inject }  from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -11,8 +12,8 @@ export class EventDetailsComponent implements OnInit {
   private event: Event;
   private eventSlug: string;
   private paramSubscription: any;
-  defaultImage: string = "assets/images/preload-image.jpg";
-  errorImage: string = "assets/images/error-image.jpg";
+  defaultImage: string =  AppSettings.loadImage;
+  errorImage: string = AppSettings.errorImage;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private router: Router, public dialog: MatDialog) {}

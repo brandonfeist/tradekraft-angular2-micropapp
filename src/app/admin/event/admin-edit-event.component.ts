@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { ArtistService } from 'app/services/artist.service';
 import { Event } from 'app/model/event';
 import { EventService } from './../../services/event.service';
@@ -17,9 +18,9 @@ import * as moment from 'moment-timezone';
 export class AdminEditEventComponent implements OnInit {
   private eventEditForm: FormGroup;
 
-  private defaultImage: string = "assets/images/preload-image.jpg";
+  private defaultImage: string = AppSettings.loadImage;
 
-  private errorImage: string = "assets/images/error-image.jpg";
+  private errorImage: string = AppSettings.errorImage;
 
   private processing: boolean = false;
 

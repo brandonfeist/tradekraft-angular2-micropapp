@@ -1,3 +1,4 @@
+import { AppSettings } from './../app-settings';
 import { ArtistService } from 'app/services/artist.service';
 import { Component, OnInit }  from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
@@ -18,8 +19,8 @@ export class ArtistComponent implements OnInit {
   private artistSearchQuery: string;
 
   private artists: Artist[] = [];
-  private defaultImage: string = "assets/images/preload-image.jpg";
-  private errorImage: string = "assets/images/error-image.jpg";
+  private defaultImage: string = AppSettings.loadImage;
+  private errorImage: string = AppSettings.errorImage;
   private artistSearchForm: FormGroup;
   private years;
 

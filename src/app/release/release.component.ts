@@ -1,3 +1,4 @@
+import { AppSettings } from './../app-settings';
 import { SnackbarService } from './../services/snackbar.service';
 import { Component, OnInit }  from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
@@ -22,8 +23,8 @@ export class ReleaseComponent implements OnInit {
   private releaseTypes: Object[];
   private genres: Genre[];
 
-  defaultImage: string = "assets/images/preload-image.jpg";
-  errorImage: string = "assets/images/error-image.jpg";
+  defaultImage: string = AppSettings.loadImage;
+  errorImage: string = AppSettings.errorImage;
   private releaseSearchForm: FormGroup;
 
   constructor(private releaseService: ReleaseService, private formBuilder: FormBuilder,

@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { DateAbbr } from './../shared/date-abbr/date-abbr';
 import { EventService } from './../services/event.service';
 import { Component, OnInit }      from '@angular/core';
@@ -20,8 +21,8 @@ import * as moment from 'moment-timezone';
     private loading: boolean = true;
     private officialEventsOnly: boolean = false;
 
-    private defaultImage: string = "assets/images/preload-image.jpg";
-    private errorImage: string = "assets/images/error-image.jpg";
+    private defaultImage: string = AppSettings.loadImage;
+    private errorImage: string = AppSettings.errorImage;
 
     constructor(private eventService: EventService, private activatedRoute: ActivatedRoute,
       private snackbarService: SnackbarService, private formBuilder: FormBuilder, private dateAbbr: DateAbbr) {}

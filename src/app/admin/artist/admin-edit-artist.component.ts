@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { YearService } from 'app/services/year.service';
 import { Year } from 'app/model/year';
 import { RegexValidation } from './../../validators/regex-validation';
@@ -21,9 +22,9 @@ export class AdminEditArtistComponent implements OnInit {
 
   private STARTING_YEAR: number = 2015;
 
-  private defaultImage: string = "assets/images/preload-image.jpg";
+  private defaultImage: string = AppSettings.loadImage;
 
-  private errorImage: string = "assets/images/error-image.jpg";
+  private errorImage: string = AppSettings.errorImage;
 
   private processing: boolean = false;
 

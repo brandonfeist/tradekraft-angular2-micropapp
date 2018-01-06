@@ -15,6 +15,7 @@ import { AdminRoutingModule } from 'app/admin/admin-routing.module';
 import { AdminArtistComponent } from 'app/admin/artist/admin-artist.component';
 import { AdminEditArtistComponent } from 'app/admin/artist/admin-edit-artist.component';
 import { CalendarModule } from 'primeng/primeng';
+import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
 
 @NgModule({
     imports:  [ 
@@ -33,7 +34,8 @@ import { CalendarModule } from 'primeng/primeng';
       AdminEditArtistComponent,
       AdminEventComponent,
       AdminCreateEventComponent,
-      AdminEditEventComponent
+      AdminEditEventComponent,
+      AdminGenreComponent
     ],
     providers: [
       AdminEditArtistResolve,

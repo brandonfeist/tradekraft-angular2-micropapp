@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { Song } from './../../model/song';
 import { Artist } from './../../model/artist';
 import { Component, OnInit }  from '@angular/core';
@@ -20,8 +21,8 @@ export class ReleaseDetailsComponent implements OnInit {
   private release: Release;
   private artists: Artist[];
   private songs: Song[];
-  defaultImage: string = "assets/images/preload-image.jpg";
-  errorImage: string = "assets/images/error-image.jpg";
+  defaultImage: string = AppSettings.loadImage;
+  errorImage: string = AppSettings.errorImage;
 
   private paramSubscription: any;
   private pauseSubscription;

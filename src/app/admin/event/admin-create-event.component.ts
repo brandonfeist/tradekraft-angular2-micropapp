@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { EventService } from './../../services/event.service';
 import { RegexValidation } from './../../validators/regex-validation';
 import { ArtistService } from 'app/services/artist.service';
@@ -16,9 +17,9 @@ import * as moment from 'moment-timezone';
 export class AdminCreateEventComponent implements OnInit {
   private eventCreateForm: FormGroup;
 
-  private defaultImage: string = "assets/images/preload-image.jpg";
+  private defaultImage: string = AppSettings.loadImage;
 
-  private errorImage: string = "assets/images/error-image.jpg";
+  private errorImage: string = AppSettings.errorImage;
 
   private processing: boolean = false;
 

@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { ArtistService } from 'app/services/artist.service';
 import { Component, OnInit, Inject }  from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
@@ -16,8 +17,8 @@ export class ArtistDetailsComponent implements OnInit {
   private artistSlug: string;
   private paramSubscription: any;
   private artist: Artist;
-  defaultImage: string = "assets/images/preload-image.jpg";
-  errorImage: string = "assets/images/error-image.jpg";
+  defaultImage: string = AppSettings.loadImage;
+  errorImage: string = AppSettings.errorImage;
 
   constructor(private artistService: ArtistService, private activatedRoute: ActivatedRoute, 
     private router: Router, public dialog: MatDialog) {}

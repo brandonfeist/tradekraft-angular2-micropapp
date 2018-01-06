@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { EventService } from './../../services/event.service';
 import { Event } from 'app/model/event';
 import { SnackbarService } from 'app/services/snackbar.service';
@@ -23,9 +24,9 @@ export class AdminEventComponent implements OnInit {
 
   private displayedColumns = ['', 'name', 'officialEvent', 'startDateTime', 'endDateTime', 'actions'];
 
-  private defaultImage: string = "assets/images/preload-image.jpg";
+  private defaultImage: string = AppSettings.loadImage;
 
-  private errorImage: string = "assets/images/error-image.jpg";
+  private errorImage: string = AppSettings.errorImage;
 
   private deleting = [];
 

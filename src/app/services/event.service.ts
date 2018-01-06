@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { AuthHttp } from 'angular2-jwt';
 import { Injectable } from '@angular/core';
 import { Http, Response, URLSearchParams } from '@angular/http';
@@ -5,10 +6,14 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class EventService {
-    constructor(private http: Http, private authHttp: AuthHttp) {}
+    private tkServiceUrl: string;
+
+    constructor(private http: Http, private authHttp: AuthHttp) {
+        this.tkServiceUrl = AppSettings.tkServiceUrl;
+    }
 
     createEvent(eventData) {
-        return this.authHttp.post('http://localhost:8087/v1/events', eventData)
+        return this.authHttp.post(this.tkServiceUrl + '/v1/events', eventData)
         .map((res:Response) => res.json());
     }
 
@@ -17,28 +22,28 @@ export class EventService {
         formData.append('event-slug', eventSlug);
         formData.append('image', eventImage, eventImage.name);
 
-        return this.authHttp.post('http://localhost:8087/v1/events/image', formData)
+        return this.authHttp.post(this.tkServiceUrl + '/v1/events/image', formData)
         .map((res:Response) => res.json());
     }
 
     getEvents(parameters?: URLSearchParams) {
-        return this.http.get('http://localhost:8087/v1/events',
+        return this.http.get(this.tkServiceUrl + '/v1/events',
         { params: parameters })
         .map((res:Response) => res.json());
     }
 
     getEvent(slug: string) {
-        return this.http.get('http://localhost:8087/v1/events/' + slug,)
+        return this.http.get(this.tkServiceUrl + '/v1/events/' + slug,)
         .map((res:Response) => res.json());
     }
 
     deleteEvent(eventSlug: string) {
-        return this.authHttp.delete('http://localhost:8087/v1/events/' + eventSlug)
+        return this.authHttp.delete(this.tkServiceUrl + '/v1/events/' + eventSlug)
         .map((res:Response) => res.json());
     }
 
     editEvent(eventSlug: string, patches: Object[]) {
-        return this.authHttp.patch('http://localhost:8087/v1/events/' + eventSlug, patches)
+        return this.authHttp.patch(this.tkServiceUrl + '/v1/events/' + eventSlug, patches)
         .map((res:Response) => res.json());
     }
 }

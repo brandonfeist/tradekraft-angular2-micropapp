@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { SnackbarService } from './snackbar.service';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -12,7 +13,7 @@ export class AuthService {
   private authenticationServiceUrl: string;
 
   constructor(private http: Http, private router: Router, private snackbarService: SnackbarService) {
-    this.authenticationServiceUrl = 'http://localhost:8086';
+    this.authenticationServiceUrl = AppSettings.authServiceUrl; 
   }
 
   authenticate(username: string, password: string) {

@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { Component, Input } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 
@@ -11,8 +12,8 @@ export class ReleaseContainerComponent {
   @Input() release: Release;
   @Input() noMargin: boolean = false;
 
-  defaultImage = "assets/images/preload-image.jpg";
-  errorImage = "assets/images/error-image.jpg";
+  defaultImage = AppSettings.loadImage;
+  errorImage = AppSettings.errorImage;
 
   constructor() { }
 

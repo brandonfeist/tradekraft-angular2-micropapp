@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { ArtistService } from 'app/services/artist.service';
 import { SnackbarService } from 'app/services/snackbar.service';
 import { Artist } from 'app/model/artist';
@@ -20,9 +21,9 @@ export class AdminArtistComponent implements OnInit {
 
   private displayedColumns = ['', 'name', 'actions'];
 
-  private defaultImage: string = "assets/images/preload-image.jpg";
+  private defaultImage: string = AppSettings.loadImage;
 
-  private errorImage: string = "assets/images/error-image.jpg";
+  private errorImage: string = AppSettings.errorImage;
 
   constructor(private artistService: ArtistService, private snackbarService: SnackbarService) {}
 

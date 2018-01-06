@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { Observable } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
@@ -8,6 +9,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class SpotifyService {
+    public tkServiceUrl: string;
     private spotifyUri: string;
     private spotifyCredentialsUri: string;
     private spotifyClientId: string;
@@ -18,12 +20,13 @@ export class SpotifyService {
     private spotifyReleaseLinkInfoRegex = /https:\/\/open.spotify.com\/album\/(\S+)/;
 
     constructor(private http: Http, private router: Router) {
-        this.spotifyUri = 'https://api.spotify.com';
-        this.spotifyCredentialsUri = 'https://accounts.spotify.com';
-        this.redirectUri = 'http://localhost:4200/login/check-spotify';
-        this.spotifyClientId = '750ea4f964cb4012a1ac34c50654ae7f';
+        this.tkServiceUrl = AppSettings.tkServiceUrl;
+        this.spotifyUri = AppSettings.spotifyServiceUri;
+        this.spotifyCredentialsUri = AppSettings.spotifyCredentialsUri;
+        this.redirectUri = AppSettings.frontendUrl + '/login/check-spotify';
+        this.spotifyClientId = AppSettings.spotifyClientId;
         this.responseType = 'code';
-        this.scope = 'user-follow-read%20user-follow-modify%20user-library-read%20user-library-modify%20playlist-modify-public%20playlist-read-private%20playlist-read-collaborative%20playlist-modify-private%20user-read-private%20user-read-email%20user-top-read%20user-read-birthdate';
+        this.scope = AppSettings.spotifyScope;
     }
 
     connectToSpotify() {
@@ -45,7 +48,7 @@ export class SpotifyService {
             '&redirect_uri=' + this.redirectUri
         );
 
-        return this.http.get('http://localhost:8087/v1/spotify/authorize', {
+        return this.http.get(this.tkServiceUrl + '/v1/spotify/authorize', {
             params: parameters
         })
         .map((res:Response) => res.json());
@@ -57,7 +60,7 @@ export class SpotifyService {
             'refresh_token=' + refreshToken
         );
 
-        return this.http.get('http://localhost:8087/v1/spotify/authorize/refresh', {
+        return this.http.get(this.tkServiceUrl + '/v1/spotify/authorize/refresh', {
             params: parameters,
             headers: this.getSpotifyAuthHeader()
         })

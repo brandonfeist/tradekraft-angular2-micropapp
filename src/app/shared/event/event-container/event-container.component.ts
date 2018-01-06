@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { Event } from './../../../model/event';
 import { Component, Input } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
@@ -13,8 +14,8 @@ export class EventContainerComponent {
   @Input() shorter: boolean;
   @Input() noMargin: boolean = false;
 
-  defaultImage = "assets/images/preload-image.jpg";
-  errorImage = "assets/images/error-image.jpg";
+  defaultImage = AppSettings.loadImage;
+  errorImage = AppSettings.errorImage;
 
   private MILLIS_IN_SECS = 1000;
   private SECS_IN_MINS = 60;

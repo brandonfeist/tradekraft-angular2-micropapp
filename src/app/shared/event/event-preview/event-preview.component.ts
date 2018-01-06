@@ -1,3 +1,4 @@
+import { AppSettings } from 'app/app-settings';
 import { Component, OnInit }      from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 
@@ -10,8 +11,8 @@ import { EventService } from './../../../services/event.service';
   })
   export class EventPreviewComponent implements OnInit {
     events: Event[] = [];
-    defaultImage = "assets/images/preload-image.jpg";
-    errorImage = "assets/images/error-image.jpg";
+    defaultImage = AppSettings.loadImage;
+    errorImage = AppSettings.errorImage;
 
     constructor(private eventService: EventService) { }
 
