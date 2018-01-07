@@ -1,6 +1,6 @@
 <a class="item artist artist-mix" routerLink="/artists/{{ artist.slug }}">
   <div class="image-container" [ngClass]="{'no-margin': noMargin}">
-      <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.image.medium" title="artist.name" alt="artist.name">
+      <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.images.medium.link" title="artist.name" alt="artist.name">
   </div>
   <div class="text-container" [ngClass]="{'no-margin': noMargin}">
       <h2>{{ artist.name }}</h2>

@@ -1,3 +1,4 @@
+import { StartEndDateValidation } from './../../validators/start-end-date-validation';
 import { AppSettings } from 'app/app-settings';
 import { ArtistService } from 'app/services/artist.service';
 import { Event } from 'app/model/event';
@@ -78,6 +79,8 @@ export class AdminEditEventComponent implements OnInit {
       country: this.event.country,
       ticketLink: this.event.ticketLink,
       artists: [this.event.artists]
+    }, {
+      validator: StartEndDateValidation.dates('startDateTime', 'endDateTime')
     });
   }
   // Validate if startDateTime is less than endDateTime

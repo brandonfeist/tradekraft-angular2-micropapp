@@ -1,12 +1,12 @@
 <div class="frame banner small">
-    <img class="image lazy-load" [errorImage]="errorImage" [lazyLoad]="artist.image.original">
+    <img class="image lazy-load" [errorImage]="errorImage" [lazyLoad]="artist.images.original.link">
 </div>
 <div class="frame">
     <div class="wrapper">
         <div class="artist-header">
             <div class="col-3">
                 <div class="image-container">
-                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.image.medium" title="{{ artist.name }}"
+                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.images.medium.link" title="{{ artist.name }}"
                         alt="{{ artist.name }}">
                 </div>
                 <div class="sub-container">

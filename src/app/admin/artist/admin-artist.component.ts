@@ -50,8 +50,6 @@ export class AdminArtistComponent implements OnInit {
   private deleteArtist(artist: Artist) {
     if(confirm("Are you sure you want to delete " + artist.name + "?")) {
       this.artistService.deleteArtist(artist.slug).subscribe((data) => {
-        console.log("Artist deleted: ", data);
-
         for(let artistIndex = 0; artistIndex < this.artists.length; artistIndex++) {
           if(artist.slug === this.artists[artistIndex].slug) {
             this.artists.splice(artistIndex, 1);

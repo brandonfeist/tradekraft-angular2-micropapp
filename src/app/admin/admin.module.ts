@@ -1,3 +1,5 @@
+import { AdminEditGenreResolve } from './genre/admin-edit-genre.resolve';
+import { AdminEditGenreComponent } from './genre/admin-edit-genre.component';
 import { AdminCreateGenreComponent } from './genre/admin-create-genre.component';
 import { AdminCreateEventComponent } from './event/admin-create-event.component';
 import { AdminEditEventResolve } from 'app/admin/event/admin-edit-event.resolve';
@@ -38,11 +40,13 @@ import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
       AdminCreateEventComponent,
       AdminEditEventComponent,
       AdminGenreComponent,
-      AdminCreateGenreComponent
+      AdminCreateGenreComponent,
+      AdminEditGenreComponent
     ],
     providers: [
       AdminEditArtistResolve,
-      AdminEditEventResolve
+      AdminEditEventResolve,
+      AdminEditGenreResolve
     ]
   })
   export class AdminModule { }

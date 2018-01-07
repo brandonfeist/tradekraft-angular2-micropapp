@@ -1,3 +1,4 @@
+import { AdminEditGenreComponent } from './genre/admin-edit-genre.component';
 import { AdminCreateGenreComponent } from './genre/admin-create-genre.component';
 import { AdminCreateEventComponent } from './event/admin-create-event.component';
 import { AdminEditEventComponent } from './event/admin-edit-event.component';
@@ -11,6 +12,7 @@ import { AdminEditArtistComponent } from 'app/admin/artist/admin-edit-artist.com
 import { AdminEditArtistResolve } from 'app/admin/artist/admin-edit-artist.resolve';
 import { AdminEditEventResolve } from 'app/admin/event/admin-edit-event.resolve';
 import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
+import { AdminEditGenreResolve } from 'app/admin/genre/admin-edit-genre.resolve';
 
 @NgModule({
     imports: [
@@ -34,6 +36,10 @@ import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
 
             { path: "genres", component: AdminGenreComponent },
             { path: "genres/create", component: AdminCreateGenreComponent },
+            {
+                path: 'genres/edit/:id', component: AdminEditGenreComponent,
+                resolve: { genre: AdminEditGenreResolve }
+            }
         ])
     ],
     exports: [

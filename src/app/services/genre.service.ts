@@ -18,8 +18,18 @@ export class GenreService {
         .map((res:Response) => res.json());
     }
 
+    getGenre(id: number) {
+        return this.http.get(this.tkServiceUrl + '/v1/genres/' + id,)
+        .map((res:Response) => res.json());
+    }
+
     createGenre(genreData) {
         return this.authHttp.post(this.tkServiceUrl + '/v1/genres', genreData)
+        .map((res:Response) => res.json());
+    }
+
+    editGenre(genreId: number, patches: Object[]) {
+        return this.authHttp.patch(this.tkServiceUrl + '/v1/genres/' + genreId, patches)
         .map((res:Response) => res.json());
     }
 
