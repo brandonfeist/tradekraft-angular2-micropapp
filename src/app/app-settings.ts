@@ -16,4 +16,8 @@ export class AppSettings {
   public static loadImage: string = "assets/images/preload-image.jpg";
 
   public static errorImage: string = "assets/images/error-image.jpg";
+
+  public static defaultFeatureVideo: string = "";
+
+  public static defaultFeaturePoster: string = "";
 }

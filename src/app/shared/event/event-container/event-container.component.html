@@ -6,7 +6,7 @@
       <div class="date">
           <h1>{{ formatEventStartDateTime(event) }}</h1>
       </div>
-      <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.image.original" alt="event title">
+      <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.images.original.link" alt="event title">
   </div>
   <div class="text-container" [ngClass]="{'shorter': shorter, 'no-margin': noMargin}">
       <h2>{{ event.name }}</h2>

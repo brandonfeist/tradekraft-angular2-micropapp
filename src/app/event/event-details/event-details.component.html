@@ -1,12 +1,12 @@
 <div class="frame banner small">
-    <img class="image lazy-load" [errorImage]="errorImage" [lazyLoad]="event.image.original">
+    <img class="image lazy-load" [errorImage]="errorImage" [lazyLoad]="event.images.original.link">
 </div>
 <div class="frame">
   <div class="wrapper">
     <div class="event-header">
       <div class="col-3">
         <div class="image-container">
-          <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.image.original" title="{{ event.name }}"
+          <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.images.original.link" title="{{ event.name }}"
               alt="{{ event.name }}">
         </div>
         <div class="sub-container">

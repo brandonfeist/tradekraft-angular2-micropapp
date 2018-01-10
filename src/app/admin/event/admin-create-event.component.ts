@@ -54,7 +54,7 @@ export class AdminCreateEventComponent implements OnInit {
     this.eventCreateForm = this.formBuilder.group({
       name: null,
       venueName: null,
-      image: null,
+      images: null,
       description: null,
       entryAge: null,
       officialEvent: null,
@@ -71,7 +71,6 @@ export class AdminCreateEventComponent implements OnInit {
       validator: StartEndDateValidation.dates('startDateTime', 'endDateTime')
     });
   }
-  // Validate if startDateTime is less than endDateTime
   // Validate if ticketLink is a valid url
 
   private keyupHandlerFunction(event) {
@@ -83,7 +82,7 @@ export class AdminCreateEventComponent implements OnInit {
 
     if(fileList.length > 0) {
       this.imageFile = fileList[0]
-      this.eventCreateForm.get('image').setValue(this.imageFile.name);
+      this.eventCreateForm.get('images').setValue(this.imageFile.name);
     }
   }
 
@@ -95,6 +94,8 @@ export class AdminCreateEventComponent implements OnInit {
 
   private onSubmit() {
     this.processing = true;
+
+    this.eventCreateForm.get('images').setValue(null);
 
     this.eventService.createEvent(this.eventCreateForm.value).subscribe(event => {
       this.eventService.uploadEventImage(event.slug, this.imageFile).subscribe(data => {
