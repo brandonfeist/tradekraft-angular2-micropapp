@@ -19,6 +19,9 @@ import { AdminArtistComponent } from 'app/admin/artist/admin-artist.component';
 import { AdminEditArtistComponent } from 'app/admin/artist/admin-edit-artist.component';
 import { CalendarModule, ColorPickerModule } from 'primeng/primeng';
 import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
+import { AdminUserComponent } from 'app/admin/user/admin-user.component';
+import { AdminEditUserComponent } from 'app/admin/user/admin-edit-user.component';
+import { AdminEditUserResolve } from 'app/admin/user/admin-edit-user.resolve';
 
 @NgModule({
     imports:  [ 
@@ -41,12 +44,15 @@ import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
       AdminEditEventComponent,
       AdminGenreComponent,
       AdminCreateGenreComponent,
-      AdminEditGenreComponent
+      AdminEditGenreComponent,
+      AdminUserComponent,
+      AdminEditUserComponent
     ],
     providers: [
       AdminEditArtistResolve,
       AdminEditEventResolve,
-      AdminEditGenreResolve
+      AdminEditGenreResolve,
+      AdminEditUserResolve
     ]
   })
   export class AdminModule { }

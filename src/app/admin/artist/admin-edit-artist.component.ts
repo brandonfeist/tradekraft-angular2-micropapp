@@ -75,6 +75,7 @@ export class AdminEditArtistComponent implements OnInit {
   }
 
   private keyupHandlerFunction(event) {
+    console.log(this.artistEditForm);
     this.artistEditForm.get('description').setValue(event);
 
     this.artistEditForm.controls.description.markAsDirty();

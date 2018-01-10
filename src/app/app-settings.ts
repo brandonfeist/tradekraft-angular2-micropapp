@@ -20,4 +20,6 @@ export class AppSettings {
   public static defaultFeatureVideo: string = "";
 
   public static defaultFeaturePoster: string = "";
+
+  public static defualtUserImage: string = '/assets/images/default-profile.png';
 }

@@ -6,6 +6,14 @@
       </mat-form-field>
 
       <mat-form-field class="login-input">
+          <input matInput placeholder="First name" formControlName="firstName" required>
+      </mat-form-field>
+
+      <mat-form-field class="login-input">
+          <input matInput placeholder="Last name" formControlName="lastName" required>
+      </mat-form-field>
+
+      <mat-form-field class="login-input">
           <input matInput placeholder="Email" formControlName="email" required email>
           <mat-error *ngIf="userRegistrationForm.controls.email.errors?.email">Not a valid email</mat-error>
       </mat-form-field>
