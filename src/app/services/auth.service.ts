@@ -16,6 +16,11 @@ export class AuthService {
     this.authenticationServiceUrl = AppSettings.authServiceUrl; 
   }
 
+  editUser(username: string, patches: Object[]) {
+    return this.authHttp.patch(this.authenticationServiceUrl + '/v1/users/' + username, patches)
+    .map((res:Response) => res.json());
+  }
+
   registerUser(userData) {
     return this.http.post(this.authenticationServiceUrl + "/v1/users/register", userData)
     .map((res:Response) => res.json());
@@ -76,8 +81,18 @@ export class AuthService {
     return false;
   }
 
+  getAllRoles() {
+    return this.authHttp.get(this.authenticationServiceUrl + "/v1/permissions/roles")
+    .map((res:Response) => res.json());
+  }
+
   getPermissions() {
     return this.decodeToken().authorities;
+  }
+
+  getAllPermissions() {
+    return this.authHttp.get(this.authenticationServiceUrl + "/v1/permissions/permissions")
+    .map((res:Response) => res.json());
   }
 
   hasAllPermissions(permissions: string[]): boolean {

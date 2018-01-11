@@ -1,3 +1,4 @@
+import { AdminEditUserRolesResolve } from './user/admin-edit-user-roles.resolve';
 import { AdminEditGenreResolve } from './genre/admin-edit-genre.resolve';
 import { AdminEditGenreComponent } from './genre/admin-edit-genre.component';
 import { AdminCreateGenreComponent } from './genre/admin-create-genre.component';
@@ -52,7 +53,8 @@ import { AdminEditUserResolve } from 'app/admin/user/admin-edit-user.resolve';
       AdminEditArtistResolve,
       AdminEditEventResolve,
       AdminEditGenreResolve,
-      AdminEditUserResolve
+      AdminEditUserResolve,
+      AdminEditUserRolesResolve
     ]
   })
   export class AdminModule { }

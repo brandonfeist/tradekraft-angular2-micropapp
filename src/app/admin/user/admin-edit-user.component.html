@@ -15,7 +15,7 @@
       </mat-form-field>
 
       <mat-form-field class="col-xs-6">
-        <input matInput placeholder="Username..." formControlName="username">
+        <input matInput placeholder="Username..." value="{{ user.username }}" disabled>
       </mat-form-field>
       <mat-form-field class="col-xs-6">
         <input matInput placeholder="Email..." formControlName="email">
@@ -29,11 +29,21 @@
             <button mat-raised-button *ngIf="imageFile" type="button" (click)="removeImageFile()">Remove Image</button>
         </div>
         <input type="file" #imgFileInput (change)="fileChange($event)" accept=".jpg,.png" style="visibility: hidden">
-        <input type="hidden" name="fileHidden" formControlName="image" required/>
+        <input type="hidden" name="fileHidden" formControlName="image" />
       </div>
       <div class="col-xs-6">
         <mat-slide-toggle formControlName="enabled">User neabled</mat-slide-toggle>
       </div>
+
+      <div class="col-xs-12">
+        <h1>Roles</h1>
+      </div>
+
+      <mat-form-field class="col-xs-12">
+        <mat-select placeholder="User roles..." [compareWith]="compareFn" formControlName="roles" multiple>
+          <mat-option *ngFor="let role of roles" [value]="role">{{ role.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
       <div class="btn-center-wrapper login-btn col-xs-6">
         <button *ngIf="!processing" mat-raised-button color="primary" type="submit" [disabled]="!userEditForm.valid">Submit</button>

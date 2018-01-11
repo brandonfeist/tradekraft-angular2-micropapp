@@ -3,7 +3,7 @@ import { AppSettings } from 'app/app-settings';
 import { RegexValidation } from './../../validators/regex-validation';
 import { SnackbarService } from 'app/services/snackbar.service';
 import { Component, OnInit }  from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 import { MatTableDataSource } from '@angular/material';
@@ -21,6 +21,8 @@ export class AdminEditUserComponent implements OnInit {
 
   private user;
 
+  private roles = [];
+
   private userSlug: string;
 
   private paramSubscription: any;
@@ -30,6 +32,8 @@ export class AdminEditUserComponent implements OnInit {
 
   ngOnInit() {
     this.paramSubscription = this.activatedRoute.params.subscribe(params => this.userSlug = params['username']);
+
+    this.roles = this.activatedRoute.snapshot.data['roles'];
 
     this.user = this.activatedRoute.snapshot.data['user'];
 
@@ -45,7 +49,8 @@ export class AdminEditUserComponent implements OnInit {
       username: this.user.username,
       image: this.user.image,
       email: this.user.email,
-      enabled: this.user.enabled
+      enabled: this.user.enabled,
+      roles: [this.user.roles]
     });
   }
 
@@ -65,7 +70,7 @@ export class AdminEditUserComponent implements OnInit {
   }
 
   compareFn(c1, c2): boolean {
-    return c1.year && c2.year && c1.year === c2.year;
+    return c1.name && c2.name && c1.name === c2.name;
   }
 
   private getJsonPatches(): Object[] {
@@ -81,35 +86,35 @@ export class AdminEditUserComponent implements OnInit {
   }
 
   private onSubmit() {
-    // this.processing = true;
+    this.processing = true;
 
-    // let patches = this.getJsonPatches();
+    let patches = this.getJsonPatches();
 
-    // if(this.artistEditForm.touched || this.imageFile) {
-    //   this.artistService.editArtist(this.artist.slug, patches).subscribe((artist) => {
-    //     if(this.imageFile) {
-    //       this.artistService.uploadArtistImage(artist.slug, this.imageFile).subscribe((artistWithImage) => {
-    //         this.snackbarService.openSnackbar("Edited artist " + artist.name);
-    //         this.router.navigate(['admin/artists']);
-    //       }, err => {
-    //         console.log("err: ", err);
-    //         this.snackbarService.openSnackbar("There was an error editing the artist.");
+    if(this.userEditForm.touched || this.imageFile) {
+      this.authService.editUser(this.user.username, patches).subscribe((user) => {
+        // if(this.imageFile) {
+        //   this.authService.uploadUserImage(user.username, this.imageFile).subscribe((userWithImage) => {
+        //     this.snackbarService.openSnackbar("Edited user " + user.username);
+        //     this.router.navigate(['admin/users']);
+        //   }, err => {
+        //     console.log("err: ", err);
+        //     this.snackbarService.openSnackbar("There was an error editing the user.");
 
-    //         this.processing = false;
-    //       })
-    //     } else {
-    //       this.snackbarService.openSnackbar("Edited artist " + artist.name);
-    //       this.router.navigate(['admin/artists']);
-    //     }
-    //   }, err => {
-    //     console.log("err: ", err);
-    //     this.snackbarService.openSnackbar("There was an error editing the artist.");
+        //     this.processing = false;
+        //   })
+        // } else {
+          this.snackbarService.openSnackbar("Edited user " + user.username);
+          this.router.navigate(['admin/users']);
+        // }
+      }, err => {
+        console.log("err: ", err);
+        this.snackbarService.openSnackbar("There was an error editing the user.");
 
-    //     this.processing = false;
-    //   })
-    // } else {
-    //   this.snackbarService.openSnackbar("No edits made to " + this.artist.name);
-    //   this.router.navigate(['admin/artists']);
-    // }
+        this.processing = false;
+      })
+    } else {
+      this.snackbarService.openSnackbar("No edits made to " + this.user.username);
+      this.router.navigate(['admin/users']);
+    }
   }
 }

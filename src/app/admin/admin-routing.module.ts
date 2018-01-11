@@ -1,3 +1,4 @@
+import { AdminEditUserRolesResolve } from './user/admin-edit-user-roles.resolve';
 import { AdminEditUserResolve } from 'app/admin/user/admin-edit-user.resolve';
 import { AdminEditGenreComponent } from './genre/admin-edit-genre.component';
 import { AdminCreateGenreComponent } from './genre/admin-create-genre.component';
@@ -46,7 +47,10 @@ import { AdminEditUserComponent } from 'app/admin/user/admin-edit-user.component
             { path: 'users', component: AdminUserComponent },
             {
                 path: 'users/edit/:username', component: AdminEditUserComponent,
-                resolve: { user: AdminEditUserResolve }
+                resolve: { 
+                    user: AdminEditUserResolve,
+                    roles: AdminEditUserRolesResolve
+                }
             }
         ])
     ],
