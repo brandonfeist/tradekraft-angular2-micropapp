@@ -1,3 +1,6 @@
+import { AdminEditRolePermissionsResolve } from './roles/admin-edit-role-permissions.resolve';
+import { AdminEditRoleResolve } from './roles/admin-edit-role.resolve';
+import { AdminRoleComponent } from './roles/admin-role.component';
 import { AdminEditUserRolesResolve } from './user/admin-edit-user-roles.resolve';
 import { AdminEditGenreResolve } from './genre/admin-edit-genre.resolve';
 import { AdminEditGenreComponent } from './genre/admin-edit-genre.component';
@@ -23,6 +26,7 @@ import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
 import { AdminUserComponent } from 'app/admin/user/admin-user.component';
 import { AdminEditUserComponent } from 'app/admin/user/admin-edit-user.component';
 import { AdminEditUserResolve } from 'app/admin/user/admin-edit-user.resolve';
+import { AdminEditRoleComponent } from 'app/admin/roles/admin-edit-role.component';
 
 @NgModule({
     imports:  [ 
@@ -47,14 +51,18 @@ import { AdminEditUserResolve } from 'app/admin/user/admin-edit-user.resolve';
       AdminCreateGenreComponent,
       AdminEditGenreComponent,
       AdminUserComponent,
-      AdminEditUserComponent
+      AdminEditUserComponent,
+      AdminRoleComponent,
+      AdminEditRoleComponent
     ],
     providers: [
       AdminEditArtistResolve,
       AdminEditEventResolve,
       AdminEditGenreResolve,
       AdminEditUserResolve,
-      AdminEditUserRolesResolve
+      AdminEditUserRolesResolve,
+      AdminEditRoleResolve,
+      AdminEditRolePermissionsResolve
     ]
   })
   export class AdminModule { }

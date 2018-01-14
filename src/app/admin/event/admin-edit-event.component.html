@@ -65,7 +65,7 @@
             <button mat-raised-button *ngIf="imageFile" type="button" (click)="removeImageFile()">Remove Image</button>
         </div>
         <input type="file" #imgFileInput (change)="fileChange($event)" accept=".jpg,.png" style="visibility: hidden">
-        <input type="hidden" name="fileHidden" formControlName="image" required/>
+        <input type="hidden" name="fileHidden" formControlName="images" required/>
       </div>
 
       <div class="col-xs-12">

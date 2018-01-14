@@ -89,7 +89,7 @@ export class AdminCreateEventComponent implements OnInit {
   removeImageFile() {
     this.imageFile = undefined;
 
-    this.eventCreateForm.get('image').setValue(null);
+    this.eventCreateForm.get('images').setValue(null);
   }
 
   private onSubmit() {

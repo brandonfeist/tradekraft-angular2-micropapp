@@ -8,17 +8,17 @@
 
     <form [formGroup]="userEditForm" (ngSubmit)="onSubmit()" novalidate>
       <mat-form-field class="col-xs-6">
-        <input matInput placeholder="First name..." formControlName="firstName" required>
-      </mat-form-field>
-      <mat-form-field class="col-xs-6">
-        <input matInput placeholder="Last name..." formControlName="lastName">
-      </mat-form-field>
-
-      <mat-form-field class="col-xs-6">
         <input matInput placeholder="Username..." value="{{ user.username }}" disabled>
       </mat-form-field>
       <mat-form-field class="col-xs-6">
         <input matInput placeholder="Email..." formControlName="email">
+      </mat-form-field>
+        
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="First name..." formControlName="firstName" required>
+      </mat-form-field>
+      <mat-form-field class="col-xs-6">
+        <input matInput placeholder="Last name..." formControlName="lastName">
       </mat-form-field>
 
       <div class="col-xs-6">

@@ -32,7 +32,8 @@
         <li *ngIf="!authService.loggedIn()"><a class="login-button" routerLink="/login">Login</a></li>
         <li *ngIf="authService.loggedIn()" class="dropdown" dropdown>
           <a href dropdownToggle (click)="false" class=" profile-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <img class="img-circle profile-image" src="{{ authService.getUserImage() }}"><span class="caret"></span>
+            <img class="img-circle profile-image lazy-load" [lazyLoad]="authService.getUserImage()"><span class="caret"></span>
+            <!-- <img class="img-circle profile-image" src="{{ authService.getUserImage() }}"><span class="caret"></span> -->
           </a>
           <ul *dropdownMenu class="dropdown-menu">
             <li role="menuitem"><a class="dropdown-text" routerLink="/users/{{ authService.getUsername() }}">Profile</a></li>

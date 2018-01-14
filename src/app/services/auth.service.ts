@@ -86,6 +86,11 @@ export class AuthService {
     .map((res:Response) => res.json());
   }
 
+  getRole(roleName: string) {
+    return this.authHttp.get(this.authenticationServiceUrl + "/v1/permissions/roles/" + roleName)
+    .map((res:Response) => res.json());
+  }
+
   getPermissions() {
     return this.decodeToken().authorities;
   }
@@ -118,11 +123,11 @@ export class AuthService {
   getUserImage(): string {
     let decodedToken = this.decodeToken();
 
-    if(decodedToken && decodedToken.image !== null) {
-      return decodedToken.image;
+    if(decodedToken && decodedToken.images !== null && !_.isEmpty(decodedToken.images)) {
+      return decodedToken.images.original;
     }
 
-    return AppSettings.defualtUserImage;
+    return AppSettings.defaultUserImage;
   }
 
   getUsername(): string {

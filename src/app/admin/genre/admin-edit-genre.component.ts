@@ -35,7 +35,9 @@ export class AdminEditGenreComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.paramSubscription.unsubscribe();
+  }
 
   private createForm() {
     this.genreEditForm = this.formBuilder.group({

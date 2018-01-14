@@ -1,0 +1,36 @@
+<div class="frame index-frame">
+  <div class="wrapper">
+    <div class="tk-container">
+      <div class="col-8">
+          <h1>Role Administration</h1>
+      </div>
+    </div>
+
+    <div>
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>
+              <button routerLink="/admin/roles/create" mat-raised-button color="primary">Create Role</button>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a routerLink="/admin/roles/edit/{{ element.name }}">
+              {{ element.name }}
+            </a>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-raised-button routerLink="/admin/roles/edit/{{ element.name }}" color="primary">Edit</button>
+            <button *ngIf="!isDeletingRole(element)" mat-raised-button color="warn" (click)="deleteRole(element)">Delete</button>
+            <button *ngIf="isDeletingRole(element)" mat-raised-button disabled><i class="fa fa-spinner fa-spin"></i></button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,8 @@ export class AdminArtistComponent implements OnInit {
   private artists: Artist[];
 
   private dataSource;
+  
+  private deleting = [];
 
   private displayedColumns = ['', 'name', 'actions'];
 
@@ -47,7 +49,17 @@ export class AdminArtistComponent implements OnInit {
     })
   }
 
+  private isDeletingArtist(artist: Artist) {
+    for(let deleteIndex = 0; deleteIndex < this.deleting.length; deleteIndex++) {
+      if(this.deleting[deleteIndex].slug === artist.slug) {
+        return true;
+      }
+    }
+  }
+
   private deleteArtist(artist: Artist) {
+    this.deleting.push({ slug: artist.slug });
+
     if(confirm("Are you sure you want to delete " + artist.name + "?")) {
       this.artistService.deleteArtist(artist.slug).subscribe((data) => {
         for(let artistIndex = 0; artistIndex < this.artists.length; artistIndex++) {

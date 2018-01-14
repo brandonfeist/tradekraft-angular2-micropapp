@@ -50,7 +50,9 @@ export class AdminEditArtistComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.paramSubscription.unsubscribe();
+  }
 
   private getYears() {
     let currentYear = moment().year();
@@ -63,7 +65,7 @@ export class AdminEditArtistComponent implements OnInit {
   private createForm() {
     this.artistEditForm = this.formBuilder.group({
       name: this.artist.name,
-      image: this.artist.image,
+      images: this.artist.images,
       description: this.artist.description,
       soundcloud: [this.artist.soundcloud, RegexValidation.regex(/^(http:\/\/|https:\/\/)(www.)?soundcloud.com\/[^\/]+(\/)?$/)],
       facebook: [this.artist.facebook, RegexValidation.regex(/^(http:\/\/|https:\/\/)(www.)?facebook.com\/[^\/]+(\/)?$/)],
@@ -90,14 +92,14 @@ export class AdminEditArtistComponent implements OnInit {
 
     if(fileList.length > 0) {
       this.imageFile = fileList[0]
-      this.artistEditForm.get('image').setValue(this.imageFile.name);
+      this.artistEditForm.get('images').setValue(this.imageFile.name);
     }
   }
 
   removeImageFile() {
     this.imageFile = undefined;
 
-    this.artistEditForm.get('image').setValue(this.artist.name);
+    this.artistEditForm.get('images').setValue(this.artist.name);
   }
 
   compareFn(c1, c2): boolean {

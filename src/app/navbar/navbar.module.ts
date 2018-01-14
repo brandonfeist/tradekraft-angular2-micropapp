@@ -8,12 +8,14 @@ import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
 import { NavbarComponent } from './navbar.component';
 import { CustomMaterialModule } from 'app/custom-material/custom-material.module';
 import { MainNavbarComponent } from 'app/navbar/main/main-navbar.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
     imports: [
       CommonModule,
       CollapseModule,
       CustomMaterialModule,
+      LazyLoadImageModule,
       SharedModule,
       BsDropdownModule.forRoot(),
       RouterModule.forChild([])

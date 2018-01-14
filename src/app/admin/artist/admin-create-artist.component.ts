@@ -54,7 +54,7 @@ export class AdminCreateArtistComponent implements OnInit {
   private createForm() {
     this.artistCreateForm = this.formBuilder.group({
       name: null,
-      image: null,
+      images: null,
       description: null,
       soundcloud: [null, RegexValidation.regex(/^(http:\/\/|https:\/\/)(www.)?soundcloud.com\/[^\/]+(\/)?$/)],
       facebook: [null, RegexValidation.regex(/^(http:\/\/|https:\/\/)(www.)?facebook.com\/[^\/]+(\/)?$/)],
@@ -74,14 +74,14 @@ export class AdminCreateArtistComponent implements OnInit {
 
     if(fileList.length > 0) {
       this.imageFile = fileList[0]
-      this.artistCreateForm.get('image').setValue(this.imageFile.name);
+      this.artistCreateForm.get('images').setValue(this.imageFile.name);
     }
   }
 
   removeImageFile() {
     this.imageFile = undefined;
 
-    this.artistCreateForm.get('image').setValue(null);
+    this.artistCreateForm.get('images').setValue(null);
   }
 
   private multiChange(event) {
@@ -90,6 +90,8 @@ export class AdminCreateArtistComponent implements OnInit {
 
   private onSubmit() {
     this.processing = true;
+
+    this.artistCreateForm.get('images').setValue(null);
 
     this.artistService.createArtist(this.artistCreateForm.value).subscribe(artist => {
       this.artistService.uploadArtistImage(artist.slug, this.imageFile).subscribe(data => {

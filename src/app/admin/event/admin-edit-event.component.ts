@@ -51,7 +51,9 @@ export class AdminEditEventComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.paramSubscription.unsubscribe();
+  }
 
   private getArtists() {
     this.artistService.getArtists().subscribe((artists) => {
@@ -66,7 +68,7 @@ export class AdminEditEventComponent implements OnInit {
     this.eventEditForm = this.formBuilder.group({
       name: this.event.name,
       venueName: this.event.venueName,
-      image: this.event.image,
+      images: this.event.images,
       description: this.event.description,
       entryAge: this.event.entryAge,
       officialEvent: this.event.officialEvent,
@@ -105,7 +107,7 @@ export class AdminEditEventComponent implements OnInit {
 
     if(fileList.length > 0) {
       this.imageFile = fileList[0]
-      this.eventEditForm.get('image').setValue(this.imageFile.name);
+      this.eventEditForm.get('images').setValue(this.imageFile.name);
     }
   }
   
@@ -113,7 +115,7 @@ export class AdminEditEventComponent implements OnInit {
   removeImageFile() {
     this.imageFile = undefined;
 
-    this.eventEditForm.get('image').setValue(this.event.name);
+    this.eventEditForm.get('images').setValue(this.event.name);
   }
 
   private getJsonPatches(): Object[] {
@@ -121,7 +123,7 @@ export class AdminEditEventComponent implements OnInit {
 
     for(let key in this.eventEditForm.controls) {
       if((this.eventEditForm.controls[key].touched || this.eventEditForm.controls[key].dirty)
-        && key !== "image") {
+        && key !== "images") {
         patches.push({op: "replace", path:"/" + key, value: this.eventEditForm.controls[key].value});
       }
     }

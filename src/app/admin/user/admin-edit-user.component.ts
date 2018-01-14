@@ -40,7 +40,9 @@ export class AdminEditUserComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.paramSubscription.unsubscribe();
+  }
 
   private createForm() {
     this.userEditForm = this.formBuilder.group({

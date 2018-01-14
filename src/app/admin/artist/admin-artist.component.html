@@ -28,7 +28,8 @@
           <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
           <mat-cell *matCellDef="let element">
             <button mat-raised-button routerLink="/admin/artists/edit/{{ element.slug }}" color="primary">Edit</button>
-            <button mat-raised-button color="warn" (click)="deleteArtist(element)">Delete</button>
+            <button *ngIf="!isDeletingArtist(element)" mat-raised-button color="warn" (click)="deleteArtist(element)">Delete</button>
+              <button *ngIf="isDeletingArtist(element)" mat-raised-button disabled><i class="fa fa-spinner fa-spin"></i></button>
           </mat-cell>
         </ng-container>
 
