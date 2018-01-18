@@ -1,3 +1,5 @@
+import { AdminReleaseArtistsResolve } from './release/admin-release-artists.resolve';
+import { AdminReleaseComponent } from './release/admin-release.component';
 import { AdminEditRolePermissionsResolve } from './roles/admin-edit-role-permissions.resolve';
 import { AdminEditRoleResolve } from './roles/admin-edit-role.resolve';
 import { AdminRoleComponent } from './roles/admin-role.component';
@@ -27,6 +29,8 @@ import { AdminUserComponent } from 'app/admin/user/admin-user.component';
 import { AdminEditUserComponent } from 'app/admin/user/admin-edit-user.component';
 import { AdminEditUserResolve } from 'app/admin/user/admin-edit-user.resolve';
 import { AdminEditRoleComponent } from 'app/admin/roles/admin-edit-role.component';
+import { AdminCreateReleaseComponent } from 'app/admin/release/admin-create-release.component';
+import { AdminReleaseGenresResolve } from 'app/admin/release/admin-release-genres.resolve';
 
 @NgModule({
     imports:  [ 
@@ -53,7 +57,9 @@ import { AdminEditRoleComponent } from 'app/admin/roles/admin-edit-role.componen
       AdminUserComponent,
       AdminEditUserComponent,
       AdminRoleComponent,
-      AdminEditRoleComponent
+      AdminEditRoleComponent,
+      AdminReleaseComponent,
+      AdminCreateReleaseComponent
     ],
     providers: [
       AdminEditArtistResolve,
@@ -62,7 +68,9 @@ import { AdminEditRoleComponent } from 'app/admin/roles/admin-edit-role.componen
       AdminEditUserResolve,
       AdminEditUserRolesResolve,
       AdminEditRoleResolve,
-      AdminEditRolePermissionsResolve
+      AdminEditRolePermissionsResolve,
+      AdminReleaseArtistsResolve,
+      AdminReleaseGenresResolve
     ]
   })
   export class AdminModule { }

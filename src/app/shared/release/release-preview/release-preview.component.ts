@@ -61,4 +61,8 @@ export class ReleasePreviewComponent implements OnInit {
       return artistsNameString
     }
   }
+
+  private hasReleases(): boolean {
+    return (this.releases && this.releases.length > 0);
+  }
 }

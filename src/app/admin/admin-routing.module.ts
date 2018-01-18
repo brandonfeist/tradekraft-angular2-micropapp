@@ -1,3 +1,4 @@
+import { AdminReleaseArtistsResolve } from './release/admin-release-artists.resolve';
 import { AdminEditRolePermissionsResolve } from './roles/admin-edit-role-permissions.resolve';
 import { AdminEditRoleResolve } from './roles/admin-edit-role.resolve';
 import { AdminEditUserRolesResolve } from './user/admin-edit-user-roles.resolve';
@@ -21,6 +22,9 @@ import { AdminUserComponent } from 'app/admin/user/admin-user.component';
 import { AdminEditUserComponent } from 'app/admin/user/admin-edit-user.component';
 import { AdminRoleComponent } from 'app/admin/roles/admin-role.component';
 import { AdminEditRoleComponent } from 'app/admin/roles/admin-edit-role.component';
+import { AdminReleaseComponent } from 'app/admin/release/admin-release.component';
+import { AdminCreateReleaseComponent } from 'app/admin/release/admin-create-release.component';
+import { AdminReleaseGenresResolve } from 'app/admin/release/admin-release-genres.resolve';
 
 @NgModule({
     imports: [
@@ -34,14 +38,21 @@ import { AdminEditRoleComponent } from 'app/admin/roles/admin-edit-role.componen
                 path: 'artists/edit/:slug', component: AdminEditArtistComponent,
                 resolve: { artist: AdminEditArtistResolve }
             },
-
+            { path: 'releases', component: AdminReleaseComponent },
             { path: "events", component: AdminEventComponent },
             { path: "events/create", component: AdminCreateEventComponent },
             {
                 path: 'events/edit/:slug', component: AdminEditEventComponent,
                 resolve: { event: AdminEditEventResolve }
             },
-
+            { path: "releases", component: AdminReleaseComponent },
+            { 
+                path: "releases/create", component: AdminCreateReleaseComponent,
+                resolve: {
+                    artists: AdminReleaseArtistsResolve,
+                    genres: AdminReleaseGenresResolve
+                }
+            },
             { path: "genres", component: AdminGenreComponent },
             { path: "genres/create", component: AdminCreateGenreComponent },
             {

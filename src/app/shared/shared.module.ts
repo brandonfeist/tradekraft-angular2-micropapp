@@ -1,3 +1,4 @@
+import { CreateSongDialog } from './dialogs/create-song/create-song.component';
 import { TinyMceComponent } from './tinymce/tinymce.component';
 import { ShareReleaseDialog } from './dialogs/share-release/share-release.component';
 import { NewsletterDialog } from './dialogs/newsletter/newsletter.component';
@@ -40,6 +41,7 @@ import { AuthModule } from 'app/auth/auth.module';
       PlaylistSpotifyDialog,
       NewsletterDialog,
       ShareReleaseDialog,
+      CreateSongDialog,
       ReadMoreComponent,
       TinyMceComponent
     ],
@@ -54,6 +56,7 @@ import { AuthModule } from 'app/auth/auth.module';
       PlaylistSpotifyDialog,
       NewsletterDialog,
       ShareReleaseDialog,
+      CreateSongDialog,
       ReadMoreComponent,
       TinyMceComponent
     ],
@@ -64,7 +67,8 @@ import { AuthModule } from 'app/auth/auth.module';
       ArtistSpotifyDialog,
       PlaylistSpotifyDialog,
       NewsletterDialog,
-      ShareReleaseDialog
+      ShareReleaseDialog,
+      CreateSongDialog
     ]
   })
   export class SharedModule { }

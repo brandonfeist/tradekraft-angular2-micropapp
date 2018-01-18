@@ -1,0 +1,45 @@
+<div class="col-8">
+    <h1>Create Release</h1>
+</div>
+
+<form [formGroup]="createSong" (ngSubmit)="onSubmit()" novalidate>
+  <mat-form-field class="col-xs-6">
+    <input matInput placeholder="Song name..." formControlName="name" required>
+  </mat-form-field>
+  <div class="col-xs-6">
+    <div class="col-xs-8">
+      <button mat-raised-button type="button" (click)="songFileInput.click()">Song File</button>
+    </div>
+    <div class="col-xs-4">
+        <button mat-raised-button *ngIf="songFile" type="button" (click)="removeSongFile()">Remove file</button>
+    </div>
+    <input type="file" #songFileInput (change)="fileChange($event)" accept=".wav" style="visibility: hidden">
+    <input type="hidden" name="fileHidden" formControlName="songFiles" required/>
+  </div>
+
+  <mat-form-field class="col-xs-6">
+    <mat-select placeholder="Song artists..." formControlName="artists" required multiple>
+      <mat-option *ngFor="let artist of artists" [value]="artist">{{ artist.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="col-xs-6">
+    <mat-select placeholder="Song genre..." formControlName="genre" required>
+      <mat-option *ngFor="let genre of genres" [value]="genre">{{ genre.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="col-xs-6">
+    <input matInput type="number" placeholder="Tracknumber" formControlName="trackNumber" required>
+  </mat-form-field>
+  <mat-form-field class="col-xs-6">
+    <input matInput type="number" placeholder="BPM" formControlName="bpm">
+  </mat-form-field>
+
+  <div class="btn-center-wrapper login-btn col-xs-6">
+    <button *ngIf="!processing" mat-raised-button color="primary" type="submit" [disabled]="!createSong.valid">Submit</button>
+  </div>
+  <div class="btn-center-wrapper login-btn col-xs-6">
+    <button mat-raised-button (click)="closeDialog()">Cancel</button>
+  </div>
+</form>

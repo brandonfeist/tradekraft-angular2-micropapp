@@ -76,9 +76,9 @@ export class AdminEventComponent implements OnInit {
   }
 
   private deleteEvent(event: Event) {
-    this.deleting.push({ slug: event.slug });
-
     if(confirm("Are you sure you want to delete " + event.name + "?")) {
+      this.deleting.push({ slug: event.slug });
+
       this.eventService.deleteEvent(event.slug).subscribe((data) => {
         for(let eventIndex = 0; eventIndex < this.events.length; eventIndex++) {
           if(event.slug === this.events[eventIndex].slug) {
