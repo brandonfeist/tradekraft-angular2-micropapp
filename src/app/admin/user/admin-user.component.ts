@@ -27,8 +27,6 @@ export class AdminUserComponent implements OnInit {
     this.getUsers();
   }
 
-  ngOnDestroy() {}
-
   private getUsers() {
     this.authService.getUsers().subscribe((users) => {
       this.users = users;

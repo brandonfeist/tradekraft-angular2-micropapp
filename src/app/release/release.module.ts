@@ -1,3 +1,4 @@
+import { SpinnerModule } from './../spinner/spinner.module';
 import { ReleaseGenresResolve } from './release-genre.resolve';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule }     from '@angular/core';
@@ -10,6 +11,8 @@ import { ReleaseDetailsComponent } from './release-details/release-details.compo
 import { ReleaseDetailsResolve } from './release-details/release-details.resolve';
 import { ReleaseRoutingModule } from './release-routing.module';
 import { CustomMaterialModule } from 'app/custom-material/custom-material.module';
+import { InfiniteScrollerDirective } from 'app/directives/infinite-scroller.directive';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
     imports:  [ 
@@ -19,11 +22,14 @@ import { CustomMaterialModule } from 'app/custom-material/custom-material.module
       LazyLoadImageModule,
       ReactiveFormsModule,
       CustomMaterialModule,
-      SharedModule
+      SharedModule,
+      InfiniteScrollModule,
+      SpinnerModule
     ],
     declarations: [ 
       ReleaseComponent,
-      ReleaseDetailsComponent
+      ReleaseDetailsComponent,
+      InfiniteScrollerDirective
     ],
     providers: [
       ReleaseDetailsResolve,

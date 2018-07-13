@@ -1,3 +1,4 @@
+import { SpinnerService } from 'app/services/spinner.service';
 import { AppSettings } from 'app/app-settings';
 import { Component, OnInit } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
@@ -10,15 +11,24 @@ import { Release } from './../../../model/release';
   templateUrl: './release-preview.component.html'
 })
 export class ReleasePreviewComponent implements OnInit {
-  releases: Release[] = [];
-  defaultImage = AppSettings.loadImage;
-  errorImage = AppSettings.errorImage;
+  private releases: Release[] = [];
 
-  constructor(private releaseService: ReleaseService) { }
+  private defaultImage = AppSettings.loadImage;
+  private errorImage = AppSettings.errorImage;
+  private lazyLoadOffset = AppSettings.lazyLoadOffest;
+
+  private releasePreviewSpinnerName: string = "releasePreviewSpinner";
+  private loading: boolean = true;
+
+  constructor(private releaseService: ReleaseService, private spinnerService: SpinnerService) { }
 
   ngOnInit() {
-    this.releaseService.getReleases(new URLSearchParams("pageSize=8")).subscribe(data => {
+    this.spinnerService.show(this.releasePreviewSpinnerName);
+
+    this.releaseService.getReleases(new URLSearchParams("pageSize=4")).subscribe(data => {
       this.releases = data.content;
+
+      this.spinnerService.hide(this.releasePreviewSpinnerName);
     },
       err => {
         console.log("error", err);

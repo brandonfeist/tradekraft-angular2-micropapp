@@ -1,3 +1,4 @@
+import { HttpRequest } from '@angular/common/http';
 import { AppSettings } from 'app/app-settings';
 import { AuthHttp } from 'angular2-jwt';
 import { Injectable } from '@angular/core';
@@ -17,13 +18,13 @@ export class EventService {
         .map((res:Response) => res.json());
     }
 
-    uploadEventImage(eventSlug: string, eventImage: File) {
+    uploadEventImage(eventImageFile: File) {
         let formData: FormData = new FormData();
-        formData.append('event-slug', eventSlug);
-        formData.append('image', eventImage, eventImage.name);
+        formData.append('image', eventImageFile, eventImageFile.name);
 
-        return this.authHttp.post(this.tkServiceUrl + '/v1/events/image', formData)
-        .map((res:Response) => res.json());
+        return new HttpRequest('POST', this.tkServiceUrl + '/v1/events/image', formData, { 
+            reportProgress: true
+        });
     }
 
     getEvents(parameters?: URLSearchParams) {
@@ -42,8 +43,8 @@ export class EventService {
         .map((res:Response) => res.json());
     }
 
-    editEvent(eventSlug: string, patches: Object[]) {
-        return this.authHttp.patch(this.tkServiceUrl + '/v1/events/' + eventSlug, patches)
+    updateEvent(eventSlug: string, eventUpdates: Event) {
+        return this.authHttp.put(this.tkServiceUrl + '/v1/events/' + eventSlug, eventUpdates)
         .map((res:Response) => res.json());
     }
 }

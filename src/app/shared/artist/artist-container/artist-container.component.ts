@@ -12,8 +12,9 @@ export class ArtistContainerComponent {
   @Input() artist: Artist;
   @Input() noMargin: boolean = false;
 
-  defaultImage = AppSettings.loadImage;
-  errorImage = AppSettings.errorImage;
+  private defaultImage = AppSettings.loadImage;
+  private errorImage = AppSettings.errorImage;
+  private lazyLoadOffset = AppSettings.lazyLoadOffest;
 
   constructor() { }
 }

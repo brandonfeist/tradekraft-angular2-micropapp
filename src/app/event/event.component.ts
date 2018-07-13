@@ -1,3 +1,4 @@
+import { SpinnerService } from './../services/spinner.service';
 import { AppSettings } from 'app/app-settings';
 import { DateAbbr } from './../shared/date-abbr/date-abbr';
 import { EventService } from './../services/event.service';
@@ -24,8 +25,11 @@ import * as moment from 'moment-timezone';
     private defaultImage: string = AppSettings.loadImage;
     private errorImage: string = AppSettings.errorImage;
 
+    private eventIndexSpinner: string = "eventIndexSpinner";
+
     constructor(private eventService: EventService, private activatedRoute: ActivatedRoute,
-      private snackbarService: SnackbarService, private formBuilder: FormBuilder, private dateAbbr: DateAbbr) {}
+      private snackbarService: SnackbarService, private formBuilder: FormBuilder, private dateAbbr: DateAbbr,
+      private spinnerService: SpinnerService) {}
 
     ngOnInit() {
       this.highlightedEvent = this.activatedRoute.snapshot.data['highlightedEvent'];
@@ -41,14 +45,17 @@ import * as moment from 'moment-timezone';
     }
 
     getEvents() {
+      this.spinnerService.show(this.eventIndexSpinner);
+
       this.eventService.getEvents(new URLSearchParams(this.getQueryString())).subscribe(data => {
         this.events = data.content;
-        this.loading = false;
+
+        this.spinnerService.hide(this.eventIndexSpinner);
       },
       err => {
         console.log("error", err);
         this.snackbarService.openSnackbar("There was a problem getting the events.");
-        this.loading = false;
+        this.spinnerService.hide(this.eventIndexSpinner);
       });
     }
 

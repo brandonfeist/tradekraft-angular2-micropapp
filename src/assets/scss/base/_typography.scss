@@ -2,14 +2,6 @@ body {
     font-family: $font;
 }
 
-.text-right {
-    text-align: right;
-}
-
-.text-left {
-    text-align: left;
-}
-
 input {
     color: $dark-grey;
     font-family: $font;
@@ -53,7 +45,6 @@ p {
 h1 {
     font-size: 21px;
     font-weight: 700;
-    text-transform: uppercase;
 }
 
 h2 {
@@ -61,6 +52,18 @@ h2 {
     font-weight: 600;
     margin: 0;
     margin-top: 5px;
+}
+
+.h2-margins {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    &.event-title-date {
+        margin-top: 10px;
+        font-size: 18px;
+    }
 }
 
 h4 {
@@ -110,4 +113,8 @@ button::-moz-focus-inner {
         color: #ffffff;
         background-color: #232323;
     }
+}
+
+.bold {
+    font-weight: bold;
 }

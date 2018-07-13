@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material';
 })
 export class MusicPlayerComponent implements OnInit {
   private MUSIC_BAR_STEP: number = 0.25;
+  private VOLUME_BAR_STEP: number = 1;
   private MUSIC_PLAY_UPDATE_INTERVAL: number = 50;
 
   private volumeButtonHover: boolean = false;
@@ -89,6 +90,23 @@ export class MusicPlayerComponent implements OnInit {
     return;
   }
 
+  private getDuration() {
+    if(Math.trunc(this.audio.duration) > 30) {
+      let durationSplit = this.song.duration.split(":");
+
+      let durationSeconds = 0;
+      if(durationSplit.length === 3) {
+        durationSeconds = (+durationSplit[0]) * 60 * 60 + (+durationSplit[1]) * 60 + (+durationSplit[2]);
+      } else if(durationSplit.length === 2) {
+        durationSeconds = (+durationSplit[0]) * 60 + (+durationSplit[1]);
+      }
+
+      return durationSeconds;
+    } else {
+      return this.audio.duration;
+    }
+  }
+
   private pausePlay() {
     this.musicService.pausePlay();
     this.getCurrentPlayTime();
@@ -116,6 +134,7 @@ export class MusicPlayerComponent implements OnInit {
   }
 
   private onVolumeInputChange(event: any) {
+    console.log(event);
     this.muted = false;
     this.volume = event.value / 100;
     this.musicService.changeVolume(this.volume);
@@ -153,7 +172,7 @@ export class MusicPlayerComponent implements OnInit {
 
   private getSongProgress(): number {
     if(this.audio && this.currentPlayTime) {
-      return ((this.currentPlayTime / this.audio.duration) * 100);
+      return ((this.currentPlayTime / this.getDuration()) * 100);
     }
 
     return 0;
@@ -163,7 +182,7 @@ export class MusicPlayerComponent implements OnInit {
     let playPos = (event.screenX / window.screen.width);
 
     if(this.audio) {
-      this.currentPlaytimeChange(this.audio.duration * playPos);
+      this.currentPlaytimeChange(this.getDuration() * playPos);
     }
   }
 

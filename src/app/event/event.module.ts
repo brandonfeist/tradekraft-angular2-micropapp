@@ -1,3 +1,4 @@
+import { SpinnerModule } from './../spinner/spinner.module';
 import { EventDetailsResolve } from './event-details/event-details.resolve';
 import { SharedModule } from './../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -18,7 +19,8 @@ import { EventDetailsComponent } from 'app/event/event-details/event-details.com
       LazyLoadImageModule,
       CustomMaterialModule,
       ReactiveFormsModule,
-      SharedModule
+      SharedModule,
+      SpinnerModule
     ],
     declarations: [ 
       EventComponent,

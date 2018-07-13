@@ -7,9 +7,10 @@ import { Artist } from 'app/model/artist';
 import { Component, OnInit }  from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { URLSearchParams } from '@angular/http';
+import { URLSearchParams, Http } from '@angular/http';
 import { MatTableDataSource } from '@angular/material';
 import * as moment from 'moment-timezone';
+import { HttpEventType, HttpClient, HttpResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: './admin-create-artist.component.html'
@@ -27,10 +28,12 @@ export class AdminCreateArtistComponent implements OnInit {
 
   private years: Year[] = [];
 
-  private imageFile: File;
+  private imageUploadProgress: number = 0;
+
+  private imageFile;
 
   constructor(private artistService: ArtistService, private snackbarService: SnackbarService,
-    private formBuilder: FormBuilder, private router: Router) {}
+    private formBuilder: FormBuilder, private router: Router, private http: HttpClient) {}
 
   ngOnInit() {
     this.getYears();
@@ -54,7 +57,7 @@ export class AdminCreateArtistComponent implements OnInit {
   private createForm() {
     this.artistCreateForm = this.formBuilder.group({
       name: null,
-      images: null,
+      image: null,
       description: null,
       soundcloud: [null, RegexValidation.regex(/^(http:\/\/|https:\/\/)(www.)?soundcloud.com\/[^\/]+(\/)?$/)],
       facebook: [null, RegexValidation.regex(/^(http:\/\/|https:\/\/)(www.)?facebook.com\/[^\/]+(\/)?$/)],
@@ -70,18 +73,29 @@ export class AdminCreateArtistComponent implements OnInit {
   }
 
   private fileChange(event) {
+    this.removeImageFile();
+
     let fileList: FileList = event.target.files;
 
     if(fileList.length > 0) {
-      this.imageFile = fileList[0]
-      this.artistCreateForm.get('images').setValue(this.imageFile.name);
+      this.http.request(this.artistService.uploadArtistImage(fileList[0])).subscribe(imageResponse => {
+        if(imageResponse.type === HttpEventType.UploadProgress) {
+          this.imageUploadProgress = Math.round(100 * imageResponse.loaded / imageResponse.total);
+        } else if (imageResponse instanceof HttpResponse) {
+          this.artistCreateForm.get('image').setValue(imageResponse.body);
+          this.imageFile = imageResponse.body;
+        }
+      }, err => {
+        console.log("image upload err: ", err);
+        this.snackbarService.openSnackbar("There was an problem uploading the artist image.");
+      });
     }
   }
 
   removeImageFile() {
     this.imageFile = undefined;
 
-    this.artistCreateForm.get('images').setValue(null);
+    this.artistCreateForm.get('image').setValue(null);
   }
 
   private multiChange(event) {
@@ -91,18 +105,9 @@ export class AdminCreateArtistComponent implements OnInit {
   private onSubmit() {
     this.processing = true;
 
-    this.artistCreateForm.get('images').setValue(null);
-
-    this.artistService.createArtist(this.artistCreateForm.value).subscribe(artist => {
-      this.artistService.uploadArtistImage(artist.slug, this.imageFile).subscribe(data => {
-        this.snackbarService.openSnackbar("Created artist " + artist.name);
-        this.router.navigate(['admin/artists']);
-      }, err => {
-        console.log("err: ", err);
-        this.snackbarService.openSnackbar("There was an problem uploading the artist image.");
-        
-        this.processing = false;
-      });
+    this.artistService.createArtist(this.artistCreateForm.value).subscribe(artistRes => {
+      this.snackbarService.openSnackbar("Created artist " + artistRes.name);
+      this.router.navigate(['admin/artists']);
     }, err => {
       console.log("err: ", err);
       this.snackbarService.openSnackbar("Artist Create Error: " + JSON.parse(err._body).error, undefined, 5000);

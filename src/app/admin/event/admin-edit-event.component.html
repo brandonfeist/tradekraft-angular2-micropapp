@@ -14,28 +14,28 @@
         <input matInput placeholder="Venue name..." formControlName="venueName" required>
       </mat-form-field>
 
-      <mat-form-field class="col-xs-6">
+      <mat-form-field class="col-xs-12">
         <mat-select placeholder="Event entry age..." formControlName="entryAge" required>
           <mat-option *ngFor="let entryAge of entryAges" [value]="entryAge">{{ entryAge }}</mat-option>
         </mat-select>
       </mat-form-field>
+
       <div class="col-xs-6">
         <mat-slide-toggle formControlName="officialEvent">Official Event</mat-slide-toggle>
       </div>
-
-      <div class="col-xs-6">
+      <div class="col-xs-3">
         <p-calendar formControlName="startDateTime" showTime="true" hourFormat="24" required></p-calendar>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-3">
         <p-calendar formControlName="endDateTime" showTime="true" hourFormat="24" required></p-calendar>
       </div>
 
-      <mat-form-field class="col-xs-6">
+      <mat-form-field class="col-xs-12">
         <mat-select [compareWith]="compareFn" placeholder="Event artists..." formControlName="artists" multiple>
           <mat-option *ngFor="let artist of artists" [value]="{ name: artist.name, slug: artist.slug }">{{ artist.name }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="col-xs-6">
+      <mat-form-field class="col-xs-12">
         <input matInput placeholder="Ticket Link.." formControlName="ticketLink">
       </mat-form-field>
 
@@ -43,17 +43,17 @@
         <input matInput placeholder="Address..." formControlName="address">
       </mat-form-field>
 
-      <mat-form-field class="col-xs-6">
+      <mat-form-field class="col-xs-12">
         <input matInput placeholder="City..." formControlName="city" required>
       </mat-form-field>
-      <mat-form-field class="col-xs-6">
+      <mat-form-field class="col-xs-12">
         <input matInput placeholder="State / Province / Region..." formControlName="state" required>
       </mat-form-field>
 
-      <mat-form-field class="col-xs-6">
+      <mat-form-field class="col-xs-12">
         <input matInput placeholder="Zip code..." formControlName="zip">
       </mat-form-field>
-      <mat-form-field class="col-xs-6">
+      <mat-form-field class="col-xs-12">
         <input matInput placeholder="Country..." formControlName="country" required>
       </mat-form-field>
 
@@ -65,7 +65,7 @@
             <button mat-raised-button *ngIf="imageFile" type="button" (click)="removeImageFile()">Remove Image</button>
         </div>
         <input type="file" #imgFileInput (change)="fileChange($event)" accept=".jpg,.png" style="visibility: hidden">
-        <input type="hidden" name="fileHidden" formControlName="images" required/>
+        <input type="hidden" name="fileHidden" formControlName="image" required/>
       </div>
 
       <div class="col-xs-12">

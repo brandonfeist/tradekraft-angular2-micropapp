@@ -6,7 +6,7 @@
         <div class="artist-header">
             <div class="col-3">
                 <div class="image-container">
-                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.images.medium.link" title="{{ artist.name }}"
+                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="artist.images.medium.link" [offset]="lazyLoadOffest" title="{{ artist.name }}"
                         alt="{{ artist.name }}">
                 </div>
                 <div class="sub-container">
@@ -57,7 +57,7 @@
                     <div class="item artist-music" *ngFor="let release of artist.releases.artistReleases">
                         <a routerLink="/releases/{{release.slug}}">
                             <div class="image-container">
-                                <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.thumb" title="release.name"
+                                <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.images.thumb.link" [offset]="lazyLoadOffest" title="release.name"
                                     alt="release.name">
                             </div>
                         </a>
@@ -77,7 +77,7 @@
                     <div class="item artist-music" *ngFor="let release of artist.releases.appearsOn">
                         <a routerLink="/releases/{{release.slug}}">
                             <div class="image-container no-margin">
-                                <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.thumb" title="release.name"
+                                <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.images.thumb.link" [offset]="lazyLoadOffest" title="release.name"
                                     alt="release.name">
                             </div>
                         </a>

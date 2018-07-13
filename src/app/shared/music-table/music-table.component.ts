@@ -66,6 +66,6 @@ export class MusicTableComponent implements OnInit {
     }
 
     songAvailable(song: Song): boolean {
-        return !_.isEmpty(song.songFile);
+        return !_.isEmpty(song.songFiles);
     }
 }

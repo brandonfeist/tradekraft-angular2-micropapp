@@ -1,5 +1,5 @@
 body {
-    background: $off-white;
+    background: $background-color;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -85,6 +85,19 @@ hr {
     top: 50%;
     right: 50%;
     z-index: 5000;
+}
+
+.right {
+    float: right;
+}
+
+.no-gutter {
+    padding: 0;
+}
+
+.small-pad {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 mat-spinner {

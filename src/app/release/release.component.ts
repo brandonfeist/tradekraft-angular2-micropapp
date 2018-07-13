@@ -1,4 +1,4 @@
-import { AppSettings } from './../app-settings';
+import { AppSettings } from 'app/app-settings';
 import { SnackbarService } from './../services/snackbar.service';
 import { Component, OnInit }  from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
@@ -8,6 +8,7 @@ import { URLSearchParams } from '@angular/http';
 import { Release } from './../model/release';
 import { ReleaseService } from './../services/release.service';
 import { Genre } from 'app/model/genre';
+import { SpinnerService } from 'app/services/spinner.service';
 
 @Component({
   selector: 'releases',
@@ -23,13 +24,18 @@ export class ReleaseComponent implements OnInit {
   private releaseTypes: Object[];
   private genres: Genre[];
 
-  defaultImage: string = AppSettings.loadImage;
-  errorImage: string = AppSettings.errorImage;
+  private defaultImage: string = AppSettings.loadImage;
+  private errorImage: string = AppSettings.errorImage;
+  private lazyLoadOffset: number = AppSettings.lazyLoadOffest;
   private releaseSearchForm: FormGroup;
+
+  private currentPage: number = 0;
+  private loadingInfScroll: boolean = false;
+  private spinnerName: string = 'releaseIndexSpinner';
 
   constructor(private releaseService: ReleaseService, private formBuilder: FormBuilder,
     private route: ActivatedRoute, private router: Router, private activatedRoute: ActivatedRoute,
-    private snackbarService: SnackbarService) { 
+    private snackbarService: SnackbarService, private spinnerService: SpinnerService) { 
       this.releaseTypes = [
         { type: "EP" },
         { type: "LP" },
@@ -53,17 +59,37 @@ export class ReleaseComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  getReleases(): void {
-    this.releaseService.getReleases(new URLSearchParams(this.getQueryString())).subscribe(data => {
-      this.releases = data.content;
-    },
-    err => {
-      console.log("error", err);
-      this.snackbarService.openSnackbar("There was a problem getting the releases.");
-    });
+  private getReleases() {
+    if(!this.loadingInfScroll) {
+      this.loadingInfScroll = true;
+      this.spinnerService.show(this.spinnerName);
+
+      let urlSearchParams = new URLSearchParams(this.getQueryString());
+      urlSearchParams.append('page', this.currentPage.toString());
+
+      this.releaseService.getReleases(urlSearchParams).subscribe(data => {
+        this.spinnerService.hide(this.spinnerName);
+
+        if(this.currentPage > 0) {
+          this.releases = this.releases.concat(data.content);
+        } else {
+          this.releases = data.content;
+        }
+
+        if(data.content.length > 0) {
+          this.currentPage++;
+        }
+      },
+      err => {
+        this.spinnerService.hide(this.spinnerName);
+
+        console.log("error", err);
+        this.snackbarService.openSnackbar("There was a problem getting the releases.");
+      });
+    }
   }
 
-  getQueryParams(): void {
+  private getQueryParams(): void {
     this.subscription = this.route
     .queryParams
     .subscribe(params => {
@@ -75,7 +101,7 @@ export class ReleaseComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  getQueryString(): string {
+  private getQueryString(): string {
     let query: string;
     
     if(this.releaseSearchQuery) {
@@ -101,7 +127,7 @@ export class ReleaseComponent implements OnInit {
     return query
   }
 
-  createForm(): void {
+  private createForm(): void {
     this.releaseSearchForm = this.formBuilder.group({
       search: this.releaseSearchQuery || null,
       genre: this.releaseGenreQuery || null,
@@ -109,7 +135,9 @@ export class ReleaseComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  private onSubmit(): void {
+    this.currentPage = 0;
+
     this.router.navigate(['releases'], { queryParams: { 
         search: this.releaseSearchForm.get("search").value,
         genre: this.releaseSearchForm.get("genre").value,
@@ -120,11 +148,15 @@ export class ReleaseComponent implements OnInit {
     this.releaseSearchQuery = this.releaseSearchForm.get("search").value;
     this.releaseGenreQuery = this.releaseSearchForm.get("genre").value;
     this.releaseTypeQuery = this.releaseSearchForm.get("type").value;
+
+    this.releases = [];
     
     this.getReleases();
+
+    window.scrollTo(0, 1);
   }
 
-  onChanges(): void {
+  private onChanges(): void {
     this.releaseSearchForm.get('genre').valueChanges.subscribe(val => {
       this.onSubmit();
     });
@@ -134,7 +166,7 @@ export class ReleaseComponent implements OnInit {
     });
   }
 
-  formatReleaseArtists(release): string {
+  private formatReleaseArtists(release): string {
     let songs = release.songs;
     let artists = {};
 

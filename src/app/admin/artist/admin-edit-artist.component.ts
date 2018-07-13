@@ -1,3 +1,4 @@
+import { HttpResponse, HttpEventType, HttpClient } from '@angular/common/http';
 import { AppSettings } from 'app/app-settings';
 import { YearService } from 'app/services/year.service';
 import { Year } from 'app/model/year';
@@ -30,7 +31,9 @@ export class AdminEditArtistComponent implements OnInit {
 
   private years = [];
 
-  private imageFile: File;
+  private imageUploadProgress: number = 0;
+
+  private imageFile;
 
   private artistSlug: string;
 
@@ -38,7 +41,7 @@ export class AdminEditArtistComponent implements OnInit {
 
   constructor(private artistService: ArtistService, private snackbarService: SnackbarService,
     private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute,
-    private yearService: YearService) {}
+    private yearService: YearService, private http: HttpClient) {}
 
   ngOnInit() {
     this.getYears();
@@ -65,7 +68,7 @@ export class AdminEditArtistComponent implements OnInit {
   private createForm() {
     this.artistEditForm = this.formBuilder.group({
       name: this.artist.name,
-      images: this.artist.images,
+      image: this.artist.image,
       description: this.artist.description,
       soundcloud: [this.artist.soundcloud, RegexValidation.regex(/^(http:\/\/|https:\/\/)(www.)?soundcloud.com\/[^\/]+(\/)?$/)],
       facebook: [this.artist.facebook, RegexValidation.regex(/^(http:\/\/|https:\/\/)(www.)?facebook.com\/[^\/]+(\/)?$/)],
@@ -74,6 +77,8 @@ export class AdminEditArtistComponent implements OnInit {
       spotify: [this.artist.spotify, RegexValidation.regex(/^(http:\/\/|https:\/\/)(www.)?open.spotify.com\/[^\/]+\/[^\/]+(\/)?$/)],
       yearsActive: [this.artist.yearsActive]
     });
+
+    this.imageFile = this.artist.image;
   }
 
   private keyupHandlerFunction(event) {
@@ -88,63 +93,48 @@ export class AdminEditArtistComponent implements OnInit {
   }
 
   private fileChange(event) {
+    this.removeImageFile();
+
     let fileList: FileList = event.target.files;
 
     if(fileList.length > 0) {
-      this.imageFile = fileList[0]
-      this.artistEditForm.get('images').setValue(this.imageFile.name);
+      this.http.request(this.artistService.uploadArtistImage(fileList[0])).subscribe(imageResponse => {
+        if(imageResponse.type === HttpEventType.UploadProgress) {
+          this.imageUploadProgress = Math.round(100 * imageResponse.loaded / imageResponse.total);
+        } else if (imageResponse instanceof HttpResponse) {
+          this.artistEditForm.get('image').setValue(imageResponse.body);
+          this.imageFile = imageResponse.body;
+        }
+      }, err => {
+        console.log("image upload err: ", err);
+        this.snackbarService.openSnackbar("There was an problem uploading the artist image.");
+      });
     }
   }
 
   removeImageFile() {
     this.imageFile = undefined;
 
-    this.artistEditForm.get('images').setValue(this.artist.name);
+    this.artistEditForm.get('image').setValue(null);
   }
 
   compareFn(c1, c2): boolean {
     return c1.year && c2.year && c1.year === c2.year;
   }
 
-  private getJsonPatches(): Object[] {
-    let patches = [];
-
-    for(let key in this.artistEditForm.controls) {
-      if(this.artistEditForm.controls[key].touched && key !== "image") {
-        patches.push({op: "replace", path:"/" + key, value: this.artistEditForm.controls[key].value});
-      }
-    }
-
-    return patches;
-  }
-
   private onSubmit() {
     this.processing = true;
 
-    let patches = this.getJsonPatches();
-
-    if(this.artistEditForm.touched || this.imageFile) {
-      this.artistService.editArtist(this.artist.slug, patches).subscribe((artist) => {
-        if(this.imageFile) {
-          this.artistService.uploadArtistImage(artist.slug, this.imageFile).subscribe((artistWithImage) => {
-            this.snackbarService.openSnackbar("Edited artist " + artist.name);
-            this.router.navigate(['admin/artists']);
-          }, err => {
-            console.log("err: ", err);
-            this.snackbarService.openSnackbar("There was an error editing the artist.");
-
-            this.processing = false;
-          })
-        } else {
-          this.snackbarService.openSnackbar("Edited artist " + artist.name);
-          this.router.navigate(['admin/artists']);
-        }
+    if(this.artistEditForm.touched) {
+      this.artistService.editArtist(this.artist.slug, this.artistEditForm.value).subscribe(artistRes => {
+        this.snackbarService.openSnackbar("Edited artist " + artistRes.name);
+        this.router.navigate(['admin/artists']);
       }, err => {
         console.log("err: ", err);
-        this.snackbarService.openSnackbar("There was an error editing the artist.");
+        this.snackbarService.openSnackbar("Artist Edit Error: " + JSON.parse(err._body).error, undefined, 5000);
 
         this.processing = false;
-      })
+      });
     } else {
       this.snackbarService.openSnackbar("No edits made to " + this.artist.name);
       this.router.navigate(['admin/artists']);

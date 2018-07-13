@@ -1,10 +1,10 @@
-<div class="frame banner large video">
+<div *ngIf="randomVideo" class="frame banner large video">
     <button mat-mini-fab color="basic" class="mute-feature" (click)="muteFeatureVideo()">
         <mat-icon *ngIf="!isFeatureMuted()" class="fa fa-volume-up" aria-hidden="true"></mat-icon>
         <mat-icon *ngIf="isFeatureMuted()" class="fa fa-volume-off" aria-hidden="true"></mat-icon>
     </button>
 
-    <a *ngIf="randomVideo.song" routerLink="/releases/{{ randomVideo.song.release.slug }}" title="{{ videoTitle }}">
+    <a *ngIf="videoHasSong()" routerLink="/releases/{{ randomVideo.song.release.slug }}" title="{{ videoTitle }}">
         <div class="feature-container">
             <div class="wrapper">
                 <div class="col-8">
@@ -19,7 +19,7 @@
         </video>
     </a>
 
-    <a *ngIf="!randomVideo.song" href="{{ randomVideo.externalUrl }}" title="{{ videoTitle }}">
+    <a *ngIf="!videoHasSong()" href="{{ randomVideo.externalUrl }}" title="{{ videoTitle }}">
         <div class="container">
             <div class="wrapper">
                 <div class="col-8">

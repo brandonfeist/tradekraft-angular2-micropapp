@@ -1,16 +1,18 @@
-<a class="item react mix" routerLink="/events/{{ event.slug }}">
-  <div class="image-container" [ngClass]="{'shorter': shorter, 'no-margin': noMargin}">
-      <div class="count active">
-          <div class="count-ribbon">{{ getDaysRemaining(event) }}</div>
-      </div>
-      <div class="date">
-          <h1>{{ formatEventStartDateTime(event) }}</h1>
-      </div>
-      <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.images.original.link" alt="event title">
-  </div>
-  <div class="text-container" [ngClass]="{'shorter': shorter, 'no-margin': noMargin}">
-      <h2>{{ event.name }}</h2>
-      <h4>{{ getEventLocationShortFormat(event) }}</h4>
-      <span class="btn default">View More</span>
-  </div>
-</a>
+<div class="col-xs-6 small-pad event">
+    <a routerLink="/events/{{ event.slug }}">
+        <div class="event-img-container">
+            <div class="count active">
+                <div class="count-ribbon">{{ getDaysRemaining(event) }}</div>
+            </div>
+            <img class="img-responsive lazy-load event-img" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.images.medium.link" [offset]="lazyLoadOffest" title="{{ event.name }}" alt="{{ event.name }}">
+            <div class="date-card">
+                <span>{{ formatEventStartDateTime(event.startDateTime) }}</span>
+            </div>
+        </div>
+        <div class="event-info">
+            <h1>{{ event.name }}</h1>
+            <p>{{ processDescriptionPreview(event) }}</p>
+            <p class="event-container-location">Location: <span>{{ getEventLocationShortFormat(event) }}</span></p>
+        </div>
+    </a>
+</div>

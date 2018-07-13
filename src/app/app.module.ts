@@ -27,6 +27,8 @@ import { SnackbarService } from 'app/services/snackbar.service';
 import { GenreService } from 'app/services/genre.service';
 import { FooterModule } from 'app/footer/footer.module';
 import { ArtistService } from 'app/services/artist.service';
+import { SongService } from 'app/services/song.service';
+import { SpinnerService } from 'app/services/spinner.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { ArtistService } from 'app/services/artist.service';
     Title,
     ArtistService,
     ReleaseService,
+    SongService,
     GenreService,
     EventService,
     SpotifyService,
@@ -58,6 +61,7 @@ import { ArtistService } from 'app/services/artist.service';
     SpotifyService,
     AuthService,
     SnackbarService,
+    SpinnerService,
     AuthGuard,
     RoleGuard
   ],

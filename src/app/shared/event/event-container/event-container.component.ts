@@ -11,16 +11,16 @@ import * as moment from 'moment-timezone';
 })
 export class EventContainerComponent {
   @Input() event: Event;
-  @Input() shorter: boolean;
-  @Input() noMargin: boolean = false;
 
-  defaultImage = AppSettings.loadImage;
-  errorImage = AppSettings.errorImage;
+  private defaultImage = AppSettings.loadImage;
+  private errorImage = AppSettings.errorImage;
+  private lazyLoadOffset = AppSettings.lazyLoadOffest;
 
   private MILLIS_IN_SECS = 1000;
   private SECS_IN_MINS = 60;
   private MINS_IN_HOURS = 60;
   private HOURS_IN_DAYS = 24;
+  private MAX_DESCRIPTION_LENGTH = 250;
 
   constructor(private dateAbbr: DateAbbr) { }
 
@@ -28,6 +28,14 @@ export class EventContainerComponent {
     let formatedStartDateTime = moment(event.startDateTime);
 
     return formatedStartDateTime.format("MMM DD YYYY");
+  }
+
+  processDescriptionPreview(event: Event) {
+    if(event.description.length > this.MAX_DESCRIPTION_LENGTH) {
+      return event.description.replace(/<(?:.|\n)*?>/gm, '').substring(0, this.MAX_DESCRIPTION_LENGTH) + '...';
+    }
+
+    return event.description;
   }
 
   getDaysRemaining(event: Event) {

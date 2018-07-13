@@ -5,8 +5,8 @@ export class Video {
     name: string;
     image: object;
     slug: string;
-    videoFile;
-    videoThumbnail: string;
+    videoFiles;
+    videoThumbnails;
     youtubeUrl: string;
     externalUrl: string;
     featured: boolean;

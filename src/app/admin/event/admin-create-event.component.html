@@ -7,12 +7,23 @@
     </div>
 
     <form [formGroup]="eventCreateForm" (ngSubmit)="onSubmit()" novalidate>
-      <mat-form-field class="col-xs-6">
+      <h2>Main Information</h2>
+      <mat-form-field class="col-xs-12">
         <input matInput placeholder="Event name..." formControlName="name" required>
       </mat-form-field>
-      <mat-form-field class="col-xs-6">
+      <mat-form-field class="col-xs-12">
         <input matInput placeholder="Venue name..." formControlName="venueName" required>
       </mat-form-field>
+      <div class="col-xs-12">
+        <div class="col-xs-8">
+          <button mat-raised-button type="button" (click)="imgFileInput.click()">Event Photo</button>
+        </div>
+        <div class="col-xs-4">
+            <button mat-raised-button *ngIf="imageFile" type="button" (click)="removeImageFile()">Remove Image</button>
+        </div>
+        <input type="file" #imgFileInput (change)="fileChange($event)" accept=".jpg,.png" style="visibility: hidden">
+        <input type="hidden" name="fileHidden" formControlName="image" required/>
+      </div>
 
       <mat-form-field class="col-xs-6">
         <mat-select placeholder="Event entry age..." formControlName="entryAge" required>
@@ -23,27 +34,29 @@
         <mat-slide-toggle formControlName="officialEvent">Official Event</mat-slide-toggle>
       </div>
 
-      <div class="col-xs-6">
+      <div class="col-xs-12">
         <p-calendar formControlName="startDateTime" showTime="true" hourFormat="24" required></p-calendar>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-12">
         <p-calendar formControlName="endDateTime" showTime="true" hourFormat="24" required></p-calendar>
       </div>
+      <mat-form-field class="col-xs-12">
+        <input matInput placeholder="Ticket Link.." formControlName="ticketLink">
+      </mat-form-field>
 
-      <mat-form-field class="col-xs-6">
+      <h2>Event Artists</h2>
+      <mat-form-field class="col-xs-12">
         <mat-select placeholder="Event artists..." formControlName="artists" multiple>
           <mat-option *ngFor="let artist of artists" [value]="{ name: artist.name, slug: artist.slug }">{{ artist.name }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="col-xs-6">
-        <input matInput placeholder="Ticket Link.." formControlName="ticketLink">
-      </mat-form-field>
 
+      <h2>Event Address</h2>
       <mat-form-field class="col-xs-12">
         <input matInput placeholder="Address..." formControlName="address">
       </mat-form-field>
 
-      <mat-form-field class="col-xs-6">
+      <mat-form-field class="col-xs-12">
         <input matInput placeholder="City..." formControlName="city" required>
       </mat-form-field>
       <mat-form-field class="col-xs-6">
@@ -57,17 +70,7 @@
         <input matInput placeholder="Country..." formControlName="country" required>
       </mat-form-field>
 
-      <div class="col-xs-12">
-        <div class="col-xs-8">
-          <button mat-raised-button type="button" (click)="imgFileInput.click()">Event Photo</button>
-        </div>
-        <div class="col-xs-4">
-            <button mat-raised-button *ngIf="imageFile" type="button" (click)="removeImageFile()">Remove Image</button>
-        </div>
-        <input type="file" #imgFileInput (change)="fileChange($event)" accept=".jpg,.png" style="visibility: hidden">
-        <input type="hidden" name="fileHidden" formControlName="images" required/>
-      </div>
-
+      <h2>Event Description</h2>
       <div class="col-xs-12">
         <tiny-mce [elementId]="'artist-edit-editor'" (onEditorKeyup)="keyupHandlerFunction($event)" formControlName="description" ngDefaultControl></tiny-mce>
       </div>

@@ -1,3 +1,4 @@
+import { HttpEventType, HttpResponse, HttpClient } from '@angular/common/http';
 import { StartEndDateValidation } from './../../validators/start-end-date-validation';
 import { AppSettings } from 'app/app-settings';
 import { EventService } from './../../services/event.service';
@@ -26,12 +27,15 @@ export class AdminCreateEventComponent implements OnInit {
 
   private artists: Artist[];
 
-  private imageFile: File;
+  private imageUploadProgress: number = 0;
+
+  private imageFile;
 
   private entryAges = ['all', '16+', '18+', '21+'];
 
   constructor(private artistService: ArtistService, private snackbarService: SnackbarService,
-    private eventService: EventService, private formBuilder: FormBuilder, private router: Router) {}
+    private eventService: EventService, private formBuilder: FormBuilder, private router: Router,
+    private http: HttpClient) {}
 
   ngOnInit() {
     this.getArtists();
@@ -54,7 +58,7 @@ export class AdminCreateEventComponent implements OnInit {
     this.eventCreateForm = this.formBuilder.group({
       name: null,
       venueName: null,
-      images: null,
+      image: null,
       description: null,
       entryAge: null,
       officialEvent: null,
@@ -78,39 +82,40 @@ export class AdminCreateEventComponent implements OnInit {
   }
 
   private fileChange(event) {
+    this.removeImageFile();
+
     let fileList: FileList = event.target.files;
 
     if(fileList.length > 0) {
-      this.imageFile = fileList[0]
-      this.eventCreateForm.get('images').setValue(this.imageFile.name);
+      this.http.request(this.eventService.uploadEventImage(fileList[0])).subscribe(imageResponse => {
+        if(imageResponse.type === HttpEventType.UploadProgress) {
+          this.imageUploadProgress = Math.round(100 * imageResponse.loaded / imageResponse.total);
+        } else if (imageResponse instanceof HttpResponse) {
+          this.eventCreateForm.get('image').setValue(imageResponse.body);
+          this.imageFile = imageResponse.body;
+        }
+      }, err => {
+        console.log("image upload err: ", err);
+        this.snackbarService.openSnackbar("There was an problem uploading the event image.");
+      });
     }
   }
 
   removeImageFile() {
     this.imageFile = undefined;
 
-    this.eventCreateForm.get('images').setValue(null);
+    this.eventCreateForm.get('image').setValue(null);
   }
 
   private onSubmit() {
     this.processing = true;
 
-    this.eventCreateForm.get('images').setValue(null);
-
-    this.eventService.createEvent(this.eventCreateForm.value).subscribe(event => {
-      this.eventService.uploadEventImage(event.slug, this.imageFile).subscribe(data => {
-        this.snackbarService.openSnackbar("Created event " + event.name);
-        this.router.navigate(['admin/events']);
-      }, err => {
-        console.log("err: ", err);
-        this.snackbarService.openSnackbar("There was an problem uploading the event image.");
-        
-        this.processing = false;
-      });
+    this.eventService.createEvent(this.eventCreateForm.value).subscribe(eventResponse => {
+      this.snackbarService.openSnackbar("Created event " + eventResponse.name);
+      this.router.navigate(['admin/events']);
     }, err => {
       console.log("err: ", err);
-      this.snackbarService.openSnackbar("Event creation error.");
-      // this.snackbarService.openSnackbar("Event Create Error: " + JSON.parse(err._body).error, undefined, 5000);
+      this.snackbarService.openSnackbar("Event Create Error: " + JSON.parse(err._body).error, undefined, 5000);
 
       this.processing = false;
     });

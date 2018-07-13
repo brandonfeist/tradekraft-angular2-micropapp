@@ -4,7 +4,7 @@ import { Artist } from './artist';
 export class Song {
     id: number;
     name: string;
-    songFile: any;
+    songFiles: any;
     trackNumber: number;
     duration: string;
     bpm: number;

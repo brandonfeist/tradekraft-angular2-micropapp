@@ -37,16 +37,16 @@ export class MusicService {
     load(release: Release, songIndexNumber: number) {
         let songs: Song[] = release.songs;
         
-        if(!_.isEmpty(songs[songIndexNumber].songFile)) {
+        if(!_.isEmpty(songs[songIndexNumber].songFiles)) {
             this.songs = songs;
             this.release = release;
             this.song = songs[songIndexNumber]
             this.songIndexNumber = songIndexNumber;
 
-            if(this.song.songFile.external) {
-                this.audio.src = this.song.songFile.external;
+            if(this.song.songFiles.external) {
+                this.audio.src = this.song.songFiles.external.link;
             } else {
-                this.audio.src = this.song.songFile.m4a;
+                this.audio.src = this.song.songFiles['128k'].link;
             }
 
             this.audio.load();
@@ -57,8 +57,16 @@ export class MusicService {
 
             this.audio.volume = this.volume;
             this.playPromise = this.audio.play();
-            this.paused = false;
-            this.pauseChange.next(this.paused);
+            
+            this.audio.onplay = () => {
+                this.paused = false;
+                this.pauseChange.next(this.paused);
+            }
+
+            this.audio.onpause = () => {
+                this.paused = true;
+                this.pauseChange.next(this.paused);
+            }
 
             this.audio.onended = () => {
                 this.nextSong();
@@ -100,16 +108,17 @@ export class MusicService {
     }
 
     pausePlay() {
-        console.log(this.audio.buffered.length); // Can use this to create buffered bar 
+        console.log(this.audio.src);
+        // for(let i = 0; i < this.audio.buffered.length; i++) {
+        //     console.log(this.audio.buffered.start(i));
+        //     console.log(this.audio.buffered.end(i));
+        // } 
         if(this.audio.src) {
             if(this.paused) {
                 this.playPromise = this.audio.play();
             } else {
                 this.audio.pause();
             }
-
-            this.paused = !this.paused;
-            this.pauseChange.next(this.paused);
         }
     }
 

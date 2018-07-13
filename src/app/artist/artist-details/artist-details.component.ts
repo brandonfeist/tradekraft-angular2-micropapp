@@ -17,8 +17,10 @@ export class ArtistDetailsComponent implements OnInit {
   private artistSlug: string;
   private paramSubscription: any;
   private artist: Artist;
-  defaultImage: string = AppSettings.loadImage;
-  errorImage: string = AppSettings.errorImage;
+
+  private defaultImage: string = AppSettings.loadImage;
+  private errorImage: string = AppSettings.errorImage;
+  private lazyLoadOffset: number = AppSettings.lazyLoadOffest;
 
   constructor(private artistService: ArtistService, private activatedRoute: ActivatedRoute, 
     private router: Router, public dialog: MatDialog) {}

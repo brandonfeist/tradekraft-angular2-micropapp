@@ -1,15 +1,14 @@
-<div *ngIf="hasEvents()" class="frame frame-events">
-    <div class="wrapper">
-        <div class="frame-title">
-            <div class="col-8">
-                <h1>Events</h1>
-            </div>
-            <div class="col-4">
-                <a class="btn action-third right" routerLink="/events">More Events</a>
-            </div>
+<div class="event-preview-container">
+    <div class="homepage-title">
+        <div class="col-xs-6 small-pad">
+            <h1>Events</h1>
         </div>
-        <div class="frame-items">
-            <event-container class="col-6" *ngFor="let event of events" [event]="event"></event-container>
+        <div class="col-xs-6 small-pad">
+            <a class="h2-margins right" routerLink="/releases">more events <i class="fas fa-angle-right"></i></a>
         </div>
+    </div>
+
+    <div class="event-container">
+        <event-container *ngFor="let event of events" [event]="event"></event-container>
     </div>
 </div>

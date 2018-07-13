@@ -11,6 +11,9 @@
   <a routerLink="/shop" routerLinkActive="active" (click)="sidenav.close()">Shop</a>
 </li>
 <li class="nav-item">
+  <a routerLink="/media" routerLinkActive="active" (click)="sidenav.close()">Media</a>
+</li>
+<li class="nav-item">
   <a routerLink="/about" routerLinkActive="active" (click)="sidenav.close()">About</a>
 </li>
 <li *ngIf="authService.hasAtLeastOnePermission(adminPanelPermissions)" class="nav-item">

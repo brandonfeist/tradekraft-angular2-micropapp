@@ -1,3 +1,4 @@
+import { ImgService } from './../../shared/img-service/img-service';
 import { AppSettings } from 'app/app-settings';
 import { ArtistService } from 'app/services/artist.service';
 import { SnackbarService } from 'app/services/snackbar.service';
@@ -27,13 +28,12 @@ export class AdminArtistComponent implements OnInit {
 
   private errorImage: string = AppSettings.errorImage;
 
-  constructor(private artistService: ArtistService, private snackbarService: SnackbarService) {}
+  constructor(private artistService: ArtistService, private snackbarService: SnackbarService, 
+    private imgService: ImgService) {}
 
   ngOnInit() {
     this.getAllArtists();
   }
-
-  ngOnDestroy() {}
 
   private getAllArtists() {
     this.artistService.getArtists().subscribe((artists) => {
@@ -55,6 +55,14 @@ export class AdminArtistComponent implements OnInit {
         return true;
       }
     }
+  }
+
+  private getImage(object, imageName: string) {
+    if(object.image && object.image.link) {
+      return object.image.link;
+    }
+
+    return undefined;
   }
 
   private deleteArtist(artist: Artist) {

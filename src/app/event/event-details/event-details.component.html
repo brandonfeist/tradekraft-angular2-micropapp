@@ -1,13 +1,19 @@
 <div class="frame banner small">
-    <img class="image lazy-load" [errorImage]="errorImage" [lazyLoad]="event.images.original.link">
+    <img class="image lazy-load" [errorImage]="errorImage" [lazyLoad]="event.images.original.link" [offset]="lazyLoadOffest">
 </div>
 <div class="frame">
   <div class="wrapper">
     <div class="event-header">
       <div class="col-3">
         <div class="image-container">
-          <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.images.original.link" title="{{ event.name }}"
+          <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="event.images.medium.link" [offset]="lazyLoadOffest" title="{{ event.name }}"
               alt="{{ event.name }}">
+        </div>
+        <div *ngIf="event.ticketLink" class="sub-container">
+          <a mat-raised-button class="silent" href="{{ event.ticketLink }}" target="_blank">
+            <span>Buy Tickets</span>
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          </a>
         </div>
         <div class="sub-container">
           <a mat-raised-button class="silent" routerLink="/events">
@@ -19,6 +25,15 @@
       <div class="col-9">
         <div class="title-container">
           <h1>{{ event.name }}</h1>
+          <h2>{{ locationTitle() }}</h2>
+          <h3 class="event-title-date">{{ formatDate(event.startDateTime, 'MMMM DD, YYYY') }}</h3>
+
+          <div *ngIf="isPastEvent()" class="small-card">
+            <h3>Past Event</h3>
+          </div>
+          <div *ngIf="isUpcomingEvent()" class="small-card">
+            <h3>Upcoming Event</h3>
+          </div>
         </div>
         <read-more class="text-container event-description" [text]="event.description" [maxLength]="500"></read-more>
 

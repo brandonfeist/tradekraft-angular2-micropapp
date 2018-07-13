@@ -1,11 +1,9 @@
-<a routerLink="/releases/{{ release.slug }}">
-  <div [ngClass]="{'no-margin': noMargin}" class="image-container">
-      <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.medium" title="release.name" alt="release.name">
-  </div>
-</a>
-<div class="text-container">
-  <h2>
-      <a routerLink="/releases/{{ release.slug }}">{{ release.name }}</a>
-  </h2>
-  <p>{{ formatReleaseArtists(release) }}</p>
+<div class="col-xs-3 small-pad release">
+  <a routerLink="/releases/{{ release.slug }}">
+    <img class="img-responsive lazy-load release-img" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.images.medium.link" [offset]="lazyLoadOffest" title="{{ release.name }}" alt="{{ release.name }}">
+    <div class="release-info">
+      <h1>{{ release.name }}</h1>
+      <p>{{ formatReleaseArtists(release) }}</p>
+    </div>
+  </a>
 </div>

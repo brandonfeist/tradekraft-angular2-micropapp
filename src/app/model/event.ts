@@ -3,7 +3,7 @@ import { Artist } from './artist';
 export class Event {
     id: number;
     name: string;
-    images: object;
+    image: object;
     description: string;
     ticketLink: string;
     entryAge: string;

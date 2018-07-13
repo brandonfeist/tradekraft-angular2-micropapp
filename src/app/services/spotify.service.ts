@@ -16,7 +16,7 @@ export class SpotifyService {
     private responseType: string;
     private redirectUri: string;
     private scope: string;
-    private spotifyLinkInfoRegex = /https:\/\/open.spotify.com\/(artist|user)\/(\S+)/;
+    private spotifyLinkInfoRegex = /https:\/\/open.spotify.com\/(artist|user)\/([a-zA-Z0-9]+)(\??\S+)/;
     private spotifyReleaseLinkInfoRegex = /https:\/\/open.spotify.com\/album\/(\S+)/;
 
     constructor(private http: Http, private router: Router) {

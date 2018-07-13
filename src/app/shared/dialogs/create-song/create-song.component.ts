@@ -60,6 +60,8 @@ export class CreateSongDialog {
   }
 
   onSubmit() {
+    this.createSong.get('songFiles').setValue(null);
+    
     this.submit.emit({
       song: this.createSong.value,
       songFile: this.songFile

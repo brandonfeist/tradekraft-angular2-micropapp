@@ -1,3 +1,4 @@
+import { ImgService } from './../../shared/img-service/img-service';
 import { AppSettings } from 'app/app-settings';
 import { EventService } from './../../services/event.service';
 import { Event } from 'app/model/event';
@@ -30,13 +31,11 @@ export class AdminEventComponent implements OnInit {
 
   private deleting = [];
 
-  constructor(private eventService: EventService, private snackbarService: SnackbarService) {}
+  constructor(private eventService: EventService, private snackbarService: SnackbarService, private imgService: ImgService) {}
 
   ngOnInit() {
     this.getAllEvents();
   }
-
-  ngOnDestroy() {}
 
   private getAllEvents() {
     let urlSearchParams = new URLSearchParams('pastEvents=true&futureEvents=true&sortOrder=desc');

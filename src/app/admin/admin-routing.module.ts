@@ -1,3 +1,5 @@
+import { AdminVideoSongsResolve } from 'app/admin/video/admin-video-songs.resolve';
+import { AdminCreateVideoComponent } from './video/admin-create-video.component';
 import { AdminReleaseArtistsResolve } from './release/admin-release-artists.resolve';
 import { AdminEditRolePermissionsResolve } from './roles/admin-edit-role-permissions.resolve';
 import { AdminEditRoleResolve } from './roles/admin-edit-role.resolve';
@@ -25,6 +27,7 @@ import { AdminEditRoleComponent } from 'app/admin/roles/admin-edit-role.componen
 import { AdminReleaseComponent } from 'app/admin/release/admin-release.component';
 import { AdminCreateReleaseComponent } from 'app/admin/release/admin-create-release.component';
 import { AdminReleaseGenresResolve } from 'app/admin/release/admin-release-genres.resolve';
+import { AdminVideoComponent } from 'app/admin/video/admin-video.component';
 
 @NgModule({
     imports: [
@@ -73,6 +76,13 @@ import { AdminReleaseGenresResolve } from 'app/admin/release/admin-release-genre
                 resolve: {
                     role: AdminEditRoleResolve,
                     permissions: AdminEditRolePermissionsResolve
+                }
+            },
+            { path: 'videos', component: AdminVideoComponent },
+            {
+                path: 'videos/create', component: AdminCreateVideoComponent,
+                resolve: {
+                    songs: AdminVideoSongsResolve
                 }
             }
         ])

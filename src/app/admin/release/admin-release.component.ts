@@ -33,6 +33,14 @@ export class AdminReleaseComponent implements OnInit {
     this.getAllReleases();
   }
 
+  private getImage(object, imageName: string) {
+    if(object.images && object.images[imageName]) {
+      return object.images[imageName].link;
+    }
+
+    return undefined;
+  }
+
   private getAllReleases() {
     this.releaseService.getReleases().subscribe((releases) => {
       this.loading = false;

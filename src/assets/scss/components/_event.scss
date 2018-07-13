@@ -1,0 +1,71 @@
+event-preview {
+  width: 100%;
+  float: left;
+  padding-bottom: 25px;
+  background-color: $white;
+
+  .event-preview-container {
+    max-width: $max-width;
+    margin: 0 auto;
+  }
+}
+
+.event-info {
+  padding: 10px;
+}
+
+.event-img-container {
+  height: 320px;
+  overflow: hidden;
+}
+
+.date-card {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  position: absolute;
+  top: 302px;
+  left: 15px;
+  background: #0c6bfe;
+  padding: 5px 10px;
+}
+
+.event-container-location {
+  font-size: 12px;
+  font-style: italic;
+
+  span {
+    color: #0c6bfe;
+  }
+}
+
+.count {
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 200px;
+
+    &.active {
+        .count-ribbon {
+            background: $white;
+            color: $black;
+        }
+    }
+}
+
+.count-ribbon {
+    background: $black;
+    color: $red;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 15px;
+    position: absolute;
+    right: -70px;
+    text-align: center;
+    text-transform: uppercase;
+    top: 35px;
+    transform: rotate(45deg);
+    width: 250px;
+}

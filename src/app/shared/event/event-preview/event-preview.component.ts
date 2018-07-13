@@ -10,9 +10,9 @@ import { EventService } from './../../../services/event.service';
     templateUrl: './event-preview.component.html'
   })
   export class EventPreviewComponent implements OnInit {
-    events: Event[] = [];
-    defaultImage = AppSettings.loadImage;
-    errorImage = AppSettings.errorImage;
+    private events: Event[] = [];
+    private defaultImage = AppSettings.loadImage;
+    private errorImage = AppSettings.errorImage;
 
     constructor(private eventService: EventService) { }
 

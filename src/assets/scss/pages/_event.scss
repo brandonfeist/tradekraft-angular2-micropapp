@@ -96,10 +96,6 @@
   position: relative;
   width: 100%;
 
-  @include media($tablet) {
-      padding: 0 25vw;
-  }
-
   .push-right a {
       margin-right: 1.5em;
   }

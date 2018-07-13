@@ -10,10 +10,10 @@ import { Release } from './../../../model/release';
 })
 export class ReleaseContainerComponent {
   @Input() release: Release;
-  @Input() noMargin: boolean = false;
 
-  defaultImage = AppSettings.loadImage;
-  errorImage = AppSettings.errorImage;
+  private defaultImage = AppSettings.loadImage;
+  private errorImage = AppSettings.errorImage;
+  private lazyLoadOffset = AppSettings.lazyLoadOffest;
 
   constructor() { }
 

@@ -1,4 +1,4 @@
-<div class="frame index-frame">
+<!-- <div class="frame index-frame">
     <div class="wrapper">
         <form [formGroup]="releaseSearchForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="tk-container">
@@ -27,11 +27,15 @@
                 </div>
             </div>
         </div>
-        <div class="frame-items">
+        <div class="frame-items"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="getReleases()">
             <div class="item music" *ngFor="let release of releases">
                 <a routerLink="/releases/{{ release.slug }}">
                     <div class="image-container">
-                        <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.medium" title="release.name" alt="release.name">
+                        <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.images.medium.link" [offset]="lazyLoadOffest" title="release.name" alt="release.name">
                     </div>
                 </a>
                 <div class="text-container">
@@ -41,6 +45,22 @@
                     <p>{{ formatReleaseArtists(release) }}</p>
                 </div>
             </div>
+            <index-spinner [name]="spinnerName" [(loading)]="loadingInfScroll"></index-spinner>
         </div>
     </div>
-</div> 
+</div>  -->
+
+<div class="release-view">
+    <div class="col-xs-12 small-pad">
+        <h1>Releases</h1>
+    </div>
+
+    <div class="releases-container" 
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="getReleases()">
+        <release-container *ngFor="let release of releases" [release]="release"></release-container>
+        <index-spinner [name]="spinnerName" [(loading)]="loadingInfScroll"></index-spinner>
+    </div>
+</div>

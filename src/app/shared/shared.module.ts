@@ -1,3 +1,4 @@
+import { SpinnerModule } from './../spinner/spinner.module';
 import { CreateSongDialog } from './dialogs/create-song/create-song.component';
 import { TinyMceComponent } from './tinymce/tinymce.component';
 import { ShareReleaseDialog } from './dialogs/share-release/share-release.component';
@@ -20,6 +21,7 @@ import { CustomMaterialModule } from 'app/custom-material/custom-material.module
 import { ReactiveFormsModule } from '@angular/forms';
 import { DateAbbr } from 'app/shared/date-abbr/date-abbr';
 import { AuthModule } from 'app/auth/auth.module';
+import { ImgService } from './img-service/img-service';
 
 @NgModule({
     imports:  [ 
@@ -28,6 +30,7 @@ import { AuthModule } from 'app/auth/auth.module';
       CustomMaterialModule,
       LazyLoadImageModule,
       ReactiveFormsModule,
+      SpinnerModule,
       AuthModule
     ],
     exports: [
@@ -61,7 +64,8 @@ import { AuthModule } from 'app/auth/auth.module';
       TinyMceComponent
     ],
     providers: [
-      DateAbbr
+      DateAbbr,
+      ImgService
     ],
     entryComponents: [
       ArtistSpotifyDialog,

@@ -22,4 +22,6 @@ export class AppSettings {
   public static defaultFeaturePoster: string = "";
 
   public static defaultUserImage: string = '/assets/images/default-profile.png';
+
+  public static lazyLoadOffest: number = 350;
 }

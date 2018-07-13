@@ -4,7 +4,7 @@ import { Event } from './event';
 export class Artist {
     id: number;
     name: string;
-    images: object;
+    image: object;
     description: string;
     soundcloud: string;
     facebook: string;

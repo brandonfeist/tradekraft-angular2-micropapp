@@ -21,8 +21,9 @@ export class ReleaseDetailsComponent implements OnInit {
   private release: Release;
   private artists: Artist[];
   private songs: Song[];
-  defaultImage: string = AppSettings.loadImage;
-  errorImage: string = AppSettings.errorImage;
+  private defaultImage: string = AppSettings.loadImage;
+  private errorImage: string = AppSettings.errorImage;
+  private lazyLoadOffest: number = AppSettings.lazyLoadOffest;
 
   private paramSubscription: any;
   private pauseSubscription;

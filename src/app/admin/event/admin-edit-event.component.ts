@@ -1,3 +1,4 @@
+import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';
 import { StartEndDateValidation } from './../../validators/start-end-date-validation';
 import { AppSettings } from 'app/app-settings';
 import { ArtistService } from 'app/services/artist.service';
@@ -25,7 +26,9 @@ export class AdminEditEventComponent implements OnInit {
 
   private processing: boolean = false;
 
-  private imageFile: File;
+  private imageUploadProgress: number = 0;
+
+  private imageFile;
 
   private event: Event;
 
@@ -39,7 +42,7 @@ export class AdminEditEventComponent implements OnInit {
 
   constructor(private eventService: EventService, private snackbarService: SnackbarService,
     private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute,
-    private artistService: ArtistService) {}
+    private artistService: ArtistService, private http: HttpClient) {}
 
   ngOnInit() {
     this.getArtists();
@@ -68,7 +71,7 @@ export class AdminEditEventComponent implements OnInit {
     this.eventEditForm = this.formBuilder.group({
       name: this.event.name,
       venueName: this.event.venueName,
-      images: this.event.images,
+      image: this.event.image,
       description: this.event.description,
       entryAge: this.event.entryAge,
       officialEvent: this.event.officialEvent,
@@ -81,9 +84,11 @@ export class AdminEditEventComponent implements OnInit {
       country: this.event.country,
       ticketLink: this.event.ticketLink,
       artists: [this.event.artists]
-    }, {
+    }, { 
       validator: StartEndDateValidation.dates('startDateTime', 'endDateTime')
     });
+
+    this.imageFile = this.event.image;
   }
   // Validate if startDateTime is less than endDateTime
   // Validate if ticketLink is a valid url
@@ -103,14 +108,22 @@ export class AdminEditEventComponent implements OnInit {
   }
 
   private fileChange(event) {
+    this.removeImageFile();
+
     let fileList: FileList = event.target.files;
 
-    if(fileList.length > 0) {
-      this.imageFile = fileList[0]
-      this.eventEditForm.get('images').setValue(this.imageFile.name);
-    }
+    this.http.request(this.eventService.uploadEventImage(fileList[0])).subscribe(imageResponse => {
+      if(imageResponse.type === HttpEventType.UploadProgress) {
+        this.imageUploadProgress = Math.round(100 * imageResponse.loaded / imageResponse.total);
+      } else if (imageResponse instanceof HttpResponse) {
+        this.eventEditForm.get('image').setValue(imageResponse.body);
+        this.imageFile = imageResponse.body;
+      }
+    }, err => {
+      console.log("image upload err: ", err);
+      this.snackbarService.openSnackbar("There was an problem uploading the event image.");
+    });
   }
-  
 
   removeImageFile() {
     this.imageFile = undefined;
@@ -118,46 +131,19 @@ export class AdminEditEventComponent implements OnInit {
     this.eventEditForm.get('images').setValue(this.event.name);
   }
 
-  private getJsonPatches(): Object[] {
-    let patches = [];
-
-    for(let key in this.eventEditForm.controls) {
-      if((this.eventEditForm.controls[key].touched || this.eventEditForm.controls[key].dirty)
-        && key !== "images") {
-        patches.push({op: "replace", path:"/" + key, value: this.eventEditForm.controls[key].value});
-      }
-    }
-
-    return patches;
-  }
-
   private onSubmit() {
     this.processing = true;
 
-    let patches = this.getJsonPatches();
+    if(this.eventEditForm.touched) {
+      this.eventService.updateEvent(this.event.slug, this.eventEditForm.value).subscribe(eventResponse => {
+        this.snackbarService.openSnackbar("Edited event " + eventResponse.name);
+        this.router.navigate(['admin/events']);
+      }, err => {
+        console.log("err: ", err);
+        this.snackbarService.openSnackbar("Event Edit Error: " + JSON.parse(err._body).error, undefined, 5000);
 
-    if(this.eventEditForm.touched || this.eventEditForm.dirty || this.imageFile) {
-      this.eventService.editEvent(this.event.slug, patches).subscribe((event) => {
-            if(this.imageFile) {
-              this.eventService.uploadEventImage(event.slug, this.imageFile).subscribe((eventWithImage) => {
-                this.snackbarService.openSnackbar("Edited event " + event.name);
-                this.router.navigate(['admin/events']);
-              }, err => {
-                console.log("err: ", err);
-                this.snackbarService.openSnackbar("There was an error editing the event.");
-    
-                this.processing = false;
-              })
-            } else {
-              this.snackbarService.openSnackbar("Edited event " + event.name);
-              this.router.navigate(['admin/events']);
-            }
-          }, err => {
-            console.log("err: ", err);
-            this.snackbarService.openSnackbar("There was an error editing the event.");
-    
-            this.processing = false;
-          })
+        this.processing = false;
+      })
     } else {
       this.snackbarService.openSnackbar("No edits made to " + this.event.name);
       this.router.navigate(['admin/events']);

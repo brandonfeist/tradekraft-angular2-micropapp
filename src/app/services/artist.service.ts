@@ -1,8 +1,10 @@
+import { Artist } from 'app/model/artist';
 import { AppSettings } from './../app-settings';
 import { AuthHttp } from 'angular2-jwt';
 import { Injectable } from '@angular/core';
 import { Http, Response, URLSearchParams, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class ArtistService {
@@ -17,13 +19,13 @@ export class ArtistService {
         .map((res:Response) => res.json());
     }
 
-    uploadArtistImage(artistSlug: string, artistImage: File) {
+    uploadArtistImage(artistImage: File) {
         let formData: FormData = new FormData();
-        formData.append('artist-slug', artistSlug);
         formData.append('image', artistImage, artistImage.name);
 
-        return this.authHttp.post(this.tkServiceUrl + '/v1/artists/image', formData)
-        .map((res:Response) => res.json());
+        return new HttpRequest('POST', this.tkServiceUrl + '/v1/artists/image', formData, { 
+            reportProgress: true
+        });
     }
 
     deleteArtist(artistSlug: string) {
@@ -31,8 +33,8 @@ export class ArtistService {
         .map((res:Response) => res.json());
     }
 
-    editArtist(artistSlug: string, patches: Object[]) {
-        return this.authHttp.patch(this.tkServiceUrl + '/v1/artists/' + artistSlug, patches)
+    editArtist(artistSlug: string, artistUpdates: Artist) {
+        return this.authHttp.put(this.tkServiceUrl + '/v1/artists/' + artistSlug, artistUpdates)
         .map((res:Response) => res.json());
     }
 

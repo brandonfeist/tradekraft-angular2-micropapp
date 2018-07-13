@@ -39,24 +39,28 @@ import { Artist } from 'app/model/artist';
     }
 
     ngAfterViewInit() {
-      this.videoplayer.nativeElement.muted = true;
+      if(this.randomVideo) {
+        this.videoplayer.nativeElement.muted = true;
 
-      this.videoplayer.nativeElement.play()
+        this.videoplayer.nativeElement.play()
+      }
     }
 
     private getRandomFeaturedVideo() {
-      this.videoTitle = this.randomVideo.name;
+      if(this.randomVideo) {
+        this.videoTitle = this.randomVideo.name;
 
-      if(this.randomVideo.song) {
-        this.videoTitle = this.randomVideo.song.name;
-        this.videoSubtitle = this.formatSongArtists(this.randomVideo.song.artists);
+        if(this.randomVideo.song) {
+          this.videoTitle = this.randomVideo.song.name;
+          this.videoSubtitle = this.formatSongArtists(this.randomVideo.song.artists);
+        }
+
+        this.videoThumnail = this.randomVideo.videoThumbnails.jpg ? this.randomVideo.videoThumbnails.jpg.link : undefined;
+
+        this.videoMp4Link = this.randomVideo.videoFiles.mp4_preview ? this.randomVideo.videoFiles.mp4_preview.link : undefined;
+
+        this.videoWebmLink = this.randomVideo.videoFiles.webm_preview ? this.randomVideo.videoFiles.webm_preview.link : undefined;
       }
-
-      this.videoThumnail = this.randomVideo.videoThumbnail;
-
-      this.videoMp4Link = this.randomVideo.videoFile.mp4_preview;
-
-      this.videoWebmLink = this.randomVideo.videoFile.webm_preview;
     }
 
     formatSongArtists(artists: Artist[]): string {
@@ -89,5 +93,13 @@ import { Artist } from 'app/model/artist';
       }
 
       return true;
+    }
+
+    private videoHasSong(): boolean {
+      if(this.randomVideo && this.randomVideo.song) {
+        return true;
+      }
+
+      return false;
     }
   }

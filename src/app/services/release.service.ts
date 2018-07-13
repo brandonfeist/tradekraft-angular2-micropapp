@@ -23,8 +23,22 @@ export class ReleaseService {
         .map((res:Response) => res.json());
     }
 
+    createRelease(releaseData) {
+        return this.authHttp.post(this.tkServiceUrl + '/v1/releases', releaseData)
+        .map((res:Response) => res.json());
+    }
+
+    uploadReleaseImage(releaseSlug: string, releaseImage: File) {
+        let formData: FormData = new FormData();
+        formData.append('release-slug', releaseSlug);
+        formData.append('image', releaseImage, releaseImage.name);
+
+        return this.authHttp.post(this.tkServiceUrl + '/v1/releases/image', formData)
+        .map((res:Response) => res.json());
+    }
+
     deleteRelease(releaseSlug: string) {
-        return this.authHttp.delete(this.tkServiceUrl + '/v1/artists/' + releaseSlug)
+        return this.authHttp.delete(this.tkServiceUrl + '/v1/releases/' + releaseSlug)
         .map((res:Response) => res.json());
     }
 }

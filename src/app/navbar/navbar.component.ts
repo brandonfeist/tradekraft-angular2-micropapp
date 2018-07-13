@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
   }
 
   private isTransparent(sideNav): boolean {
-    return (this.navbarTransparent && !sideNav.opened && !this.onIndexPage());
+    return (this.navbarTransparent && !sideNav.opened && !this.onIndexPage() && (document.documentElement.clientWidth > 1040));
   }
 
   private openNewsletterDialog() {

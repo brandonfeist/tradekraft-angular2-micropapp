@@ -21,10 +21,6 @@ artist-container {
     position: relative;
     width: 100%;
 
-    @include media($tablet) {
-        padding: 0 25vw;
-    }
-
     .social-media {
         margin: 20px 0;
         line-height: 1;

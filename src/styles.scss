@@ -3,37 +3,42 @@
 
 @import '~bourbon-neat/app/assets/stylesheets/_neat';
 
+// @import "~bootstrap/scss/bootstrap.scss";
 @import "./assets/scss/bootstrap-sass/_variables.scss";
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 
 @import './assets/scss/helpers/_variables.scss';
 
 @import './assets/scss/base/_base.scss';
-@import './assets/scss/base/_containers.scss';
-@import './assets/scss/base/_frames.scss';
+// @import './assets/scss/base/_containers.scss';
+// @import './assets/scss/base/_frames.scss';
 
 @import './assets/scss/components/_buttons.scss';
-@import './assets/scss/components/_columns.scss';
-@import './assets/scss/components/_elements.scss';
+// @import './assets/scss/components/_columns.scss';
+// @import './assets/scss/components/_elements.scss';
+@import './assets/scss/components/_event.scss';
 @import './assets/scss/components/_icons.scss';
-@import './assets/scss/components/_instagram.scss';
-@import './assets/scss/components/_items.scss';
+// @import './assets/scss/components/_instagram.scss';
+// @import './assets/scss/components/_items.scss';
 @import './assets/scss/components/_lazy-load-images.scss';
-@import './assets/scss/components/_lists.scss';
+// @import './assets/scss/components/_lists.scss';
+// @import './assets/scss/components/_loading.scss';
 @import './assets/scss/components/_musicplayer.scss';
-@import './assets/scss/components/_search.scss';
+@import './assets/scss/components/_release.scss';
+// @import './assets/scss/components/_search.scss';
 
-@import './assets/scss/pages/_artist.scss';
-@import './assets/scss/pages/_event.scss';
-@import './assets/scss/pages/_index.scss';
-@import './assets/scss/pages/_login.scss';
+// @import './assets/scss/pages/_artist.scss';
+// @import './assets/scss/pages/_event.scss';
+@import './assets/scss/pages/_homepage.scss';
+// @import './assets/scss/pages/_index.scss';
+// @import './assets/scss/pages/_login.scss';
 @import './assets/scss/pages/_release.scss';
-@import './assets/scss/pages/_spotify-artist.scss';
-@import './assets/scss/pages/_spotify-playlist.scss';
+// @import './assets/scss/pages/_spotify-artist.scss';
+// @import './assets/scss/pages/_spotify-playlist.scss';
 
 @import './assets/scss/sections/_banners.scss';
-@import './assets/scss/sections/_footer.scss';
-@import './assets/scss/sections/_forms.scss';
+// @import './assets/scss/sections/_footer.scss';
+// @import './assets/scss/sections/_forms.scss';
 @import './assets/scss/sections/_slidemenu.scss';
 
 @import './assets/scss/base/_typography.scss';

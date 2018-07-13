@@ -1,5 +1,5 @@
 <div class="frame banner small">
-    <img class="image lazy-load" [errorImage]="errorImage" [lazyLoad]="release.image.original">
+    <img class="image lazy-load" [errorImage]="errorImage" [lazyLoad]="release.images.original.link" [offset]="lazyLoadOffest">
 </div>
 <div class="frame">
     <div class="wrapper">
@@ -8,7 +8,7 @@
                 <div class="image-container">
                     <!-- <span class="icon play white pseudo-play">Play</span>
                     <span class="icon pause white pseudo-pause">Pause</span> -->
-                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.image.medium" title="{{ release.name }}" alt="{{ release.name }}">
+                    <img class="lazy-load" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="release.images.medium.link" [offset]="lazyLoadOffest" title="{{ release.name }}" alt="{{ release.name }}">
                 </div>
                 <div class="sub-container">
                     <h5 class="release-header-label">Release Date: </h5>

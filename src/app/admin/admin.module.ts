@@ -1,3 +1,4 @@
+import { AdminCreateVideoComponent } from './video/admin-create-video.component';
 import { AdminReleaseArtistsResolve } from './release/admin-release-artists.resolve';
 import { AdminReleaseComponent } from './release/admin-release.component';
 import { AdminEditRolePermissionsResolve } from './roles/admin-edit-role-permissions.resolve';
@@ -23,7 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from 'app/admin/admin-routing.module';
 import { AdminArtistComponent } from 'app/admin/artist/admin-artist.component';
 import { AdminEditArtistComponent } from 'app/admin/artist/admin-edit-artist.component';
-import { CalendarModule, ColorPickerModule } from 'primeng/primeng';
+import { CalendarModule, ColorPickerModule, SliderModule } from 'primeng/primeng';
 import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
 import { AdminUserComponent } from 'app/admin/user/admin-user.component';
 import { AdminEditUserComponent } from 'app/admin/user/admin-edit-user.component';
@@ -31,6 +32,9 @@ import { AdminEditUserResolve } from 'app/admin/user/admin-edit-user.resolve';
 import { AdminEditRoleComponent } from 'app/admin/roles/admin-edit-role.component';
 import { AdminCreateReleaseComponent } from 'app/admin/release/admin-create-release.component';
 import { AdminReleaseGenresResolve } from 'app/admin/release/admin-release-genres.resolve';
+import { AdminVideoComponent } from 'app/admin/video/admin-video.component';
+import { AdminVideoSongsResolve } from 'app/admin/video/admin-video-songs.resolve';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports:  [ 
@@ -41,7 +45,9 @@ import { AdminReleaseGenresResolve } from 'app/admin/release/admin-release-genre
       CustomMaterialModule,
       CalendarModule,
       ColorPickerModule,
-      SharedModule
+      SharedModule,
+      SliderModule,
+      HttpClientModule
     ],
     declarations: [ 
       AdminDashboardComponent,
@@ -59,7 +65,9 @@ import { AdminReleaseGenresResolve } from 'app/admin/release/admin-release-genre
       AdminRoleComponent,
       AdminEditRoleComponent,
       AdminReleaseComponent,
-      AdminCreateReleaseComponent
+      AdminCreateReleaseComponent,
+      AdminVideoComponent,
+      AdminCreateVideoComponent
     ],
     providers: [
       AdminEditArtistResolve,
@@ -70,7 +78,8 @@ import { AdminReleaseGenresResolve } from 'app/admin/release/admin-release-genre
       AdminEditRoleResolve,
       AdminEditRolePermissionsResolve,
       AdminReleaseArtistsResolve,
-      AdminReleaseGenresResolve
+      AdminReleaseGenresResolve,
+      AdminVideoSongsResolve
     ]
   })
   export class AdminModule { }

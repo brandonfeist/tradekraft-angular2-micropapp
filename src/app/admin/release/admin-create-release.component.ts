@@ -1,3 +1,6 @@
+import { Release } from './../../model/release';
+import { Observable } from 'rxjs/Rx';
+import { SongService } from './../../services/song.service';
 import { Genre } from './../../model/genre';
 import { CreateSongDialog } from './../../shared/dialogs/create-song/create-song.component';
 import { ReleaseService } from 'app/services/release.service';
@@ -43,7 +46,7 @@ export class AdminCreateReleaseComponent implements OnInit {
 
   constructor(private releaseService: ReleaseService, private snackbarService: SnackbarService,
     private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
-    private activatedRoute: ActivatedRoute) {}
+    private activatedRoute: ActivatedRoute, private songService: SongService) {}
 
   ngOnInit() {    
     this.createForm();
@@ -135,27 +138,63 @@ export class AdminCreateReleaseComponent implements OnInit {
     }
   }
 
+  private uploadSongAndSongFiles(release: Release) {
+    let songsAndSongFiles = this.releaseSongsCreateForm.value.songs
+
+    let songs = [];
+
+    for(let songIndex = 0; songIndex < songsAndSongFiles.length; songIndex++) {
+      songsAndSongFiles[songIndex].song.release = release;
+      songs.push(songsAndSongFiles[songIndex].song);
+    }
+
+    this.songService.createSongs(songs).subscribe(songs => {
+      let songFilePromises = [];
+
+      for(let songFileIndex = 0; songFileIndex < songsAndSongFiles.length; songFileIndex++) {
+        songFilePromises.push(
+          this.songService.uploadSongFile(songs[songFileIndex].slug, songsAndSongFiles[songFileIndex].songFile)
+        );
+      }
+      
+      Observable.forkJoin(songFilePromises).subscribe(songFiles => {
+        this.snackbarService.openSnackbar("Release and songs uploaded.");
+        this.router.navigate(['admin/releases']);
+      }, err => {
+        console.log("err: ", err);
+        this.snackbarService.openSnackbar("There was a problem uploading the song files.");
+
+        this.processing = false;
+      })
+    }, err => {
+      console.log("err: ", err);
+      this.snackbarService.openSnackbar("There was a problem creating the songs.");
+
+      this.processing = false;
+    });
+  }
+
   private onSubmit() {
-    console.log("Submit");
-  //   this.processing = true;
+    this.processing = true;
 
-  //   this.artistCreateForm.get('images').setValue(null);
+    this.releaseInfoCreateForm.get('images').setValue(null);
 
-  //   this.artistService.createArtist(this.artistCreateForm.value).subscribe(artist => {
-  //     this.artistService.uploadArtistImage(artist.slug, this.imageFile).subscribe(data => {
-  //       this.snackbarService.openSnackbar("Created artist " + artist.name);
-  //       this.router.navigate(['admin/artists']);
-  //     }, err => {
-  //       console.log("err: ", err);
-  //       this.snackbarService.openSnackbar("There was an problem uploading the artist image.");
-        
-  //       this.processing = false;
-  //     });
-  //   }, err => {
-  //     console.log("err: ", err);
-  //     this.snackbarService.openSnackbar("Artist Create Error: " + JSON.parse(err._body).error, undefined, 5000);
+    let release = Object.assign({}, this.releaseInfoCreateForm.value, this.releaseLinksCreateForm.value);
 
-  //     this.processing = false;
-  //   });
+    this.releaseService.createRelease(release).subscribe(release => {
+      this.releaseService.uploadReleaseImage(release.slug, this.imageFile).subscribe(release => {
+        this.uploadSongAndSongFiles(release);
+      }, err => {
+        console.log("err: ", err);
+        this.snackbarService.openSnackbar("There was a problem creating the release.");
+
+        this.processing = false;
+      })
+    }, err => {
+      console.log("err: ", err);
+      this.snackbarService.openSnackbar("There was a problem creating the release.");
+
+      this.processing = false;
+    });
   }
 }

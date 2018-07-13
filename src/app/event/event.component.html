@@ -10,7 +10,8 @@
             </div>
         </div>
         <div class="events-table">
-          <mat-spinner *ngIf="loading"></mat-spinner>
+          <spinner [name]="eventIndexSpinner" [(loading)]="loading"></spinner>
+
           <h1 *ngIf="!hasEvents(events) && !loading">No events currently, come back soon! * Maybe sign up for info about future events? *</h1>
           <table *ngIf="hasEvents(events) && !loading" class="events">
             <tbody>
