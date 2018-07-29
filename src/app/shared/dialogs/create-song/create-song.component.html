@@ -14,7 +14,7 @@
         <button mat-raised-button *ngIf="songFile" type="button" (click)="removeSongFile()">Remove file</button>
     </div>
     <input type="file" #songFileInput (change)="fileChange($event)" accept=".wav,.mp3" style="visibility: hidden">
-    <input type="hidden" name="fileHidden" formControlName="songFiles" required/>
+    <input type="hidden" name="fileHidden" formControlName="songFile" required/>
   </div>
 
   <mat-form-field class="col-xs-6">

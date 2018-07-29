@@ -24,7 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from 'app/admin/admin-routing.module';
 import { AdminArtistComponent } from 'app/admin/artist/admin-artist.component';
 import { AdminEditArtistComponent } from 'app/admin/artist/admin-edit-artist.component';
-import { CalendarModule, ColorPickerModule, SliderModule } from 'primeng/primeng';
+import { CalendarModule, ColorPickerModule, SliderModule, InputTextModule} from 'primeng/primeng';
 import { AdminGenreComponent } from 'app/admin/genre/admin-genre.component';
 import { AdminUserComponent } from 'app/admin/user/admin-user.component';
 import { AdminEditUserComponent } from 'app/admin/user/admin-edit-user.component';

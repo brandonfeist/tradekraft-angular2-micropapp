@@ -1,3 +1,4 @@
+import { HttpRequest } from '@angular/common/http';
 import { AuthHttp } from 'angular2-jwt';
 import { AppSettings } from 'app/app-settings';
 import { Injectable } from '@angular/core';
@@ -28,13 +29,13 @@ export class ReleaseService {
         .map((res:Response) => res.json());
     }
 
-    uploadReleaseImage(releaseSlug: string, releaseImage: File) {
+    uploadReleaseImage(releaseImage: File) {
         let formData: FormData = new FormData();
-        formData.append('release-slug', releaseSlug);
         formData.append('image', releaseImage, releaseImage.name);
 
-        return this.authHttp.post(this.tkServiceUrl + '/v1/releases/image', formData)
-        .map((res:Response) => res.json());
+        return new HttpRequest('POST', this.tkServiceUrl + '/v1/releases/image', formData, { 
+            reportProgress: true
+        });
     }
 
     deleteRelease(releaseSlug: string) {

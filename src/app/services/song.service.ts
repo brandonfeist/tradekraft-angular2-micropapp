@@ -24,9 +24,8 @@ export class SongService {
       .map((res:Response) => res.json());
     }
 
-    uploadSongFile(songSlug: string, songFile: File) {
+    uploadSongFile(songFile: File) {
         let formData: FormData = new FormData();
-        formData.append('song-slug', songSlug);
         formData.append('song', songFile, songFile.name);
 
         return this.authHttp.post(this.tkServiceUrl + '/v1/songs/songFile', formData)

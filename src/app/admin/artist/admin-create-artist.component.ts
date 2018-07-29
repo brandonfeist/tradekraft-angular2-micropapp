@@ -16,6 +16,8 @@ import { HttpEventType, HttpClient, HttpResponse } from '@angular/common/http';
   templateUrl: './admin-create-artist.component.html'
 })
 export class AdminCreateArtistComponent implements OnInit {
+  private UPLOAD_FINISHED: number = 100;
+
   private artistCreateForm: FormGroup;
 
   private STARTING_YEAR: number = 2015;
@@ -73,6 +75,8 @@ export class AdminCreateArtistComponent implements OnInit {
   }
 
   private fileChange(event) {
+    this.imageUploadProgress = 0;
+
     this.removeImageFile();
 
     let fileList: FileList = event.target.files;
@@ -80,8 +84,10 @@ export class AdminCreateArtistComponent implements OnInit {
     if(fileList.length > 0) {
       this.http.request(this.artistService.uploadArtistImage(fileList[0])).subscribe(imageResponse => {
         if(imageResponse.type === HttpEventType.UploadProgress) {
-          this.imageUploadProgress = Math.round(100 * imageResponse.loaded / imageResponse.total);
+          this.imageUploadProgress = Math.round(100 * imageResponse.loaded / imageResponse.total) - 10;
         } else if (imageResponse instanceof HttpResponse) {
+          this.imageUploadProgress = this.UPLOAD_FINISHED;
+
           this.artistCreateForm.get('image').setValue(imageResponse.body);
           this.imageFile = imageResponse.body;
         }
@@ -89,10 +95,14 @@ export class AdminCreateArtistComponent implements OnInit {
         console.log("image upload err: ", err);
         this.snackbarService.openSnackbar("There was an problem uploading the artist image.");
       });
+    } else {
+      console.log("", fileList);
     }
   }
 
   removeImageFile() {
+    this.imageUploadProgress = 0;
+    
     this.imageFile = undefined;
 
     this.artistCreateForm.get('image').setValue(null);

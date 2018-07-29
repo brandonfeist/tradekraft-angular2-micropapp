@@ -1,3 +1,4 @@
+import { ImgService } from './../../shared/img-service/img-service';
 import { Release } from 'app/model/release';
 import { ReleaseService } from './../../services/release.service';
 import { AppSettings } from 'app/app-settings';
@@ -27,20 +28,13 @@ export class AdminReleaseComponent implements OnInit {
 
   private errorImage: string = AppSettings.errorImage;
 
-  constructor(private releaseService: ReleaseService, private snackbarService: SnackbarService) {}
+  constructor(private releaseService: ReleaseService, private snackbarService: SnackbarService,
+    private imgService: ImgService) {}
 
   ngOnInit() {
     this.getAllReleases();
   }
-
-  private getImage(object, imageName: string) {
-    if(object.images && object.images[imageName]) {
-      return object.images[imageName].link;
-    }
-
-    return undefined;
-  }
-
+  
   private getAllReleases() {
     this.releaseService.getReleases().subscribe((releases) => {
       this.loading = false;

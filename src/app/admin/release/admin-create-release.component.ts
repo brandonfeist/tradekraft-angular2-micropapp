@@ -1,3 +1,4 @@
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Release } from './../../model/release';
 import { Observable } from 'rxjs/Rx';
 import { SongService } from './../../services/song.service';
@@ -32,7 +33,9 @@ export class AdminCreateReleaseComponent implements OnInit {
 
   private processing: boolean = false;
 
-  private imageFile: File;
+  private imageUploadProgress: number = 0;
+
+  private imageFile;
 
   private releaseTypes = ['EP', 'LP', 'Single'];
 
@@ -46,7 +49,7 @@ export class AdminCreateReleaseComponent implements OnInit {
 
   constructor(private releaseService: ReleaseService, private snackbarService: SnackbarService,
     private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
-    private activatedRoute: ActivatedRoute, private songService: SongService) {}
+    private activatedRoute: ActivatedRoute, private songService: SongService, private http: HttpClient) {}
 
   ngOnInit() {    
     this.createForm();
@@ -61,7 +64,7 @@ export class AdminCreateReleaseComponent implements OnInit {
   private createForm() {
     this.releaseInfoCreateForm = this.formBuilder.group({
       name: null,
-      images: null,
+      image: null,
       description: null,
       releaseType: this.releaseTypes[0],
       releaseDate: new Date(),
@@ -89,18 +92,29 @@ export class AdminCreateReleaseComponent implements OnInit {
   }
 
   private fileChange(event) {
+    this.removeImageFile();
+
     let fileList: FileList = event.target.files;
 
     if(fileList.length > 0) {
-      this.imageFile = fileList[0]
-      this.releaseInfoCreateForm.get('images').setValue(this.imageFile.name);
+      this.http.request(this.releaseService.uploadReleaseImage(fileList[0])).subscribe(imageResponse => {
+        if(imageResponse.type === HttpEventType.UploadProgress) {
+          this.imageUploadProgress = Math.round(100 * imageResponse.loaded / imageResponse.total);
+        } else if (imageResponse instanceof HttpResponse) {
+          this.releaseInfoCreateForm.get('image').setValue(imageResponse.body);
+          this.imageFile = imageResponse.body;
+        }
+      }, err => {
+        console.log("image upload err: ", err);
+        this.snackbarService.openSnackbar("There was an problem uploading the release image.");
+      });
     }
   }
 
   private removeImageFile() {
     this.imageFile = undefined;
 
-    this.releaseInfoCreateForm.get('images').setValue(null);
+    this.releaseInfoCreateForm.get('image').setValue(null);
   }
 
   private openCreateSongDialog() {
@@ -139,57 +153,47 @@ export class AdminCreateReleaseComponent implements OnInit {
   }
 
   private uploadSongAndSongFiles(release: Release) {
-    let songsAndSongFiles = this.releaseSongsCreateForm.value.songs
+    let songsAndSongFiles = this.releaseSongsCreateForm.value.songs;
 
-    let songs = [];
-
-    for(let songIndex = 0; songIndex < songsAndSongFiles.length; songIndex++) {
-      songsAndSongFiles[songIndex].song.release = release;
-      songs.push(songsAndSongFiles[songIndex].song);
+    let songFilePromises = [];
+    for(let songFileIndex = 0; songFileIndex < songsAndSongFiles.length; songFileIndex++) {
+      songFilePromises.push(
+        this.songService.uploadSongFile(songsAndSongFiles[songFileIndex].songFile)
+      );
     }
 
-    this.songService.createSongs(songs).subscribe(songs => {
-      let songFilePromises = [];
-
-      for(let songFileIndex = 0; songFileIndex < songsAndSongFiles.length; songFileIndex++) {
-        songFilePromises.push(
-          this.songService.uploadSongFile(songs[songFileIndex].slug, songsAndSongFiles[songFileIndex].songFile)
-        );
+    Observable.forkJoin(songFilePromises).subscribe(songFiles => {
+      let songs = [];
+      for(let songIndex = 0; songIndex < songsAndSongFiles.length; songIndex++) {
+        songsAndSongFiles[songIndex].song.songFile = songFiles[songIndex];
+        songsAndSongFiles[songIndex].song.release = release;
+        songs.push(songsAndSongFiles[songIndex].song);
       }
-      
-      Observable.forkJoin(songFilePromises).subscribe(songFiles => {
+
+      this.songService.createSongs(songs).subscribe(songRes => {
         this.snackbarService.openSnackbar("Release and songs uploaded.");
         this.router.navigate(['admin/releases']);
       }, err => {
         console.log("err: ", err);
-        this.snackbarService.openSnackbar("There was a problem uploading the song files.");
+        this.snackbarService.openSnackbar("There was a problem creating the songs.");
 
         this.processing = false;
       })
     }, err => {
       console.log("err: ", err);
-      this.snackbarService.openSnackbar("There was a problem creating the songs.");
+      this.snackbarService.openSnackbar("There was a problem uploading the song files.");
 
       this.processing = false;
-    });
+    })
   }
 
   private onSubmit() {
     this.processing = true;
 
-    this.releaseInfoCreateForm.get('images').setValue(null);
-
     let release = Object.assign({}, this.releaseInfoCreateForm.value, this.releaseLinksCreateForm.value);
 
     this.releaseService.createRelease(release).subscribe(release => {
-      this.releaseService.uploadReleaseImage(release.slug, this.imageFile).subscribe(release => {
-        this.uploadSongAndSongFiles(release);
-      }, err => {
-        console.log("err: ", err);
-        this.snackbarService.openSnackbar("There was a problem creating the release.");
-
-        this.processing = false;
-      })
+      this.uploadSongAndSongFiles(release);
     }, err => {
       console.log("err: ", err);
       this.snackbarService.openSnackbar("There was a problem creating the release.");

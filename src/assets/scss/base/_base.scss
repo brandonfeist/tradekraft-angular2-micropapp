@@ -30,6 +30,18 @@ img {
     }
 }
 
+.form-wrapper {
+    margin: 0 auto;
+    max-width: 950px;
+    padding: 0 65px;
+    position: relative;
+    width: 100%;
+
+    @include media($mobile) {
+        padding: 0 10px;
+    } 
+}
+
 .hide {
     // scss-lint:disable ImportantRule
     display: none !important;

@@ -36,7 +36,7 @@ export class CreateSongDialog {
   private createSongForm() {
     this.createSong = this.formBuilder.group({
       name: null,
-      songFiles: null,
+      songFile: null,
       trackNumber: null,
       bpm: null,
       artists: null,
@@ -49,18 +49,18 @@ export class CreateSongDialog {
 
     if(fileList.length > 0) {
       this.songFile = fileList[0]
-      this.createSong.get('songFiles').setValue(this.songFile.name);
+      this.createSong.get('songFile').setValue(this.songFile.name);
     }
   }
 
   removeSongFile() {
     this.songFile = undefined;
 
-    this.createSong.get('songFiles').setValue(null);
+    this.createSong.get('songFile').setValue(null);
   }
 
   onSubmit() {
-    this.createSong.get('songFiles').setValue(null);
+    this.createSong.get('songFile').setValue(null);
     
     this.submit.emit({
       song: this.createSong.value,

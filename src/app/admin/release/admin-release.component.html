@@ -14,7 +14,7 @@
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <a routerLink="/admin/releases/edit/{{ element.slug }}">
-              <img class="lazy-load admin-thumb" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="getImage(element, 'thumb')" title="{{ element.name }}" alt="{{ element.name }}">
+              <img class="lazy-load admin-thumb" [defaultImage]="defaultImage" [errorImage]="errorImage" [lazyLoad]="imgService.getImage(element)" title="{{ element.name }}" alt="{{ element.name }}">
             </a>
           </mat-cell>
         </ng-container>
