@@ -1,63 +1,61 @@
 <div class="frame index-frame">
-  <div class="wrapper">
-    <div class="tk-container">
-      <div class="col-8">
-          <h1>Edit {{ artist.name }}</h1>
-      </div>
-    </div>
-
-    <form [formGroup]="artistEditForm" (ngSubmit)="onSubmit()" novalidate>
-      <h2>Main Information</h2>
-      <mat-form-field class="col-xs-12">
-        <input matInput placeholder="Artist name..." formControlName="name" required>
-      </mat-form-field>
-      <div class="col-xs-12">
-        <div class="col-xs-8">
-          <button mat-raised-button type="button" (click)="imgFileInput.click()">Artist Photo</button>
-        </div>
-        <div class="col-xs-4">
-            <button mat-raised-button *ngIf="imageFile" type="button" (click)="removeImageFile()">Remove Image</button>
-        </div>
-        <input type="file" #imgFileInput (change)="fileChange($event)" accept=".jpg,.png" style="visibility: hidden">
-        <input type="hidden" name="fileHidden" formControlName="image" required/>
+  <div class="form-wrapper">
+    <div class="card card-1">
+      <div class="form-item form-header">
         <mat-progress-bar mode="determinate" value="{{ imageUploadProgress }}"></mat-progress-bar>
-      </div>
-      <mat-form-field class="col-xs-12">
-        <mat-select [compareWith]="compareFn" placeholder="Years artist active..." formControlName="yearsActive" multiple>
-          <mat-option *ngFor="let year of years" [value]="year">{{ year.year }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <h2>Social Media</h2>
-      <mat-form-field class="col-xs-12">
-        <input matInput placeholder="Soundcloud link..." formControlName="soundcloud">
-        <mat-error *ngIf="artistEditForm.controls.soundcloud.errors?.pattern">Not a valid artist soundcloud url [Ex. https://www.soundcloud.com/artistName]</mat-error>
-      </mat-form-field>
-      <mat-form-field class="col-xs-12">
-        <input matInput placeholder="Twitter link..." formControlName="twitter">
-        <mat-error *ngIf="artistEditForm.controls.twitter.errors?.pattern">Not a valid artist twitter url [Ex. https://www.twitter.com/artistName]</mat-error>
-      </mat-form-field>
-      <mat-form-field class="col-xs-12">
-        <input matInput placeholder="Spotify link..." formControlName="spotify">
-        <mat-error *ngIf="artistEditForm.controls.spotify.errors?.pattern">Not a valid artist spotify url [Ex. https://www.open.spotify.com/artist/artistId]</mat-error>
-      </mat-form-field>
-      <mat-form-field class="col-xs-12">
-        <input matInput placeholder="Instagram link..." formControlName="instagram">
-        <mat-error *ngIf="artistEditForm.controls.instagram.errors?.pattern">Not a valid artist instagram url [Ex. https://www.instagram.com/artistName]</mat-error>
-      </mat-form-field>
-
-      <h2>Description</h2>
-      <div class="col-xs-12">
-        <tiny-mce [elementId]="'artist-edit-editor'" [initialContent]="artist.description" (onEditorKeyup)="keyupHandlerFunction($event)" formControlName="description" ngDefaultControl></tiny-mce>
+        <h1>Edit {{ artist.name }}</h1>
       </div>
 
-      <div class="btn-center-wrapper login-btn col-xs-6">
-        <button *ngIf="!processing" mat-raised-button color="primary" type="submit" [disabled]="!artistEditForm.valid">Submit</button>
-        <button *ngIf="processing" mat-raised-button color="primary" type="submit" disabled><i class="fa fa-spinner fa-spin"></i></button>
-      </div>
-      <div class="btn-center-wrapper login-btn col-xs-6">
-        <button mat-raised-button routerLink="/admin/artists">Cancel</button>
-      </div>
-    </form>
+      <form class="form-item" [formGroup]="artistEditForm" (ngSubmit)="onSubmit()" novalidate>
+        <h2 class="form-item form-sub-header">Main Information</h2>
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Artist name..." formControlName="name" required>
+        </mat-form-field>
+        <mat-form-field class="form-item">
+            <mat-select [compareWith]="compareFn" placeholder="Years artist active..." formControlName="yearsActive" multiple>
+                <mat-option *ngFor="let year of years" [value]="year">{{ year.year }}</mat-option>
+              </mat-select>
+        </mat-form-field>
+
+        <h2 class="form-item form-sub-header">Artist Image</h2>
+        <div class="form-img-container">
+            <button class="img-input-btn" mat-raised-button type="button" (click)="imgFileInput.click()">Artist Photo</button>
+            <button mat-raised-button *ngIf="imageFile" type="button" (click)="removeImageFile()">Remove Image</button>
+  
+            <input type="file" #imgFileInput (change)="fileChange($event)" accept=".jpg,.png" style="display: none">
+            <input type="hidden" name="fileHidden" formControlName="image" required/>
+          </div>
+
+        <h2 class="form-item form-sub-header">Social Media</h2>
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Soundcloud link..." formControlName="soundcloud">
+          <mat-error *ngIf="artistEditForm.controls.soundcloud.errors?.pattern">Not a valid artist soundcloud url [Ex. https://www.soundcloud.com/artistName]</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Twitter link..." formControlName="twitter">
+          <mat-error *ngIf="artistEditForm.controls.twitter.errors?.pattern">Not a valid artist twitter url [Ex. https://www.twitter.com/artistName]</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Spotify link..." formControlName="spotify">
+          <mat-error *ngIf="artistEditForm.controls.spotify.errors?.pattern">Not a valid artist spotify url [Ex. https://www.open.spotify.com/artist/artistId]</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Instagram link..." formControlName="instagram">
+          <mat-error *ngIf="artistEditForm.controls.instagram.errors?.pattern">Not a valid artist instagram url [Ex. https://www.instagram.com/artistName]</mat-error>
+        </mat-form-field>
+
+        <h2 class="form-item form-sub-header">Description</h2>
+        <div class="form-item form-desc">
+            <tiny-mce [elementId]="'artist-edit-editor'" [initialContent]="artist.description" (onEditorKeyup)="keyupHandlerFunction($event)" formControlName="description" ngDefaultControl></tiny-mce>
+        </div>
+
+        <div class="form-btn-group">
+            <button *ngIf="!processing" mat-raised-button color="primary" type="submit" [disabled]="!artistEditForm.valid">Submit</button>
+            <button *ngIf="processing" mat-raised-button color="primary" type="submit" disabled><i class="fa fa-spinner fa-spin"></i></button>
+
+            <button mat-raised-button routerLink="/admin/artists">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
